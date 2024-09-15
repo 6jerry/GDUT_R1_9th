@@ -1,8 +1,8 @@
 m3508_test\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
-m3508_test\heap_4.o: D:\keil 5\ARM\ARMCC\Bin\..\include\stdlib.h
+m3508_test\heap_4.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 m3508_test\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-m3508_test\heap_4.o: D:\keil 5\ARM\ARMCC\Bin\..\include\stddef.h
-m3508_test\heap_4.o: D:\keil 5\ARM\ARMCC\Bin\..\include\stdint.h
+m3508_test\heap_4.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+m3508_test\heap_4.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 m3508_test\heap_4.o: ../Core/Inc/FreeRTOSConfig.h
 m3508_test\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 m3508_test\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

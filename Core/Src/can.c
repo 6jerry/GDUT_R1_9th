@@ -1,31 +1,33 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file    can.c
-  * @brief   This file provides code for the configuration
-  *          of the CAN instances.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    can.c
+ * @brief   This file provides code for the configuration
+ *          of the CAN instances.
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2024 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "can.h"
 
 /* USER CODE BEGIN 0 */
 #include "motor.h"
-CAN_TxHeaderTypeDef	TxHeader;      //∑¢ÀÕ
-uint8_t	RxData[8];  // ˝æ›Ω” ’ ˝◊È£¨canµƒ ˝æ›÷°÷ª”–8÷°
-uint8_t	RxData2[8];
-int Rx_Flag =1;
+#include <stm32f4xx_hal_can.h>
+#include <stm32f407xx.h>
+CAN_TxHeaderTypeDef TxHeader; // ÂèëÔøΩ??
+uint8_t RxData[8];            // Êï∞ÊçÆÊé•Êî∂Êï∞ÁªÑÔºåcanÁöÑÊï∞ÊçÆÂ∏ßÂè™Êúâ8ÔøΩ?
+uint8_t RxData2[8];
+int Rx_Flag = 1;
 /* USER CODE END 0 */
 
 CAN_HandleTypeDef hcan1;
@@ -60,10 +62,9 @@ void MX_CAN1_Init(void)
   }
   /* USER CODE BEGIN CAN1_Init 2 */
   CAN1_Filter_Init();
-	HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+  HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING); // ÔøΩ?Ê¥ªÊåáÂÆöÁöÑ‰∏≠Êñ≠ÂáΩÊï∞
 
   /* USER CODE END CAN1_Init 2 */
-
 }
 /* CAN2 init function */
 void MX_CAN2_Init(void)
@@ -93,25 +94,26 @@ void MX_CAN2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN2_Init 2 */
-
+  CAN2_Filter_Init();
+  HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
   /* USER CODE END CAN2_Init 2 */
-
 }
 
-static uint32_t HAL_RCC_CAN1_CLK_ENABLED=0;
+static uint32_t HAL_RCC_CAN1_CLK_ENABLED = 0;
 
-void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
+void HAL_CAN_MspInit(CAN_HandleTypeDef *canHandle)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if(canHandle->Instance==CAN1)
+  if (canHandle->Instance == CAN1)
   {
-  /* USER CODE BEGIN CAN1_MspInit 0 */
+    /* USER CODE BEGIN CAN1_MspInit 0 */
 
-  /* USER CODE END CAN1_MspInit 0 */
+    /* USER CODE END CAN1_MspInit 0 */
     /* CAN1 clock enable */
     HAL_RCC_CAN1_CLK_ENABLED++;
-    if(HAL_RCC_CAN1_CLK_ENABLED==1){
+    if (HAL_RCC_CAN1_CLK_ENABLED == 1)
+    {
       __HAL_RCC_CAN1_CLK_ENABLE();
     }
 
@@ -120,7 +122,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     PA11     ------> CAN1_RX
     PA12     ------> CAN1_TX
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
+    GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_12;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -136,19 +138,20 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
     HAL_NVIC_SetPriority(CAN1_SCE_IRQn, 2, 0);
     HAL_NVIC_EnableIRQ(CAN1_SCE_IRQn);
-  /* USER CODE BEGIN CAN1_MspInit 1 */
+    /* USER CODE BEGIN CAN1_MspInit 1 */
 
-  /* USER CODE END CAN1_MspInit 1 */
+    /* USER CODE END CAN1_MspInit 1 */
   }
-  else if(canHandle->Instance==CAN2)
+  else if (canHandle->Instance == CAN2)
   {
-  /* USER CODE BEGIN CAN2_MspInit 0 */
+    /* USER CODE BEGIN CAN2_MspInit 0 */
 
-  /* USER CODE END CAN2_MspInit 0 */
+    /* USER CODE END CAN2_MspInit 0 */
     /* CAN2 clock enable */
     __HAL_RCC_CAN2_CLK_ENABLE();
     HAL_RCC_CAN1_CLK_ENABLED++;
-    if(HAL_RCC_CAN1_CLK_ENABLED==1){
+    if (HAL_RCC_CAN1_CLK_ENABLED == 1)
+    {
       __HAL_RCC_CAN1_CLK_ENABLE();
     }
 
@@ -157,7 +160,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     PB12     ------> CAN2_RX
     PB13     ------> CAN2_TX
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13;
+    GPIO_InitStruct.Pin = GPIO_PIN_12 | GPIO_PIN_13;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -173,23 +176,24 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     HAL_NVIC_EnableIRQ(CAN2_RX1_IRQn);
     HAL_NVIC_SetPriority(CAN2_SCE_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(CAN2_SCE_IRQn);
-  /* USER CODE BEGIN CAN2_MspInit 1 */
+    /* USER CODE BEGIN CAN2_MspInit 1 */
 
-  /* USER CODE END CAN2_MspInit 1 */
+    /* USER CODE END CAN2_MspInit 1 */
   }
 }
 
-void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
+void HAL_CAN_MspDeInit(CAN_HandleTypeDef *canHandle)
 {
 
-  if(canHandle->Instance==CAN1)
+  if (canHandle->Instance == CAN1)
   {
-  /* USER CODE BEGIN CAN1_MspDeInit 0 */
+    /* USER CODE BEGIN CAN1_MspDeInit 0 */
 
-  /* USER CODE END CAN1_MspDeInit 0 */
+    /* USER CODE END CAN1_MspDeInit 0 */
     /* Peripheral clock disable */
     HAL_RCC_CAN1_CLK_ENABLED--;
-    if(HAL_RCC_CAN1_CLK_ENABLED==0){
+    if (HAL_RCC_CAN1_CLK_ENABLED == 0)
+    {
       __HAL_RCC_CAN1_CLK_DISABLE();
     }
 
@@ -197,26 +201,27 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
     PA11     ------> CAN1_RX
     PA12     ------> CAN1_TX
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_11|GPIO_PIN_12);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_11 | GPIO_PIN_12);
 
     /* CAN1 interrupt Deinit */
     HAL_NVIC_DisableIRQ(CAN1_TX_IRQn);
     HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
     HAL_NVIC_DisableIRQ(CAN1_RX1_IRQn);
     HAL_NVIC_DisableIRQ(CAN1_SCE_IRQn);
-  /* USER CODE BEGIN CAN1_MspDeInit 1 */
+    /* USER CODE BEGIN CAN1_MspDeInit 1 */
 
-  /* USER CODE END CAN1_MspDeInit 1 */
+    /* USER CODE END CAN1_MspDeInit 1 */
   }
-  else if(canHandle->Instance==CAN2)
+  else if (canHandle->Instance == CAN2)
   {
-  /* USER CODE BEGIN CAN2_MspDeInit 0 */
+    /* USER CODE BEGIN CAN2_MspDeInit 0 */
 
-  /* USER CODE END CAN2_MspDeInit 0 */
+    /* USER CODE END CAN2_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_CAN2_CLK_DISABLE();
     HAL_RCC_CAN1_CLK_ENABLED--;
-    if(HAL_RCC_CAN1_CLK_ENABLED==0){
+    if (HAL_RCC_CAN1_CLK_ENABLED == 0)
+    {
       __HAL_RCC_CAN1_CLK_DISABLE();
     }
 
@@ -224,134 +229,136 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
     PB12     ------> CAN2_RX
     PB13     ------> CAN2_TX
     */
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_12|GPIO_PIN_13);
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_12 | GPIO_PIN_13);
 
     /* CAN2 interrupt Deinit */
     HAL_NVIC_DisableIRQ(CAN2_TX_IRQn);
     HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
     HAL_NVIC_DisableIRQ(CAN2_RX1_IRQn);
     HAL_NVIC_DisableIRQ(CAN2_SCE_IRQn);
-  /* USER CODE BEGIN CAN2_MspDeInit 1 */
+    /* USER CODE BEGIN CAN2_MspDeInit 1 */
 
-  /* USER CODE END CAN2_MspDeInit 1 */
+    /* USER CODE END CAN2_MspDeInit 1 */
   }
 }
 
 /* USER CODE BEGIN 1 */
-/*CANπ˝¬À∆˜≥ı ºªØ*/
+/*CANËøáÊª§Âô®ÂàùÂßãÂåñ*/
 void CAN1_Filter_Init(void)
 {
-	CAN_FilterTypeDef sFilterConfig;
-	
-  sFilterConfig.FilterBank = 0;                    /* π˝¬À∆˜◊È0 */
-  sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  /* ∆¡±ŒŒªƒ£ Ω */
-  sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; /* 32Œª°£*/
-  
-  sFilterConfig.FilterIdHigh         = (((uint32_t)CAN_RxExtId<<3)&0xFFFF0000)>>16;				/* “™π˝¬ÀµƒID∏ﬂŒª *///0x0000
-  sFilterConfig.FilterIdLow          = (((uint32_t)CAN_RxExtId<<3)|CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF; /* “™π˝¬ÀµƒIDµÕŒª *///0x0000
-//  sFilterConfig.FilterMaskIdHigh     = 0xFFFF;			/* π˝¬À∆˜∏ﬂ16Œª√øŒª±ÿ–Î∆•≈‰ */
-//  sFilterConfig.FilterMaskIdLow      = 0xFFFF;			/* π˝¬À∆˜µÕ16Œª√øŒª±ÿ–Î∆•≈‰ */
-  sFilterConfig.FilterMaskIdHigh     = 0x0000;			/*  µº …œ «πÿ±’¡Àπ˝¬À∆˜ */
-  sFilterConfig.FilterMaskIdLow      = 0x0000;				/*  µº …œ «πÿ±’¡Àπ˝¬À∆˜ */
-  sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;           /* π˝¬À∆˜±ªπÿ¡™µΩFIFO 0 */
-  sFilterConfig.FilterActivation = ENABLE;          /*  πƒ‹π˝¬À∆˜ */ 
-  sFilterConfig.SlaveStartFilterBank = 14;
-	
-	if (HAL_CAN_ConfigFilter(&hcan1, &sFilterConfig) != HAL_OK)
+  CAN_FilterTypeDef sFilterConfig;
+
+  sFilterConfig.FilterBank = 0;                      /* ËøáÊª§Âô®ÁªÑ0 */
+  sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  /* Â±èËîΩ‰ΩçÊ®°ÔøΩ? */
+  sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; /* 32‰ΩçÔøΩ??*/
+
+  sFilterConfig.FilterIdHigh = (((uint32_t)CAN_RxExtId << 3) & 0xFFFF0000) >> 16; /* Ë¶ÅËøáÊª§ÁöÑIDÈ´ò‰Ωç */                  // 0x0000
+  sFilterConfig.FilterIdLow = (((uint32_t)CAN_RxExtId << 3) | CAN_ID_EXT | CAN_RTR_DATA) & 0xFFFF; /* Ë¶ÅËøáÊª§ÁöÑID‰Ωé‰Ωç */ // 0x0000
+  //  sFilterConfig.FilterMaskIdHigh     = 0xFFFF;			/* ËøáÊª§Âô®È´ò16‰ΩçÊØè‰ΩçÂøÖÈ°ªÂåπÔøΩ? */
+  //  sFilterConfig.FilterMaskIdLow      = 0xFFFF;			/* ËøáÊª§Âô®‰Ωé16‰ΩçÊØè‰ΩçÂøÖÈ°ªÂåπÔøΩ? */
+  sFilterConfig.FilterMaskIdHigh = 0x0000;           /* ÂÆûÈôÖ‰∏äÊòØÂÖ≥Èó≠‰∫ÜËøáÊª§Âô® */
+  sFilterConfig.FilterMaskIdLow = 0x0000;            /* ÂÆûÈôÖ‰∏äÊòØÂÖ≥Èó≠‰∫ÜËøáÊª§Âô® */
+  sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0; /* ËøáÊª§Âô®Ë¢´ÂÖ≥ËÅîÂà∞FIFO 0 */
+  sFilterConfig.FilterActivation = ENABLE;           /* ‰ΩøËÉΩËøáÊª§ÔøΩ? */
+  // sFilterConfig.SlaveStartFilterBank = 14;
+
+  if (HAL_CAN_ConfigFilter(&hcan1, &sFilterConfig) != HAL_OK)
   {
-		/* Filter configuration Error */
+    /* Filter configuration Error */
     Error_Handler();
   }
-	
+
   if (HAL_CAN_Start(&hcan1) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
   }
-	
-	  /*##-4- Activate CAN RX notification #######################################*/
+
+  /*##-4- Activate CAN RX notification #######################################*/
   if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
   }
-	
-	TxHeader.ExtId=CAN_TxExtId;        //¿©’π±Í ∂∑˚(29Œª)
-	TxHeader.IDE=CAN_ID_EXT;    // π”√±Í◊º÷°
-	TxHeader.RTR=CAN_RTR_DATA;  // ˝æ›÷°
-	TxHeader.DLC=8; 
-	TxHeader.TransmitGlobalTime = DISABLE;
+
+  TxHeader.ExtId = CAN_TxExtId; // Êâ©Â±ïÊ†áËØÜÔøΩ?(29ÔøΩ?)
+  TxHeader.IDE = CAN_ID_EXT;    // ‰ΩøÁî®Ê†áÂáÜÔøΩ?
+  TxHeader.RTR = CAN_RTR_DATA;  // Êï∞ÊçÆÔøΩ?
+  TxHeader.DLC = 8;
+  TxHeader.TransmitGlobalTime = DISABLE;
 }
 
-/*CANπ˝¬À∆˜≥ı ºªØ*/
+/*CANËøáÊª§Âô®ÂàùÂßãÂåñ*/
 void CAN2_Filter_Init(void)
 {
-	CAN_FilterTypeDef sFilterConfig;
-	
-  sFilterConfig.FilterBank = 0;                    /* π˝¬À∆˜◊È0 */
-  sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  /* ∆¡±ŒŒªƒ£ Ω */
-  sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; /* 32Œª°£*/
-  
-  sFilterConfig.FilterIdHigh         = (((uint32_t)CAN_RxExtId<<3)&0xFFFF0000)>>16;				/* “™π˝¬ÀµƒID∏ﬂŒª *///0x0000
-  sFilterConfig.FilterIdLow          = (((uint32_t)CAN_RxExtId<<3)|CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF; /* “™π˝¬ÀµƒIDµÕŒª *///0x0000
-//  sFilterConfig.FilterMaskIdHigh     = 0xFFFF;			/* π˝¬À∆˜∏ﬂ16Œª√øŒª±ÿ–Î∆•≈‰ */
-//  sFilterConfig.FilterMaskIdLow      = 0xFFFF;			/* π˝¬À∆˜µÕ16Œª√øŒª±ÿ–Î∆•≈‰ */
-	sFilterConfig.FilterMaskIdHigh     = 0x0000;			
-  sFilterConfig.FilterMaskIdLow      = 0x0000;
-  sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;           /* π˝¬À∆˜±ªπÿ¡™µΩFIFO 0 */
-  sFilterConfig.FilterActivation = ENABLE;          /*  πƒ‹π˝¬À∆˜ */ 
+  CAN_FilterTypeDef sFilterConfig;
+
+  sFilterConfig.FilterBank = 14;                     /* ËøáÊª§Âô®ÁªÑ0 */
+  sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  /* Â±èËîΩ‰ΩçÊ®°ÔøΩ? */
+  sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; /* 32‰ΩçÔøΩ??*/
+
+  sFilterConfig.FilterIdHigh = (((uint32_t)CAN_RxExtId << 3) & 0xFFFF0000) >> 16; /* Ë¶ÅËøáÊª§ÁöÑIDÈ´ò‰Ωç */                  // 0x0000
+  sFilterConfig.FilterIdLow = (((uint32_t)CAN_RxExtId << 3) | CAN_ID_EXT | CAN_RTR_DATA) & 0xFFFF; /* Ë¶ÅËøáÊª§ÁöÑID‰Ωé‰Ωç */ // 0x0000
+  //  sFilterConfig.FilterMaskIdHigh     = 0xFFFF;			/* ËøáÊª§Âô®È´ò16‰ΩçÊØè‰ΩçÂøÖÈ°ªÂåπÔøΩ? */
+  //  sFilterConfig.FilterMaskIdLow      = 0xFFFF;			/* ËøáÊª§Âô®‰Ωé16‰ΩçÊØè‰ΩçÂøÖÈ°ªÂåπÔøΩ? */
+  sFilterConfig.FilterMaskIdHigh = 0x0000;
+  sFilterConfig.FilterMaskIdLow = 0x0000;
+  sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0; /* ËøáÊª§Âô®Ë¢´ÂÖ≥ËÅîÂà∞FIFO 0 */
+  sFilterConfig.FilterActivation = ENABLE;           /* ‰ΩøËÉΩËøáÊª§ÔøΩ? */
   sFilterConfig.SlaveStartFilterBank = 14;
-	
-	if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK)
+
+  if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK)
   {
-		/* Filter configuration Error */
+    /* Filter configuration Error */
     Error_Handler();
   }
-	
+
   if (HAL_CAN_Start(&hcan2) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
   }
-	
-	  /*##-4- Activate CAN RX notification #######################################*/
+
+  /*##-4- Activate CAN RX notification #######################################*/
   if (HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
   }
-	
-	TxHeader.ExtId=CAN_TxExtId;        //¿©’π±Í ∂∑˚(29Œª)
-	TxHeader.IDE=CAN_ID_EXT;    // π”√±Í◊º÷°
-	TxHeader.RTR=CAN_RTR_DATA;  // ˝æ›÷°
-	TxHeader.DLC=8; 
-	TxHeader.TransmitGlobalTime = DISABLE;
-	
 
+  TxHeader.ExtId = CAN_TxExtId; // Êâ©Â±ïÊ†áËØÜÔøΩ?(29ÔøΩ?)
+  TxHeader.IDE = CAN_ID_EXT;    // ‰ΩøÁî®Ê†áÂáÜÔøΩ?
+  TxHeader.RTR = CAN_RTR_DATA;  // Êï∞ÊçÆÔøΩ?
+  TxHeader.DLC = 8;
+  TxHeader.TransmitGlobalTime = DISABLE;
 }
 
-
-
-/*CANΩ” ’÷–∂œ∫Ø ˝*/
+/*CANÊé•Êî∂‰∏≠Êñ≠ÂáΩÊï∞*/
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-		
-	if(hcan == &hcan1)
-	{
-	    CAN_RxHeaderTypeDef	RxHeader;      //Ω” ’
-		Rx_Flag=1;  //Ω” ’±Í÷æŒª
-		HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &RxHeader, RxData);
-		m3508_update_info(&RxHeader,RxData);  // M3508µÁª˙ ˝æ›¥¶¿Ì
 
-	}
-	if(hcan == &hcan2)
-	{
-	  CAN_RxHeaderTypeDef	RxHeader;      //Ω” ’
-		Rx_Flag =0;  //Ω” ’±Í÷æŒª
-		HAL_CAN_GetRxMessage(&hcan2, CAN_RX_FIFO0, &RxHeader, RxData2);
-	}
-	
+  if (hcan == &hcan1)
+  {
+    CAN_RxHeaderTypeDef RxHeader; // Êé•Êî∂
+    Rx_Flag = 1;                  // Êé•Êî∂Ê†áÂøóÔøΩ?
+    HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &RxHeader, RxData);
+    m3508_update_info(&RxHeader, RxData); // M3508ÁîµÊú∫Êï∞ÊçÆÂ§ÑÁêÜ
+  }
+  if (hcan == &hcan2)
+  {
+    CAN_RxHeaderTypeDef RxHeader2; // Êé•Êî∂
+    Rx_Flag = 0;                   // Êé•Êî∂Ê†áÂøóÔøΩ?
+    HAL_CAN_GetRxMessage(&hcan2, CAN_RX_FIFO0, &RxHeader2, RxData2);
+    shoot_motor_update(&RxHeader2, RxData2);
+  }
 }
-
-
+/*void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+  if (hcan == &hcan2)
+  {
+    CAN_RxHeaderTypeDef RxHeader; // Êé•Êî∂
+    Rx_Flag = 0;                  // Êé•Êî∂Ê†áÂøóÔøΩ?
+    HAL_CAN_GetRxMessage(&hcan2, CAN_RX_FIFO1, &RxHeader, RxData2);
+  }
+}
 /* USER CODE END 1 */

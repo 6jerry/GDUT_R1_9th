@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp
+--cpu=Cortex-M4.fp.sp
 "m3508_test\startup_stm32f407xx.o"
 "m3508_test\main.o"
 "m3508_test\gpio.o"
@@ -39,6 +39,10 @@
 "m3508_test\fsm.o"
 "m3508_test\communicate.o"
 "m3508_test\movement.o"
+"m3508_test\crc_util.o"
+"m3508_test\serial_to_matlab.o"
+"m3508_test\new_pid.o"
+"m3508_test\serial_to_esp32.o"
 "m3508_test\croutine.o"
 "m3508_test\event_groups.o"
 "m3508_test\list.o"

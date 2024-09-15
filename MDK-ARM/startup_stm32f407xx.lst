@@ -829,13 +829,13 @@ ARM Macro Assembler    Page 13
   422 0000001C                 END
               00000000 
               00000000 
-Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
-erwork --depend=m3508_test\startup_stm32f407xx.d -om3508_test\startup_stm32f407
-xx.o -I../Core/Inc -I.\RTE\_m3508_test -I"D:\keil 5\ARM\PACK\ARM\CMSIS\5.0.1\CM
-SIS\Include" -I"D:\keil 5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Devi
-ce\ST\STM32F4xx\Include" --predefine="__MICROLIB SETA 1" --predefine="__UVISION
-_VERSION SETA 524" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" 
---list=startup_stm32f407xx.lst startup_stm32f407xx.s
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=m3508_test\startup_stm32f407xx.d -om3508_test\startup_stm32f
+407xx.o -I../Core/Inc -I.\RTE\_m3508_test -IG:\Keil_v5\ARM\CMSIS\5.9.0\CMSIS\Co
+re\Include -IG:\Keil_v5\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32
+F4xx\Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SET
+A 539" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --predefine=
+"_RTE_ SETA 1" --list=startup_stm32f407xx.lst startup_stm32f407xx.s
 
 
 

@@ -1,7 +1,7 @@
 m3508_test\freertos.o: ../Core/Src/freertos.c
 m3508_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-m3508_test\freertos.o: D:\keil 5\ARM\ARMCC\Bin\..\include\stddef.h
-m3508_test\freertos.o: D:\keil 5\ARM\ARMCC\Bin\..\include\stdint.h
+m3508_test\freertos.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+m3508_test\freertos.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 m3508_test\freertos.o: ../Core/Inc/FreeRTOSConfig.h
 m3508_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 m3508_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -45,7 +45,10 @@ m3508_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/
 m3508_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 m3508_test\freertos.o: ../robocon_robot/motor.h
 m3508_test\freertos.o: ../robocon_robot/pid.h
+m3508_test\freertos.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\cstdint
+m3508_test\freertos.o: ../robocon_robot/new_pid.h
 m3508_test\freertos.o: ../robocon_robot/driver_usart.h
+m3508_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 m3508_test\freertos.o: ../robocon_robot/hardware.h
 m3508_test\freertos.o: ../robocon_robot/calculation.h
 m3508_test\freertos.o: ../robocon_robot/FSM.h
@@ -53,3 +56,8 @@ m3508_test\freertos.o: ../robocon_robot/MoveBase.h
 m3508_test\freertos.o: ../robocon_robot/communicate.h
 m3508_test\freertos.o: ../robocon_robot/communicate.h
 m3508_test\freertos.o: ../Core/Inc/usart.h
+m3508_test\freertos.o: ../robocon_robot/serial_to_matlab.h
+m3508_test\freertos.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+m3508_test\freertos.o: ../robocon_robot/crc_util.h
+m3508_test\freertos.o: ../robocon_robot/serial_to_esp32.h
+m3508_test\freertos.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

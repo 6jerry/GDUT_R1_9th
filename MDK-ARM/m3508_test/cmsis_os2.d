@@ -1,8 +1,8 @@
 m3508_test\cmsis_os2.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c
-m3508_test\cmsis_os2.o: D:\keil 5\ARM\ARMCC\Bin\..\include\string.h
+m3508_test\cmsis_os2.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 m3508_test\cmsis_os2.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
-m3508_test\cmsis_os2.o: D:\keil 5\ARM\ARMCC\Bin\..\include\stdint.h
-m3508_test\cmsis_os2.o: D:\keil 5\ARM\ARMCC\Bin\..\include\stddef.h
+m3508_test\cmsis_os2.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+m3508_test\cmsis_os2.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 m3508_test\cmsis_os2.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 m3508_test\cmsis_os2.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 m3508_test\cmsis_os2.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h

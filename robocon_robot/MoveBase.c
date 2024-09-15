@@ -10,28 +10,28 @@
 #include "communicate.h"
 #include "FSM.h"
  
-//ROBOT_CHASSIS ROBOT_TARGET_POS_INFO;// »úÆ÷ÈËÄ¿±ê¹ì¼£Î»ÖÃĞÅÏ¢
+//ROBOT_CHASSIS ROBOT_TARGET_POS_INFO;// æœºå™¨äººç›®æ ‡è½¨è¿¹ä½ç½®ä¿¡æ¯
 
-ROBOT_CHASSIS Robot_Chassis;//»úÆ÷ÈË£¡Ä¿±ê£¡¹ì¼£Î»ÖÃĞÅÏ¢
-
-
+ROBOT_CHASSIS Robot_Chassis;//æœºå™¨äººï¼ç›®æ ‡ï¼è½¨è¿¹ä½ç½®ä¿¡æ¯
 
 
 
-int testflag=0;//ÓÃÓÚ²âÊÔ´úÂëµÄ½ø³Ì
+
+
+int testflag=0;//ç”¨äºæµ‹è¯•ä»£ç çš„è¿›ç¨‹
 float kp_x = 6;
 float kd_x = 0;	//0.00011
 float kp_y = 6;
 float kd_y = 0;	//0.00011
 float kp_yaw = 1;
 float kd_yaw = 0;
-float error_X;float error_Y;	// ÊÀ½çX¡¢YÆ«²î
-float error_x;float error_y;	// ±¾Ìåx¡¢yÆ«²î
-float error_Yaw;							// Æ«º½½ÇÆ«²î
-float now_yaw;								// µ±Ç°»¡¶ÈÖÆÆ«º½½Ç
-float u_output;								// ±¾Ìå×ø±êx·½ÏòËÙ¶ÈÊä³ö
-float v_output;								// ±¾Ìå×ø±êy·½ÏòËÙ¶ÈÊä³ö
-float w_ouput;	// ½ÇËÙ¶ÈÊä³ö
+float error_X;float error_Y;	// ä¸–ç•ŒXã€Yåå·®
+float error_x;float error_y;	// æœ¬ä½“xã€yåå·®
+float error_Yaw;							// åèˆªè§’åå·®
+float now_yaw;								// å½“å‰å¼§åº¦åˆ¶åèˆªè§’
+float u_output;								// æœ¬ä½“åæ ‡xæ–¹å‘é€Ÿåº¦è¾“å‡º
+float v_output;								// æœ¬ä½“åæ ‡yæ–¹å‘é€Ÿåº¦è¾“å‡º
+float w_ouput;	// è§’é€Ÿåº¦è¾“å‡º
 
 
 pid point_traker_x_pid;
@@ -44,26 +44,26 @@ pid yaw_pid;
 pid laser_take_pid;
 pid laser_shoot_pid;
 
-float error_X;float error_Y;	// ÊÀ½çX¡¢YÆ«²î
-float error_x;float error_y;	// ±¾Ìåx¡¢yÆ«²î
+float error_X;float error_Y;	// ä¸–ç•ŒXã€Yåå·®
+float error_x;float error_y;	// æœ¬ä½“xã€yåå·®
 
 
 
 /*
- *  º¯ÊıÃû£ºMove_Init()
- *  ¹¦ÄÜÃèÊö£º³õÊ¼»¯ÔË¶¯PID²ÎÊı
- *  ÊäÈë²ÎÊı£ºÎŞ
- *  Êä³ö²ÎÊı£ºÎŞ
- *  ·µ»ØÖµ£ºÎŞ
+ *  å‡½æ•°åï¼šMove_Init()
+ *  åŠŸèƒ½æè¿°ï¼šåˆå§‹åŒ–è¿åŠ¨PIDå‚æ•°
+ *  è¾“å…¥å‚æ•°ï¼šæ— 
+ *  è¾“å‡ºå‚æ•°ï¼šæ— 
+ *  è¿”å›å€¼ï¼šæ— 
 */
 void Move_Init(void)
 {
-	//PD¸ú×ÙÆ÷
+	//PDè·Ÿè¸ªå™¨
 //	PID_parameter_init(&point_traker_x_pid, 3,0, 0.5, 2000, 0, 10);
 //	PID_parameter_init(&point_traker_y_pid, 3,0, 0.5, 2000, 0, 10);
 //	PID_parameter_init(&point_traker_yaw_pid, 30,0, 0.1,1000, 0, 1);
 		
-	// ×Ô¶¯Â·¾¶PID
+	// è‡ªåŠ¨è·¯å¾„PID
 //	PID_parameter_init(&Vel_Track_pid, 12.0f,0,0.5, 3000, 3000, 10);
 //	
 //	PID_parameter_init(&Pos_Track_pid,1.92f, 0.0f, 0.5f, 3, 1, 0.01);	
@@ -95,9 +95,9 @@ int first_time_flag = 1;
 PATH_TYPEDEF now_path_point;
 
 /**
-* @brief  PathPlan¹æ»®+¸ú×Ù
-* @note		Èı´ÎBÑùÌõ¹æ»®£¬Îó²îÖ±½Ó¸³Öµ£¬µ½´ïÖÕµã·µ»Ø1£¬·ñÔò·µ»Ø0
-* @param  t_real:ÕæÊµ¾­¹ıµÄÊ±¼ä£¬t_target:Ä¿±ê×ÜÊ±¼ä£¬num:¿ØÖÆµãÊıÄ¿+1£¬X¡¢Y:¿ØÖÆµãÊı×é
+* @brief  PathPlanè§„åˆ’+è·Ÿè¸ª
+* @note		ä¸‰æ¬¡Bæ ·æ¡è§„åˆ’ï¼Œè¯¯å·®ç›´æ¥èµ‹å€¼ï¼Œåˆ°è¾¾ç»ˆç‚¹è¿”å›1ï¼Œå¦åˆ™è¿”å›0
+* @param  t_real:çœŸå®ç»è¿‡çš„æ—¶é—´ï¼Œt_target:ç›®æ ‡æ€»æ—¶é—´ï¼Œnum:æ§åˆ¶ç‚¹æ•°ç›®+1ï¼ŒXã€Y:æ§åˆ¶ç‚¹æ•°ç»„
 * @retval 
 */
 int PathPlan(float t_real, float t_target, int num, float *X , float *Y, float *Yaw)
@@ -105,17 +105,17 @@ int PathPlan(float t_real, float t_target, int num, float *X , float *Y, float *
 	float PathPlanerror_X;
 	float PathPlanerror_Y;
 	
-	k = (int)(t_real * num / t_target);	// µÚk¶Î
-	t = t_real - k * t_target / num;		// µÚk¶ÎÊ±¼ä
-	t = t * num / t_target;							// ¹éÒ»»¯
+	k = (int)(t_real * num / t_target);	// ç¬¬kæ®µ
+	t = t_real - k * t_target / num;		// ç¬¬kæ®µæ—¶é—´
+	t = t * num / t_target;							// å½’ä¸€åŒ–
 
-	// Î»ÖÃÑùÌõº¯Êı
+	// ä½ç½®æ ·æ¡å‡½æ•°
 	f1s = (1 - t) * (1 - t) * (1 - t) / 6;
 	f2s = (3 * t * t * t - 6 * t * t + 4) / 6;
 	f3s = (-3 * t * t * t + 3 * t * t + 3 * t + 1) / 6;
 	f4s = (t * t * t) / 6;
 	
-	// ¼ÆËãÄ¿±ê¸ú×Ùµã
+	// è®¡ç®—ç›®æ ‡è·Ÿè¸ªç‚¹
 	now_path_point.X = X[k] * f1s + X[k+1] * f2s + X[k+2] * f3s + X[k+3] * f4s;
 	now_path_point.Y = Y[k] * f1s + Y[k+1] * f2s + Y[k+2] * f3s + Y[k+3] * f4s;
 	now_path_point.Yaw = Yaw[k] * f1s + Yaw[k+1] * f2s + Yaw[k+2] * f3s + Yaw[k+3] * f4s;
@@ -138,25 +138,25 @@ int PathPlan(float t_real, float t_target, int num, float *X , float *Y, float *
 	
 	if(t_real < (t_target))
 	{
-	// PD¸ú×ÙÆ÷
+	// PDè·Ÿè¸ªå™¨
 	PDController(now_path_point, ROBOT_REAL_POS_DATA);
 //	PathPlanerror_X=ABS(ROBOT_REAL_POS_DATA.POS_X-now_path_point.X);
 //	PathPlanerror_Y=ABS(ROBOT_REAL_POS_DATA.POS_Y-now_path_point.Y);
 	}	
-	// ±£Áô±¾´ÎÖµ
+	// ä¿ç•™æœ¬æ¬¡å€¼
 	last_X = now_path_point.X;
 	last_Y = now_path_point.Y;
 	last_Yaw = now_path_point.Yaw;
 	
-	// µ½´ïÖÕµã
+	// åˆ°è¾¾ç»ˆç‚¹
 	if(t_real > (t_target))
 	{
 		
 //		if(moving_point_track(X[num+3], Y[num+3], Yaw[num+3],200))
 //		{
 		first_time_flag = 1;
-		Robot_Chassis.World_V[1] = 0;//xÖá
-		Robot_Chassis.World_V[0] = 0;//yÖá
+		Robot_Chassis.World_V[1] = 0;//xè½´
+		Robot_Chassis.World_V[0] = 0;//yè½´
 		
 			return 1;
 //		}
@@ -167,12 +167,12 @@ int PathPlan(float t_real, float t_target, int num, float *X , float *Y, float *
 
 
 /**
-* @brief  AngleLimit½Ç¶ÈÏŞ·ù
+* @brief  AngleLimitè§’åº¦é™å¹…
 * @note	
 
 
-½«½Ç¶ÈÏŞÖÆÔÚ-180¡ãµ½180¡ã
-* @param  angle:ÒªÏŞÖÆµÄÖµ
+å°†è§’åº¦é™åˆ¶åœ¨-180Â°åˆ°180Â°
+* @param  angle:è¦é™åˆ¶çš„å€¼
 * @retval 
 */
 void AngleLimit(float *angle)
@@ -200,16 +200,16 @@ void AngleLimit(float *angle)
 
 
 /**
-* @brief  YawAdjustÆ«º½½Ç¿ØÖÆ
-* @note		½«Æ«º½½Ç¿ØÖÆÔÚÄ¿±ê½Ç¶È
-* @param  Target_angle:ÒªÏŞÖÆµÄÖµ
+* @brief  YawAdjuståèˆªè§’æ§åˆ¶
+* @note		å°†åèˆªè§’æ§åˆ¶åœ¨ç›®æ ‡è§’åº¦
+* @param  Target_angle:è¦é™åˆ¶çš„å€¼
 * @retval 
 */
 int YawAdjust(float Target_angle)
 {
    float YawAdjust_error;
  
-	 // ¼ÆËãÎó²î
+	 // è®¡ç®—è¯¯å·®
    if(ROBOT_REAL_POS_DATA.POS_YAW*Target_angle >= 0)
    {
       YawAdjust_error = Target_angle - ROBOT_REAL_POS_DATA.POS_YAW;
@@ -224,10 +224,10 @@ int YawAdjust(float Target_angle)
 		 }
    }
    
-   // Ö±½ÓÀûÓÃPIDÊä³ö½ÇËÙ¶È
+   // ç›´æ¥åˆ©ç”¨PIDè¾“å‡ºè§’é€Ÿåº¦
    PID_position_PID_calculation_by_error(&yaw_pid, YawAdjust_error);
    
-  Robot_Chassis.World_V[2]= yaw_pid.output;	// µ×ÅÌ½ÇËÙ¶È µ¥Î»£ºrad/s
+  Robot_Chassis.World_V[2]= yaw_pid.output;	// åº•ç›˜è§’é€Ÿåº¦ å•ä½ï¼šrad/s
 	 
 	  if(ABS(YawAdjust_error)<1.0)return 1;
 	 else 
@@ -237,21 +237,21 @@ int YawAdjust(float Target_angle)
 	 
 }
 
-pid point_pid;//µã¶Ôµã×·×ÙPID
-pid yaw_pid;//½Ç¶ÈPID
+pid point_pid;//ç‚¹å¯¹ç‚¹è¿½è¸ªPID
+pid yaw_pid;//è§’åº¦PID
 float error;
-//µã¸ú×Ù
+//ç‚¹è·Ÿè¸ª
 int moving_point_track(float POS_X, float POS_Y, float POS_YAW,float V_max)
 {
 	 YawAdjust(POS_YAW);
 	
-	  //¼ÆËãÎó²î
-	error = sqrt((ROBOT_REAL_POS_DATA.POS_X - POS_X) * (ROBOT_REAL_POS_DATA.POS_X - POS_X) + (ROBOT_REAL_POS_DATA.POS_Y - POS_Y) * (ROBOT_REAL_POS_DATA.POS_Y- POS_Y));  // ¼ÆËãÎó²î
+	  //è®¡ç®—è¯¯å·®
+	error = sqrt((ROBOT_REAL_POS_DATA.POS_X - POS_X) * (ROBOT_REAL_POS_DATA.POS_X - POS_X) + (ROBOT_REAL_POS_DATA.POS_Y - POS_Y) * (ROBOT_REAL_POS_DATA.POS_Y- POS_Y));  // è®¡ç®—è¯¯å·®
 	point_pid.outputmax = ABS(V_max);
   	PID_position_PID_calculation_by_error(&point_pid, error);
 	
-		Robot_Chassis.World_V[1] =-(float)(point_pid.output * 1.0f*(ROBOT_REAL_POS_DATA.POS_X - POS_X) /error);//xÖá
-		Robot_Chassis.World_V[0] =-(float)(point_pid.output * 1.0f*(ROBOT_REAL_POS_DATA.POS_Y - POS_Y) /error);//yÖá
+		Robot_Chassis.World_V[1] =-(float)(point_pid.output * 1.0f*(ROBOT_REAL_POS_DATA.POS_X - POS_X) /error);//xè½´
+		Robot_Chassis.World_V[0] =-(float)(point_pid.output * 1.0f*(ROBOT_REAL_POS_DATA.POS_Y - POS_Y) /error);//yè½´
 	
 	if(ABS(ROBOT_REAL_POS_DATA.POS_X - POS_X)<0.008 && ABS(ROBOT_REAL_POS_DATA.POS_Y- POS_Y)<0.008)
 	{
@@ -261,26 +261,26 @@ int moving_point_track(float POS_X, float POS_Y, float POS_YAW,float V_max)
 }
 
 /**
-* @brief  PDController¸ú×ÙÆ÷
-* @note		¸ú×Ù¹æ»®ºÃµÄÂ·¾¶
-* @param  target_point:µ¥Î»Ê±¼äÒª¸ú×ÙµÄµã£¨ĞèÏÈ¹æ»®ºÃËÙ¶È£©£¬robot_now_pos:»úÆ÷ÈËµ±Ç°ÊÀ½ç×ø±êÏÂµÄÎ»ÖÃ
+* @brief  PDControllerè·Ÿè¸ªå™¨
+* @note		è·Ÿè¸ªè§„åˆ’å¥½çš„è·¯å¾„
+* @param  target_point:å•ä½æ—¶é—´è¦è·Ÿè¸ªçš„ç‚¹ï¼ˆéœ€å…ˆè§„åˆ’å¥½é€Ÿåº¦ï¼‰ï¼Œrobot_now_pos:æœºå™¨äººå½“å‰ä¸–ç•Œåæ ‡ä¸‹çš„ä½ç½®
 * @retval 
 */
 void PDController(PATH_TYPEDEF target_point,ROBOT_REAL_POS robot_now_pos)
 {
 	YawAdjust(target_point.Yaw);
 	
-	// ¼ÆËãÎó²î
+	// è®¡ç®—è¯¯å·®
 	error_X = target_point.X - robot_now_pos.POS_X;
 	error_Y = target_point.Y - robot_now_pos.POS_X;
 	error_Yaw = target_point.Yaw - robot_now_pos.POS_YAW;
-	//½Ç¶ÈÖÆ×ª»»Îª»¡¶ÈÖÆ
+	//è§’åº¦åˆ¶è½¬æ¢ä¸ºå¼§åº¦åˆ¶
 	now_yaw = robot_now_pos.POS_YAW * PI / 180.0f;
-	// »»Ëãµ½±¾Ìå×ø±ê
+	// æ¢ç®—åˆ°æœ¬ä½“åæ ‡
 	error_x =  cos(now_yaw) * error_X + sin(now_yaw) * error_Y;
 	error_y = -sin(now_yaw) * error_X + cos(now_yaw) * error_Y;
 	
-	// ¼ÆËãËÙ¶È
+	// è®¡ç®—é€Ÿåº¦
 	w_ouput  = (kp_yaw * error_Yaw + kd_yaw * target_point.W) / (1 + kd_yaw);
 	u_output = (kp_x*error_x + kd_x*( target_point.V_x  * cos(now_yaw) + \
 																		target_point.V_y  * sin(now_yaw) + \
@@ -291,7 +291,7 @@ void PDController(PATH_TYPEDEF target_point,ROBOT_REAL_POS robot_now_pos)
 																		w_ouput * error_y * sin(now_yaw) - \
 																		w_ouput * error_x * cos(now_yaw)))/(1+kd_y);
 																		 
-	// »»ËãÎªÊÀ½ç×ø±êÏµÏÂµÄËÙ¶È
+	// æ¢ç®—ä¸ºä¸–ç•Œåæ ‡ç³»ä¸‹çš„é€Ÿåº¦
 	Robot_Chassis.World_V[1] = -(u_output * cos(now_yaw) - v_output * sin(now_yaw));
 	Robot_Chassis.World_V[0] = -(u_output * sin(now_yaw) + v_output * cos(now_yaw));
 	Robot_Chassis.World_V[2]  = -w_ouput;
@@ -299,7 +299,7 @@ void PDController(PATH_TYPEDEF target_point,ROBOT_REAL_POS robot_now_pos)
 	PID_position_PID_calculation_by_error(&point_traker_y_pid, error_Y);
 	PID_position_PID_calculation_by_error(&point_traker_yaw_pid, error_Yaw);
 //	
-//	//Ìí¼Ó¸ººÅ
+//	//æ·»åŠ è´Ÿå·
 //	Robot_Chassis.World_V[1] = point_traker_x_pid.output;
 //	Robot_Chassis.World_V[0] = point_traker_y_pid.output;
 	//Robot_Chassis.World_V[2]  = -point_traker_yaw_pid.output;
@@ -312,20 +312,20 @@ void PDController(PATH_TYPEDEF target_point,ROBOT_REAL_POS robot_now_pos)
 
 
 /*
- *  º¯ÊıÃû£ºchassis_TrapezoidPlaning
- *  ¹¦ÄÜÃèÊö£ºÌİĞÎËÙ¶È¹æ»®
-*  ÊäÈë²ÎÊı£ºPOS_X_start:Æô¶¯Î»ÖÃµÄºá×ø±ê
-			POS_Y_start,Æô¶¯Î»ÖÃµÄ×İ×ø±ê
-			POS_X_end,Ä¿µÄµãµÄºá×ø±ê
-			POS_Y_end,Ä¿µÄµãµÄ×İ×ø±ê
-			POS_YAW,Ä¿±êÆ«º½½Ç£¿
-			V_start,³õÊ¼ËÙ¶È
-			V_end,Ä©ËÙ¶È
-			V_max,×î´óËÙ¶È
-			R_ac,¼ÓËÙÂ·³Ì±ÈÀı
-			R_de£¬¼õËÙÂ·³ÌµÄ±ÈÀı
- *  Êä³ö²ÎÊı£ºÎŞ
- *  ·µ»ØÖµ£ºÅäÖÃÊı¾İÓĞÎó£º1/Õı³££º0
+ *  å‡½æ•°åï¼šchassis_TrapezoidPlaning
+ *  åŠŸèƒ½æè¿°ï¼šæ¢¯å½¢é€Ÿåº¦è§„åˆ’
+*  è¾“å…¥å‚æ•°ï¼šPOS_X_start:å¯åŠ¨ä½ç½®çš„æ¨ªåæ ‡
+			POS_Y_start,å¯åŠ¨ä½ç½®çš„çºµåæ ‡
+			POS_X_end,ç›®çš„ç‚¹çš„æ¨ªåæ ‡
+			POS_Y_end,ç›®çš„ç‚¹çš„çºµåæ ‡
+			POS_YAW,ç›®æ ‡åèˆªè§’ï¼Ÿ
+			V_start,åˆå§‹é€Ÿåº¦
+			V_end,æœ«é€Ÿåº¦
+			V_max,æœ€å¤§é€Ÿåº¦
+			R_ac,åŠ é€Ÿè·¯ç¨‹æ¯”ä¾‹
+			R_deï¼Œå‡é€Ÿè·¯ç¨‹çš„æ¯”ä¾‹
+ *  è¾“å‡ºå‚æ•°ï¼šæ— 
+ *  è¿”å›å€¼ï¼šé…ç½®æ•°æ®æœ‰è¯¯ï¼š1/æ­£å¸¸ï¼š0
 */
 int chassis_TrapezoidPlaning(float POS_X_start,
 							float POS_Y_start,
@@ -338,65 +338,65 @@ int chassis_TrapezoidPlaning(float POS_X_start,
 							float R_ac,
 							float R_de)
 {
-//¶¨Òå±äÁ¿Ãû³Æ
-	float Ssu_chassis;   //×ÜÂ·³Ì
-	float Sac_chassis;   //¼ÓËÙÂ·³Ì
-	float Sde_chassis;   //¼õËÙÂ·³Ì
-	float Sco_chassis;   //ÔÈËÙÂ·³Ì
-	float Aac_chassis;   //¼ÓËÙ¼ÓËÙ¶È
-	float Ade_chassis;   //¼õËÙ¼ÓËÙ¶È
-	float S_chassis;     //µ±Ç°Â·³Ì
-	float output_V;//Êä³öµÄËÙ¶È
-	float real_error;//ÕæÊµÎó²î
+//å®šä¹‰å˜é‡åç§°
+	float Ssu_chassis;   //æ€»è·¯ç¨‹
+	float Sac_chassis;   //åŠ é€Ÿè·¯ç¨‹
+	float Sde_chassis;   //å‡é€Ÿè·¯ç¨‹
+	float Sco_chassis;   //åŒ€é€Ÿè·¯ç¨‹
+	float Aac_chassis;   //åŠ é€ŸåŠ é€Ÿåº¦
+	float Ade_chassis;   //å‡é€ŸåŠ é€Ÿåº¦
+	float S_chassis;     //å½“å‰è·¯ç¨‹
+	float output_V;//è¾“å‡ºçš„é€Ÿåº¦
+	float real_error;//çœŸå®è¯¯å·®
 
 
 	
 	YawAdjust(POS_YAW);
-		// Èç¹ûËùÅäÊı¾İÓĞÎó£¬Ôò²»Ö´ĞĞËÙ¶È¹æ»®		
-	if((R_ac > 1) || (R_ac < 0) ||		//¼ÓËÙÂ·³ÌµÄ±ÈÀı
-		 (R_de > 1) || (R_de < 0) ||	//¼õËÙÂ·³ÌµÄ±ÈÀı
-		 (V_max < V_start) )			//×î´óµÄËÙ¶È<¿ªÊ¼µÄËÙ¶È 
+		// å¦‚æœæ‰€é…æ•°æ®æœ‰è¯¯ï¼Œåˆ™ä¸æ‰§è¡Œé€Ÿåº¦è§„åˆ’		
+	if((R_ac > 1) || (R_ac < 0) ||		//åŠ é€Ÿè·¯ç¨‹çš„æ¯”ä¾‹
+		 (R_de > 1) || (R_de < 0) ||	//å‡é€Ÿè·¯ç¨‹çš„æ¯”ä¾‹
+		 (V_max < V_start) )			//æœ€å¤§çš„é€Ÿåº¦<å¼€å§‹çš„é€Ÿåº¦ 
 	{
-		Robot_Chassis.World_V[1]=0;  // ²»ÔË¶¯
+		Robot_Chassis.World_V[1]=0;  // ä¸è¿åŠ¨
 		Robot_Chassis.World_V[0]=0;
 		return 1;
 	}
 	
-	//¼ÆËãĞĞ³Ì±äÁ¿
+	//è®¡ç®—è¡Œç¨‹å˜é‡
 	Ssu_chassis=sqrt((POS_X_end-POS_X_start)*(POS_X_end-POS_X_start)+(POS_Y_end-POS_Y_start)*(POS_Y_end-POS_Y_start));
 	
 	Sac_chassis=Ssu_chassis*R_ac;
 	Sde_chassis=Ssu_chassis*R_de;
 	Sco_chassis=Ssu_chassis-Sac_chassis-Sde_chassis;
 	
-	Aac_chassis = (V_max * V_max - V_start * V_start) / (2.0f * Sac_chassis);	//¼ÓËÙ¼ÓËÙ¶È (×î´óµÄËÙ¶È*×î´óµÄËÙ¶È - ¿ªÊ¼µÄËÙ¶È *¿ªÊ¼µÄËÙ¶È ) / (2.0f * ¼ÓËÙÂ·³Ì)
+	Aac_chassis = (V_max * V_max - V_start * V_start) / (2.0f * Sac_chassis);	//åŠ é€ŸåŠ é€Ÿåº¦ (æœ€å¤§çš„é€Ÿåº¦*æœ€å¤§çš„é€Ÿåº¦ - å¼€å§‹çš„é€Ÿåº¦ *å¼€å§‹çš„é€Ÿåº¦ ) / (2.0f * åŠ é€Ÿè·¯ç¨‹)
 //  	if(Aac_chassis>1800)
 //		Aac_chassis=1200;//500mm/s
-	Ade_chassis = (V_end * V_end - V_max *   V_max) / (2.0f * Sde_chassis);	//¼õËÙ¼ÓËÙ¶È
+	Ade_chassis = (V_end * V_end - V_max *   V_max) / (2.0f * Sde_chassis);	//å‡é€ŸåŠ é€Ÿåº¦
 //	  if(Ade_chassis>600)
 //		Ade_chassis=600;//500mm/s
 	real_error=sqrt((ROBOT_REAL_POS_DATA.POS_X - POS_X_end) * (ROBOT_REAL_POS_DATA.POS_X - POS_X_end) + (ROBOT_REAL_POS_DATA.POS_Y - POS_Y_end) * (ROBOT_REAL_POS_DATA.POS_Y- POS_Y_end));
-		//¹ıÂËÒì³£Çé¿ö
+		//è¿‡æ»¤å¼‚å¸¸æƒ…å†µ
 		if(Ssu_chassis<S_chassis)
 		{
-		output_V = -V_start;	//TARGET_RPM = ¿ªÊ¼µÄËÙ¶È
+		output_V = -V_start;	//TARGET_RPM = å¼€å§‹çš„é€Ÿåº¦
 		}
 		
 			else
 	{
-		S_chassis = sqrt((ROBOT_REAL_POS_DATA.POS_X - POS_X_start) * (ROBOT_REAL_POS_DATA.POS_X - POS_X_start) + (ROBOT_REAL_POS_DATA.POS_Y - POS_Y_start) * (ROBOT_REAL_POS_DATA.POS_Y- POS_Y_start));   //¿ªÊ¼Î»ÖÃ
+		S_chassis = sqrt((ROBOT_REAL_POS_DATA.POS_X - POS_X_start) * (ROBOT_REAL_POS_DATA.POS_X - POS_X_start) + (ROBOT_REAL_POS_DATA.POS_Y - POS_Y_start) * (ROBOT_REAL_POS_DATA.POS_Y- POS_Y_start));   //å¼€å§‹ä½ç½®
 		
-		// ¹æ»®RPM
-		if     (S_chassis < Sac_chassis)       output_V = sqrt(2.0f * Aac_chassis * S_chassis + V_start * V_start);               // ¼ÓËÙ½×¶Î
-		else if(S_chassis < (Sac_chassis+Sco_chassis)&&S_chassis>Sac_chassis) output_V = sqrt(2.0f * Aac_chassis * Sac_chassis + V_start * V_start);                                                        // ÔÈËÙ½×¶Î
-		else                   output_V = sqrt(V_end * V_end - 2.0f * Ade_chassis * ABS(Ssu_chassis - S_chassis));  // ¼õËÙ½×¶Î
+		// è§„åˆ’RPM
+		if     (S_chassis < Sac_chassis)       output_V = sqrt(2.0f * Aac_chassis * S_chassis + V_start * V_start);               // åŠ é€Ÿé˜¶æ®µ
+		else if(S_chassis < (Sac_chassis+Sco_chassis)&&S_chassis>Sac_chassis) output_V = sqrt(2.0f * Aac_chassis * Sac_chassis + V_start * V_start);                                                        // åŒ€é€Ÿé˜¶æ®µ
+		else                   output_V = sqrt(V_end * V_end - 2.0f * Ade_chassis * ABS(Ssu_chassis - S_chassis));  // å‡é€Ÿé˜¶æ®µ
 	}
 	
-	//·Ö½âËÙ¶È£¬²¢·ÖÅäºÏÊÊµÃÕı¸ººÅ
-		Robot_Chassis.World_V[1] =(output_V * 1.0f*(POS_X_end - ROBOT_REAL_POS_DATA.POS_X) /real_error);//xÖá
-		Robot_Chassis.World_V[0] =(output_V * 1.0f*(POS_Y_end - ROBOT_REAL_POS_DATA.POS_Y) /real_error);//yÖá
+	//åˆ†è§£é€Ÿåº¦ï¼Œå¹¶åˆ†é…åˆé€‚å¾—æ­£è´Ÿå·
+		Robot_Chassis.World_V[1] =(output_V * 1.0f*(POS_X_end - ROBOT_REAL_POS_DATA.POS_X) /real_error);//xè½´
+		Robot_Chassis.World_V[0] =(output_V * 1.0f*(POS_Y_end - ROBOT_REAL_POS_DATA.POS_Y) /real_error);//yè½´
 	
-	if(ABS(ROBOT_REAL_POS_DATA.POS_X - POS_X_end)<0.015&&ABS(ROBOT_REAL_POS_DATA.POS_Y - POS_Y_end)<0.015)//ÌáÇ°Ìø³ö
+	if(ABS(ROBOT_REAL_POS_DATA.POS_X - POS_X_end)<0.015&&ABS(ROBOT_REAL_POS_DATA.POS_Y - POS_Y_end)<0.015)//æå‰è·³å‡º
 	{
 //		testflag=1;
 		output_V=0;
@@ -412,17 +412,17 @@ int chassis_TrapezoidPlaning(float POS_X_start,
 
 int ZONE_Location_Flag=0;
 /*
- *  º¯ÊıÃû£ºMoveCtrl
- *  ¹¦ÄÜÃèÊö£ºËÙ¶È½âËãÈÎÎñ·â×°
- *  ÊäÈë²ÎÊı£º
- *  Êä³ö²ÎÊı£ºÎŞ
- *  ·µ»ØÖµ£ºÎŞ
+ *  å‡½æ•°åï¼šMoveCtrl
+ *  åŠŸèƒ½æè¿°ï¼šé€Ÿåº¦è§£ç®—ä»»åŠ¡å°è£…
+ *  è¾“å…¥å‚æ•°ï¼š
+ *  è¾“å‡ºå‚æ•°ï¼šæ— 
+ *  è¿”å›å€¼ï¼šæ— 
 */
 void MoveCtrl(void)
 {
 	// if(!ZONE_Location_Flag)
 	// {
-	// 	if(ACTION_GL_POS_INFO.ANGLE_X>0)ROBOT_REAL_POS_DATA.robot_location=ZONE_1;//ÍÆ³µ²â¸©Ñö½Ç£¡£¡£¡
+	// 	if(ACTION_GL_POS_INFO.ANGLE_X>0)ROBOT_REAL_POS_DATA.robot_location=ZONE_1;//æ¨è½¦æµ‹ä¿¯ä»°è§’ï¼ï¼ï¼
 		
 	// 	else 
 	// 	{
@@ -448,29 +448,29 @@ void MoveCtrl(void)
 
 
 
-/*---------------------------------------------------------¼¤¹â--------------------------------------------------------------*/
+/*---------------------------------------------------------æ¿€å…‰--------------------------------------------------------------*/
 
 
 
 int laser_flag=0;
 
-//ĞŞ¸ÄÓÃÓÚÈ¡Ãç¶¨Î»
+//ä¿®æ”¹ç”¨äºå–è‹—å®šä½
 int Laser_calibration(float X, float Y,float yaw,float v_max,int location)
 {
 
 		float Laser_error_x,Laser_error_y,ERROR_SHOOTING;
 
 	YawAdjust(yaw);
-	//×ªµ½Ö¸¶¨½Ç¶È
+	//è½¬åˆ°æŒ‡å®šè§’åº¦
 	Laser_error_x =  Laser_Real_Data.Laser_X - X;
 	Laser_error_y =  Laser_Real_Data.Laser_Y - Y;
 	ERROR_SHOOTING=sqrt(Laser_error_x*Laser_error_x+Laser_error_y*Laser_error_y);
-//ÅĞ¶Ï¾àÀëÊÇ·ñºÏÊÊ
+//åˆ¤æ–­è·ç¦»æ˜¯å¦åˆé€‚
 //	if(Laser_error_x>-5&&Laser_error_y>-5)
 //	{
 		if(ABS(Laser_error_x)>0.015||ABS(Laser_error_y)>0.015)
 		{
-			//pidÖ±½ÓÊä³ö
+			//pidç›´æ¥è¾“å‡º
 			
 			laser_take_pid.outputmax = ABS(v_max);
 			PID_position_PID_calculation_by_error(&laser_take_pid, ERROR_SHOOTING);
@@ -583,11 +583,11 @@ int Laser_calibration(float X, float Y,float yaw,float v_max,int location)
 
 
 /*
- *  º¯ÊıÃû£ºLocation_Adjust
- *  ¹¦ÄÜÃèÊö£º×²Ç½¶¨Î»£¬¸øaction¸üĞÂ×¼È·Öµ
- *  ÊäÈë²ÎÊı£ºµ±Ç°È¡ÃçÍê³ÉÊı£¨finish£©
- *  Êä³ö²ÎÊı£ºÎŞ
- *  ·µ»ØÖµ£ºÎŞ
+ *  å‡½æ•°åï¼šLocation_Adjust
+ *  åŠŸèƒ½æè¿°ï¼šæ’å¢™å®šä½ï¼Œç»™actionæ›´æ–°å‡†ç¡®å€¼
+ *  è¾“å…¥å‚æ•°ï¼šå½“å‰å–è‹—å®Œæˆæ•°ï¼ˆfinishï¼‰
+ *  è¾“å‡ºå‚æ•°ï¼šæ— 
+ *  è¿”å›å€¼ï¼šæ— 
 */
 int location_flag=0;
 
@@ -609,61 +609,61 @@ void Location_Adjust(int ZONE1_finish)
 	{
 		switch(ZONE1_finish)
 		{
-			//ÈıºÅÈ¡Ãç
+			//ä¸‰å·å–è‹—
 			case 7:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Red_TakeCalibration_X[2]+Red_TakeCalibration_Y[2]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Red_TakeCalibration_Y[2]-Red_TakeCalibration_X[2]);
 			break;
 			
-			//ËÄºÅÈ¡Ãç
+			//å››å·å–è‹—
 			case 10:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Red_TakeCalibration_X[3]+Red_TakeCalibration_Y[3]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Red_TakeCalibration_Y[3]-Red_TakeCalibration_X[3]);
 			break;
 			
-			//ÎåºÅÈ¡Ãç
+			//äº”å·å–è‹—
 			case 13:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Red_TakeCalibration_X[4]+Red_TakeCalibration_Y[4]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Red_TakeCalibration_Y[4]-Red_TakeCalibration_X[4]);
 			break;
 			
-			//ÁùºÅÈ¡Ãç
+			//å…­å·å–è‹—
 			case 16:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Red_TakeCalibration_X[5]+Red_TakeCalibration_Y[5]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Red_TakeCalibration_Y[5]-Red_TakeCalibration_X[5]);
 			break;
 			
-			//ÆßºÅÈ¡Ãç
+			//ä¸ƒå·å–è‹—
 			case 19:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Red_TakeCalibration_X[6]+Red_TakeCalibration_Y[6]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Red_TakeCalibration_Y[6]-Red_TakeCalibration_X[6]);
 			break;
 			
-			//°ËºÅÈ¡Ãç
+			//å…«å·å–è‹—
 			case 22:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Red_TakeCalibration_X[7]+Red_TakeCalibration_Y[7]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Red_TakeCalibration_Y[7]-Red_TakeCalibration_X[7]);
 			break;
 			
-			//¾ÅºÅÈ¡Ãç
+			//ä¹å·å–è‹—
 			case 25:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Red_TakeCalibration_X[8]+Red_TakeCalibration_Y[8]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Red_TakeCalibration_Y[8]-Red_TakeCalibration_X[8]);
 			break;
 			
-			//Ê®ºÅÈ¡Ãç
+			//åå·å–è‹—
 			case 28:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Red_TakeCalibration_X[9]+Red_TakeCalibration_Y[9]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Red_TakeCalibration_Y[9]-Red_TakeCalibration_X[9]);
 			break;
 			
-			//Ê®Ò»ºÅÈ¡Ãç
+			//åä¸€å·å–è‹—
 			case 31:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Red_TakeCalibration_X[10]+Red_TakeCalibration_Y[10]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Red_TakeCalibration_Y[10]-Red_TakeCalibration_X[10]);
 			break;
 			
-	//		//Ê®¶şºÅÈ¡Ãç
+	//		//åäºŒå·å–è‹—
 	//		case 34:
 	//			ACTION_GL_POS_INFO.REAL_X=500*number2*(-2.45-0.25f);			
 	//			ACTION_GL_POS_INFO.REAL_Y=500*number2*(-0.25f+2.45f);
@@ -674,61 +674,61 @@ void Location_Adjust(int ZONE1_finish)
 	{
 		switch(ZONE1_finish)
 		{
-			//ÈıºÅÈ¡Ãç
+			//ä¸‰å·å–è‹—
 			case 7:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Blue_TakeCalibration_X[2]-Blue_TakeCalibration_Y[2]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Blue_TakeCalibration_X[2]+Blue_TakeCalibration_Y[2]);
 			break;
 			
-			//ËÄºÅÈ¡Ãç
+			//å››å·å–è‹—
 			case 10:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Blue_TakeCalibration_X[3]-Blue_TakeCalibration_Y[3]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Blue_TakeCalibration_X[3]+Blue_TakeCalibration_Y[3]);
 			break;
 			
-			//ÎåºÅÈ¡Ãç
+			//äº”å·å–è‹—
 			case 13:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Blue_TakeCalibration_X[4]-Blue_TakeCalibration_Y[4]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Blue_TakeCalibration_X[4]+Blue_TakeCalibration_Y[4]);
 			break;
 			
-			//ÁùºÅÈ¡Ãç
+			//å…­å·å–è‹—
 			case 16:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Blue_TakeCalibration_X[5]-Blue_TakeCalibration_Y[5]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Blue_TakeCalibration_X[5]+Blue_TakeCalibration_Y[5]);
 			break;
 			
-			//ÆßºÅÈ¡Ãç
+			//ä¸ƒå·å–è‹—
 			case 19:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Blue_TakeCalibration_X[6]-Blue_TakeCalibration_Y[6]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Blue_TakeCalibration_X[6]+Blue_TakeCalibration_Y[6]);
 			break;
 			
-			//°ËºÅÈ¡Ãç
+			//å…«å·å–è‹—
 			case 22:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Blue_TakeCalibration_X[7]-Blue_TakeCalibration_Y[7]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Blue_TakeCalibration_X[7]+Blue_TakeCalibration_Y[7]);
 			break;
 			
-			//¾ÅºÅÈ¡Ãç
+			//ä¹å·å–è‹—
 			case 25:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Blue_TakeCalibration_X[8]-Blue_TakeCalibration_Y[8]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Blue_TakeCalibration_X[8]+Blue_TakeCalibration_Y[8]);
 			break;
 			
-			//Ê®ºÅÈ¡Ãç
+			//åå·å–è‹—
 			case 28:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Blue_TakeCalibration_X[9]-Blue_TakeCalibration_Y[9]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Blue_TakeCalibration_X[9]+Blue_TakeCalibration_Y[9]);
 			break;
 			
-			//Ê®Ò»ºÅÈ¡Ãç
+			//åä¸€å·å–è‹—
 			case 31:
 				ACTION_GL_POS_INFO.REAL_X=500*number2*(Blue_TakeCalibration_X[10]-Blue_TakeCalibration_Y[10]);			
 				ACTION_GL_POS_INFO.REAL_Y=500*number2*(Blue_TakeCalibration_X[10]+Blue_TakeCalibration_Y[10]);
 			break;
 			
-	//		//Ê®¶şºÅÈ¡Ãç
+	//		//åäºŒå·å–è‹—
 	//		case 34:
 	//			ACTION_GL_POS_INFO.REAL_X=500*number2*(-2.45-0.25f);			
 	//			ACTION_GL_POS_INFO.REAL_Y=500*number2*(-0.25f+2.45f);

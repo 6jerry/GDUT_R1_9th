@@ -1,8 +1,8 @@
 m3508_test\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c
-m3508_test\stream_buffer.o: D:\keil 5\ARM\ARMCC\Bin\..\include\stdint.h
-m3508_test\stream_buffer.o: D:\keil 5\ARM\ARMCC\Bin\..\include\string.h
+m3508_test\stream_buffer.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+m3508_test\stream_buffer.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 m3508_test\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-m3508_test\stream_buffer.o: D:\keil 5\ARM\ARMCC\Bin\..\include\stddef.h
+m3508_test\stream_buffer.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 m3508_test\stream_buffer.o: ../Core/Inc/FreeRTOSConfig.h
 m3508_test\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 m3508_test\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

@@ -7,16 +7,16 @@
 #include "FSM.h"
 ///*!
 // * \fn     pos_calculate
-// * \brief  µ×ÅÌËÙ¶ÈÄæ½â 
-// *         ¸ù¾Ýµç»ú°Ú·ÅÎ»ÖÃ¸ü¸Ä 
+// * \brief  ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½
+// *         ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ú·ï¿½Î»ï¿½Ã¸ï¿½ï¿½ï¿½
 // * \param  [in] int num    #
 // * \param  [in] float vx   #
 // * \param  [in] float vy   #
 // * \param  [in] float w    #
-// * 
+// *
 // * \retval float
 // */
-//float pos_calculate(int num,float vx,float vy,float Vw)
+// float pos_calculate(int num,float vx,float vy,float Vw)
 //{
 //	float va=Vw*RADIUS;
 //	if(num==1)
@@ -24,142 +24,145 @@
 //		float out1=(float)(-vx*0.5-vy*sqrt(3)/2+va);
 //		return out1;
 //	}
-//	
+//
 //	else if(num==0)
 //	{
 //		float out2=(float)(vx+va);
 //		return out2;
-//	
+//
 //	}
-//	
+//
 //	else if(num==2)
 //	{
 //		float out3=(float)(-vx*0.5+vy*sqrt(3)/2+va);
 //		return out3;
 //	}
-//	
+//
 //	else
 //		return 0;
 //}
 
-
 /*!
  * \fn     v_to_rpm
- * \brief  ½«ÂÖ×ÓÏßËÙ¶È×ª»¯Îª×ªËÙ
- *          
- * \param  £¨float£©v 
- * 
+ * \brief  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½×ªï¿½ï¿½Îª×ªï¿½ï¿½
+ *
+ * \param  ï¿½ï¿½floatï¿½ï¿½v
+ *
  * \retval float
  */
- 
- float v_to_rpm(float v)
- {
-	float rpm=v/Rwheel/(2*PI)*60*19;
-	 return rpm;
- }
- 
- 
+
+float v_to_rpm(float v)
+{
+	float rpm = v / Rwheel / (2 * PI) * 60 * 19;
+	return rpm;
+}
+
 /*!
  * \fn     rpm_to_v
- * \brief  ½«ÂÖ×Ó×ªËÙ×ª»¯ÎªÏßËÙ¶È
- *          
- * \param  £¨float£©rpm
- * 
+ * \brief  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½×ªï¿½ï¿½Îªï¿½ï¿½ï¿½Ù¶ï¿½
+ *
+ * \param  ï¿½ï¿½floatï¿½ï¿½rpm
+ *
  * \retval float
  */
- 
- float rpm_to_v(float rpm)
- {
-	float v=rpm*2*PI/60*Rwheel;
-	 return v;
- }
- 
- 
- float one_yaw = 45.0* PI / 180.0f;
- /*!
+
+float rpm_to_v(float rpm)
+{
+	float v = rpm * 2 * PI / 60 * Rwheel;
+	return v;
+}
+
+float one_yaw = 45.0 * PI / 180.0f;
+/*!
  * \fn     Kinematic_Analysis1
- * \brief  Ò»Çø×ËÌ¬ÈýÈ«ÏòÂÖÔË¶¯Äæ½â ½«Ä¿±êÊÀ½ç×ø±êËÙ¶ÈËÙ¶È×ª»¯ÎªÃ¿¸öÂÖ×Ó×ªËÙ
+ * \brief  Ò»ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½Ù¶ï¿½×ªï¿½ï¿½ÎªÃ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
  *
  * \param  [in] float Vx   #
  * \param  [in] float Vy   #
- * 
+ *
  * \retval void
- */                    
+ */
 void Kinematic_Analysis1(ROBOT_CHASSIS motor_target)
 {
 
-	float now_yaw=0;
-	if(Yaw_Clock==0)now_yaw = -ROBOT_REAL_POS_DATA.POS_YAW* PI / 180.0f;
-	float Vx=cos(one_yaw+now_yaw) * (motor_target.World_V[1]) + sin(one_yaw+now_yaw) * (motor_target.World_V[0]);
-	float Vy=-sin(one_yaw+now_yaw) * (motor_target.World_V[1]) + cos(one_yaw+now_yaw)*(motor_target.World_V[0]);
-	float W=-motor_target.World_V[2];
-	
-	MOTOR_REAL_INFO[1].TARGET_RPM = -v_to_rpm((W*RADIUS+0.6712*Vx-Vy*0.7412));
+	float now_yaw = 0;
+	if (Yaw_Clock == 0)
+		now_yaw = -ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f;
+	float Vx = cos(one_yaw + now_yaw) * (motor_target.World_V[1]) + sin(one_yaw + now_yaw) * (motor_target.World_V[0]);
+	float Vy = -sin(one_yaw + now_yaw) * (motor_target.World_V[1]) + cos(one_yaw + now_yaw) * (motor_target.World_V[0]);
+	float W = -motor_target.World_V[2];
 
-	MOTOR_REAL_INFO[2].TARGET_RPM = -v_to_rpm(W*RADIUS+0.6712*Vx+Vy*0.7412);
+	MOTOR_REAL_INFO[1].TARGET_RPM = -v_to_rpm((W * RADIUS + 0.6712 * Vx - Vy * 0.7412));
 
-	MOTOR_REAL_INFO[0].TARGET_RPM= v_to_rpm(-Vx+RADIUS*W);
+	MOTOR_REAL_INFO[2].TARGET_RPM = -v_to_rpm(W * RADIUS + 0.6712 * Vx + Vy * 0.7412);
+
+	MOTOR_REAL_INFO[0].TARGET_RPM = v_to_rpm(-Vx + RADIUS * W);
 }
+void robot_tf()
+{
 
+	MOTOR_REAL_INFO[0].TARGET_RPM = v_to_rpm((Robot_Chassis.Robot_V[2] * 0.3149 + 0.6712 * Robot_Chassis.Robot_V[1] - Robot_Chassis.Robot_V[0] * 0.7412));
+
+	MOTOR_REAL_INFO[1].TARGET_RPM = v_to_rpm(Robot_Chassis.Robot_V[2] * 0.3149 + 0.6712 * Robot_Chassis.Robot_V[1] + Robot_Chassis.Robot_V[0] * 0.7412); // y,x,w
+
+	MOTOR_REAL_INFO[2].TARGET_RPM = v_to_rpm(-Robot_Chassis.Robot_V[1] + 0.20024 * Robot_Chassis.Robot_V[2]);
+}
 /*!
  * \fn     Kinematic_Analysis
- * \brief  ¶þÇøÈýÈ«ÏòÂÖÔË¶¯Äæ½â ½«Ä¿±êÊÀ½ç×ø±êËÙ¶ÈËÙ¶È×ª»¯ÎªÃ¿¸öÂÖ×Ó×ªËÙ
+ * \brief  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½Ù¶ï¿½×ªï¿½ï¿½ÎªÃ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
  *
  * \param  [in] float Vx   #
  * \param  [in] float Vy   #
- * 
+ *
  * \retval void
- */                    
+ */
 void Kinematic_Analysis2(ROBOT_CHASSIS motor_target)
 {
-	
+
 	world_to_robot(&motor_target);
-	
-	MOTOR_REAL_INFO[1].TARGET_RPM = v_to_rpm((motor_target.Robot_V[2]*RADIUS+0.6712*motor_target.Robot_V[1]-motor_target.Robot_V[0]*0.7412));
 
-	MOTOR_REAL_INFO[2].TARGET_RPM = v_to_rpm(motor_target.Robot_V[2]*RADIUS+0.6712*motor_target.Robot_V[1]+motor_target.Robot_V[0]*0.7412);
+	MOTOR_REAL_INFO[1].TARGET_RPM = v_to_rpm((motor_target.Robot_V[2] * RADIUS + 0.6712 * motor_target.Robot_V[1] - motor_target.Robot_V[0] * 0.7412));
 
-	MOTOR_REAL_INFO[0].TARGET_RPM= -v_to_rpm(-motor_target.Robot_V[1]+RADIUS*motor_target.Robot_V[2]);
+	MOTOR_REAL_INFO[2].TARGET_RPM = v_to_rpm(motor_target.Robot_V[2] * RADIUS + 0.6712 * motor_target.Robot_V[1] + motor_target.Robot_V[0] * 0.7412);
+
+	MOTOR_REAL_INFO[0].TARGET_RPM = -v_to_rpm(-motor_target.Robot_V[1] + RADIUS * motor_target.Robot_V[2]);
 }
-
 
 /*!
  * \fn     world_to_robot
- * \brief  ½«ÊÀ½ç×ø±êÏµËÙ¶È»»Ëã³É»úÆ÷ÈË×ø±êÏµËÙ¶È
- *          
+ * \brief  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½Ù¶È»ï¿½ï¿½ï¿½É»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½Ù¶ï¿½
+ *
  * \param  ROBOT_REAL_POS robot_now_pos
- * 
+ *
  * \retval void
  */
-void world_to_robot(ROBOT_CHASSIS* robot_data)
+void world_to_robot(ROBOT_CHASSIS *robot_data)
 {
-	float now_yaw=-ROBOT_REAL_POS_DATA.POS_YAW* PI / 180.0f;
-	
-	// x·½ÏòÉÏµÄ×ª»»
-	robot_data->Robot_V[1]= cos(now_yaw) * (robot_data->World_V[1]) + sin(now_yaw) * (robot_data->World_V[0]);
-	// y·½ÏòÉÏµÄ×ª»»
-	robot_data->Robot_V[0]= -sin(now_yaw) * (robot_data->World_V[1]) + cos(now_yaw)*(robot_data->World_V[0]);
-	// yawÉÏµÄ×ª»»
-	robot_data->Robot_V[2]= robot_data->World_V[2];
-	
+	float now_yaw = -ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f;
+
+	// xï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½×ªï¿½ï¿½
+	robot_data->Robot_V[1] = cos(now_yaw) * (robot_data->World_V[1]) + sin(now_yaw) * (robot_data->World_V[0]);
+	// yï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½×ªï¿½ï¿½
+	robot_data->Robot_V[0] = -sin(now_yaw) * (robot_data->World_V[1]) + cos(now_yaw) * (robot_data->World_V[0]);
+	// yawï¿½Ïµï¿½×ªï¿½ï¿½
+	robot_data->Robot_V[2] = robot_data->World_V[2];
 
 	return;
 }
 
-
 ///*!
 // * \fn     Kinematic_Analysis
-// * \brief  ¶þÇøÈýÈ«ÏòÂÖÔË¶¯Äæ½â ½«Ä¿±êÊÀ½ç×ø±êËÙ¶ÈËÙ¶È×ª»¯ÎªÃ¿¸öÂÖ×Ó×ªËÙ
+// * \brief  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½Ù¶ï¿½×ªï¿½ï¿½ÎªÃ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
 // *
 // * \param  [in] float Vx   #
 // * \param  [in] float Vy   #
-// * 
+// *
 // * \retval void
-// */                    
-//void Kinematic_Analysis3(ROBOT_CHASSIS motor_target)
+// */
+// void Kinematic_Analysis3(ROBOT_CHASSIS motor_target)
 //{
 //	float now_yaw=ROBOT_REAL_POS_DATA.POS_YAW* PI / 180.0f;
-//	
+//
 //	MOTOR_REAL_INFO[1].TARGET_RPM = v_to_rpm(motor_target.World_V[2]*RADIUS+0.6712*(motor_target.World_V[1]*cos(now_yaw)-motor_target.World_V[0]*sin(now_yaw));
 
 //	MOTOR_REAL_INFO[2].TARGET_RPM = v_to_rpm(motor_target.Robot_V[2]*RADIUS+0.6712*motor_target.Robot_V[1]+motor_target.Robot_V[0]*0.7412);
@@ -167,47 +170,37 @@ void world_to_robot(ROBOT_CHASSIS* robot_data)
 //	MOTOR_REAL_INFO[0].TARGET_RPM= -v_to_rpm(motor_target.World_V[2]*RADIUS-motor_target.World_V[1]*cos(now_yaw)-motor_target.World_V[0]*sin(now_yaw));
 //}
 
-
 KalmanFilter Kalman_LaserX;
 KalmanFilter Kalman_LaserY;
 
-
-
-
 /*
- *  º¯ÊýÃû£ºKalmanfiter_Init
- *  ¹¦ÄÜÃèÊö£º¿¨¶ûÂüÏµÊý³õÊ¼»¯
- *  ÊäÈë²ÎÊý£ºKalmanFilter *EKF
- *  Êä³ö²ÎÊý£ºÎÞ
- *  ·µ»ØÖµ£ºÎÞ
-*/
+ *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Kalmanfiter_Init
+ *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
+ *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½KalmanFilter *EKF
+ *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ *  ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
+ */
 void Kalmanfiter_Init(KalmanFilter *EKF)
 {
-	EKF->LastP=0.02;
-	EKF->NewP=0;
-	EKF->Out=0;
-	EKF->Kg=1;
-	EKF->Q=0.01;
-	EKF->R=5;
+	EKF->LastP = 0.02;
+	EKF->NewP = 0;
+	EKF->Out = 0;
+	EKF->Kg = 1;
+	EKF->Q = 0.01;
+	EKF->R = 5;
 }
 
 /*
- *  º¯ÊýÃû£ºkalmanfiter
- *  ¹¦ÄÜÃèÊö£º¿¨¶ûÂüÂË²¨Æ÷
- *  ÊäÈë²ÎÊý£ºKalmanFilter *EKF float input
- *  Êä³ö²ÎÊý£ºÎÞ
- *  ·µ»ØÖµ£ºÎÞ
-*/
-void kalmanfiter(KalmanFilter *EKF,float input)
+ *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½kalmanfiter
+ *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë²ï¿½ï¿½ï¿½
+ *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½KalmanFilter *EKF float input
+ *  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ *  ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
+ */
+void kalmanfiter(KalmanFilter *EKF, float input)
 {
 	EKF->NewP = EKF->LastP + EKF->Q;
 	EKF->Kg = EKF->NewP / (EKF->NewP + EKF->R);
 	EKF->Out = EKF->Out + EKF->Kg * (input - EKF->Out);
 	EKF->LastP = (1 - EKF->Kg) * EKF->NewP;
 }
-
-
-
-
-
-
