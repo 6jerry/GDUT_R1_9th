@@ -164,7 +164,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		msg.data = rx_buffer1[0];
 		HAL_UART_Receive_IT(&huart1, rx_buffer1, 1);
 		// BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-		xQueueOverwriteFromISR(uartQueue, &msg, &xHigherPriorityTaskWoken);
+		// xQueueOverwriteFromISR(uartQueue, &msg, &xHigherPriorityTaskWoken);
+		handle_serial_data_esp32(rx_buffer1[0]);
 	}
 
 	else if (huart->Instance == USART3)
