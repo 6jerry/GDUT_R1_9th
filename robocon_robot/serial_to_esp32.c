@@ -101,7 +101,7 @@ uint8_t handle_serial_data_esp32(uint8_t byte)
             rx_frame_esp32.frame_end[1] = byte;
             uint16_t received_crc = rx_frame_esp32.check_code_e.crc_code;
             // uint16_t calculated_crc = CRC16_Table(rx_temp_data_esp32, rx_frame_esp32.data_length);
-            //rx_frame_esp32.crc_calculated = calculated_crc;
+            // rx_frame_esp32.crc_calculated = calculated_crc;
             if (1)
             {
                 for (uint8_t i = 0; i < rx_frame_esp32.data_length; i++)
@@ -186,14 +186,63 @@ void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData)
 }
 void xbox_remote_control()
 {
+    if (xbox_msgs.joyLHori > 31000 && xbox_msgs.joyLHori < 350000)
+    {
+        xbox_msgs.joyLHori_map = 0.0f;
+    }
+    if (xbox_msgs.joyLHori <= 31000)
+    {
+        xbox_msgs.joyLHori_map = (31000.0f - (float)xbox_msgs.joyLHori) / 31000.0f;
+    }
+    if (xbox_msgs.joyLHori >= 35000)
+    {
+        xbox_msgs.joyLHori_map = (35000.0f - (float)xbox_msgs.joyLHori) / 30535.0f;
+    }
 
-    
+    if (xbox_msgs.joyLVert > 31000 && xbox_msgs.joyLVert < 350000)
+    {
+        xbox_msgs.joyLVert_map = 0.0f;
+    }
+    if (xbox_msgs.joyLVert <= 31000)
+    {
+        xbox_msgs.joyLVert_map = (31000.0f - (float)xbox_msgs.joyLVert) / 31000.0f;
+    }
+    if (xbox_msgs.joyLVert >= 35000)
+    {
+        xbox_msgs.joyLVert_map = (35000.0f - (float)xbox_msgs.joyLVert) / 30535.0f;
+    }
 
+    if (xbox_msgs.joyRHori > 31000 && xbox_msgs.joyRHori < 350000)
+    {
+        xbox_msgs.joyRHori_map = 0.0f;
+    }
+    if (xbox_msgs.joyRHori <= 31000)
+    {
+        xbox_msgs.joyRHori_map = (31000.0f - (float)xbox_msgs.joyRHori) / 31000.0f;
+    }
+    if (xbox_msgs.joyRHori >= 35000)
+    {
+        xbox_msgs.joyRHori_map = (35000.0f - (float)xbox_msgs.joyRHori) / 30535.0f;
+    }
 
+    if (xbox_msgs.trigRT == 0)
+    {
+        shoot_down_left.setpoint = 0;
+        shoot_down_right.setpoint = 0;
+        shoot_up_left.setpoint = 0;
+        shoot_up_right.setpoint = 0;
+    }
+    if (xbox_msgs.trigRT > 0)
+    {
+        xbox_msgs.trigRT_map = (float)xbox_msgs.trigRT / 1023.0f;
+        shoot_down_left.setpoint = MAX_SHOOT_RPM_DOWN * xbox_msgs.trigRT_map;
+        shoot_down_right.setpoint = -shoot_down_left.setpoint;
 
+        shoot_up_left.setpoint = MAX_SHOOT_RPM_UP * xbox_msgs.trigRT_map;
+        shoot_up_right.setpoint = -shoot_up_left.setpoint;
+    }
 
-
-
-
-
+    Robot_Chassis.Robot_V[1] = MAX_ROBOT_SPEED_X * xbox_msgs.joyLHori_map;
+    Robot_Chassis.Robot_V[0] = MAX_ROBOT_SPEED_Y * xbox_msgs.joyLVert_map;
+    Robot_Chassis.Robot_V[2] = -MAX_ROBOT_SPEED_W * xbox_msgs.joyRHori_map;
 }

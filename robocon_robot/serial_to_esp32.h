@@ -8,13 +8,19 @@
 #include "crc_util.h"
 #include <stdbool.h>
 #include "MoveBase.h"
+#include "motor.h"
 #define FRAME_HEAD_0_ESP32 0xFC
 #define FRAME_HEAD_1_ESP32 0xFB
 #define FRAME_ID_ESP32 0x01 // 示例数据帧ID
 #define FRAME_END_0_ESP32 0xFD
 #define FRAME_END_1_ESP32 0xFE
 #define MAX_DATA_LENGTH_ESP32 28
+#define MAX_ROBOT_SPEED_X 1.50f
+#define MAX_ROBOT_SPEED_Y 1.50f
+#define MAX_ROBOT_SPEED_W 3.60f
 
+#define MAX_SHOOT_RPM_UP 4000.0f
+#define MAX_SHOOT_RPM_DOWN 3200.0f
 typedef struct serial_frame_esp32
 {
     uint8_t data_length;
@@ -60,6 +66,13 @@ typedef struct
     uint16_t joyRVert;
     uint16_t trigLT;
     uint16_t trigRT;
+
+    float joyLHori_map;
+    float joyLVert_map;
+    float joyRHori_map;
+    float joyRVert_map;
+    float trigLT_map;
+    float trigRT_map;
 } XboxControllerData_t;
 
 uint8_t handle_serial_data_esp32(uint8_t byte);

@@ -146,7 +146,7 @@ void MX_FREERTOS_Init(void)
 
     /* creation of robot_move */
     robot_moveHandle = osThreadNew(RobotMove, NULL, &robot_move_attributes);
-    uartRXTaskHandle = osThreadNew(uartRXTask, NULL, &uartRXTask_attributes);
+    // uartRXTaskHandle = osThreadNew(uartRXTask, NULL, &uartRXTask_attributes);
     /* USER CODE BEGIN RTOS_THREADS */
     /* add threads, ... */
     /* USER CODE END RTOS_THREADS */
@@ -249,12 +249,13 @@ void RobotState(void *argument)
     for (;;)
     {
         test++;
+        xbox_remote_control();
 
         //	  YawAdjust(45);
         //  	printf("x: %f y: %f \r\n",ROBOT_REAL_POS_INFO.Position[x],ROBOT_REAL_POS_INFO.Position[y]);
         // remote_control();
         // Robot_Chassis.Robot_V[1] = 0.50f;
-        // robot_tf();
+        robot_tf();
         //	  move_test();
         //	  VelCrl(&MOTOR_REAL_INFO[1],200);
         //	  remote_FSM();
@@ -290,9 +291,9 @@ void RobotMove(void *argument)
     {
         if (ppm_update_flag == 1)
         {
-            remote_control();
+            // remote_control();
         }
-        shoot_control();
+        // shoot_control();
 
         if (ROCK_L_X < 800) // 小于500相当于掉线，此时ppm是0，轮子会疯转（掉线保护）
         {
