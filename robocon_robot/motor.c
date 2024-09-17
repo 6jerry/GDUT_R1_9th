@@ -66,7 +66,7 @@ void m3508_Init()
 	PID_Init(&motorleft_r, 16.2, 0.17, 2.87, 1000000, 20000, 5, 960);
 	PID_Init(&motorright_r, 16.7, 0.21, 2.4, 10000000, 20000, 5, 960);
 	PID_Init(&motorfront_r, 16.5, 0.18, 2.6, 1000000, 20000, 5, 960);
-	PID_Init(&shoot_down_left, 0, 0, 0, 1000000, 20000, 5, 60);
+	PID_Init(&shoot_down_left, 16.6, 0.25, 1.97, 1000000, 20000, 5, 750);
 	PID_Init(&shoot_down_right, 16.5, 0.25, 1.96, 1000000, 20000, 5, 750);
 	PID_Init(&shoot_up_left, 16, 0.22, 1.86, 1000000, 20000, 5, 750);
 	PID_Init(&shoot_up_right, 16.8, 0.23, 2.1, 1000000, 20000, 5, 750);

@@ -5,19 +5,21 @@
 #include "stm32f4xx_hal.h"
 #include "motor.h"
 
-//define
+//将遥控器的左右摇杆和PPM_buf绑定
 
+//左摇杆控制进退和左右移动
+#define ROCK_L_Y			PPM_buf[1]				//ROLL 1000-1500-2000//未知bug
+#define	ROCK_L_X		  PPM_buf[0]				//PITCH 1000-1500-2000P
 
+//右摇杆控制旋转
+#define ROCK_R_X			PPM_buf[3]					//YAW  1000-1500-2000
+#define ROCK_R_Y			PPM_buf[2]					//THR  1000-1500-2000
+
+//将遥控器的上四键和PPM_buf绑定
 #define SWA		PPM_buf[4]				//AUX4 1000~2000//没用
 #define SWB		PPM_buf[5]				//AUX2 1000-1500-2000
 #define SWD		PPM_buf[7]			//AUX1 1000~2000
 #define SWC		PPM_buf[6]				//AUX3 1000-1500-2000
-
-#define ROCK_R_X			PPM_buf[0]					//YAW  1000-1500-2000
-#define ROCK_R_Y			PPM_buf[1]					//THR  1000-1500-2000
-
-#define ROCK_L_Y			PPM_buf[2]				//ROLL 1000-1500-2000//未知bug
-#define	ROCK_L_X		  	PPM_buf[3]				//PITCH 1000-1500-2000P
 
 #define Rotary_L PPM_buf[8]
 
@@ -28,6 +30,11 @@
 static uint16_t PPM_Databuf[10]={0};
 
 extern uint16_t PPM_buf[10];
+
+extern uint8_t shoot_flag;
+
+extern uint8_t ppm_update_flag;
+
 typedef struct
 {
 	struct  //遥控原始数据，8通道
@@ -121,6 +128,8 @@ extern uint16_t Time_Sys[4];
 extern uint16_t Microsecond_Cnt;
 
 void remote_control(void);
+void reduce_jitter(void);
+void shoot_control(void);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 void Update_Action_gl_position(float value[6]);

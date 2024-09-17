@@ -15,9 +15,9 @@
  *
  ******************************************************************************
  */
-/* USER CODE END Header */
+ /* USER CODE END Header */
 
-/* Includes ------------------------------------------------------------------*/
+ /* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
 #include "task.h"
 #include "main.h"
@@ -100,11 +100,11 @@ const osThreadAttr_t uartRXTask_attributes = {
 
 /* USER CODE END FunctionPrototypes */
 
-void StartDefaultTask(void *argument);
-void MotorControl(void *argument);
-void RobotState(void *argument);
-void RobotMove(void *argument);
-void uartRXTask(void *argument);
+void StartDefaultTask(void* argument);
+void MotorControl(void* argument);
+void RobotState(void* argument);
+void RobotMove(void* argument);
+void uartRXTask(void* argument);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
@@ -162,8 +162,8 @@ void MX_FREERTOS_Init(void)
  * @param  argument: Not used
  * @retval None
  */
-/* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void *argument)
+ /* USER CODE END Header_StartDefaultTask */
+void StartDefaultTask(void* argument)
 {
     /* USER CODE BEGIN StartDefaultTask */
     float move_time_counter = 0;
@@ -208,9 +208,9 @@ void StartDefaultTask(void *argument)
  * @param argument: Not used
  * @retval None
  */
-/* USER CODE END Header_MotorControl */
-float test_msgss[8] = {0};
-void MotorControl(void *argument)
+ /* USER CODE END Header_MotorControl */
+float test_msgss[8] = { 0 };
+void MotorControl(void* argument)
 {
     /* USER CODE BEGIN MotorControl */
     /* Infinite loop */
@@ -241,8 +241,8 @@ void MotorControl(void *argument)
  * @param argument: Not used
  * @retval None
  */
-/* USER CODE END Header_RobotState */
-void RobotState(void *argument)
+ /* USER CODE END Header_RobotState */
+void RobotState(void* argument)
 {
     /* USER CODE BEGIN RobotState */
     /* Infinite loop */
@@ -254,7 +254,7 @@ void RobotState(void *argument)
         //  	printf("x: %f y: %f \r\n",ROBOT_REAL_POS_INFO.Position[x],ROBOT_REAL_POS_INFO.Position[y]);
         // remote_control();
         // Robot_Chassis.Robot_V[1] = 0.50f;
-        // robot_tf();
+       // robot_tf();
         //	  move_test();
         //	  VelCrl(&MOTOR_REAL_INFO[1],200);
         //	  remote_FSM();
@@ -279,8 +279,8 @@ void RobotState(void *argument)
  * @param argument: Not used
  * @retval None
  */
-/* USER CODE END Header_RobotMove */
-void RobotMove(void *argument)
+ /* USER CODE END Header_RobotMove */
+void RobotMove(void* argument)
 {
     /* USER CODE BEGIN RobotMove */
     //	static portTickType move_xLastWakeTime;
@@ -288,18 +288,23 @@ void RobotMove(void *argument)
     /* Infinite loop */
     for (;;)
     {
-        if (ppm_update_flag == 1)
-        {
-            remote_control();
-        }
-        shoot_control();
+        remote_control();
 
-        if (ROCK_L_X < 800) // 小于500相当于掉线，此时ppm是0，轮子会疯转（掉线保护）
+        if (shoot_flag == 1)
         {
-            ROCK_L_X = 1500;
-            ROCK_L_Y = 1500;
-            ROCK_R_X = 1500;
-            ROCK_R_Y = 1500;
+            HAL_GPIO_WritePin(shoot_key_GPIO_Port, shoot_key_Pin, GPIO_PIN_SET);
+            shoot_down_left.setpoint = 2400;
+            shoot_down_right.setpoint = -2400;
+            shoot_up_left.setpoint = 3600;
+            shoot_up_right.setpoint = -3600;
+        }
+        if (shoot_flag == 0)
+        {
+            HAL_GPIO_WritePin(shoot_key_GPIO_Port, shoot_key_Pin, GPIO_PIN_RESET);
+            shoot_down_left.setpoint = 0;
+            shoot_down_right.setpoint = 0;
+            shoot_up_left.setpoint = 0;
+            shoot_up_right.setpoint = 0;
         }
         MotorCtrl();
         vTaskDelay(1);
@@ -312,7 +317,7 @@ void RobotMove(void *argument)
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
-void uartRXTask(void *argument)
+void uartRXTask(void* argument)
 {
     UART_Message msg;
     for (;;)
@@ -324,12 +329,20 @@ void uartRXTask(void *argument)
             switch (msg.uart_id)
             {
             case UART_ID_USART1:
-                uint8_t esp32_id = handle_serial_data_esp32(msg.data);
-                if (esp32_id == 0x01)
+                uint8_t mat_id = handle_serial_data_mat(msg.data);
+                if (mat_id == 0x01)
                 {
+                    // Robot_Chassis.Robot_V[1] = rx_frame_mat.data.msg_get[0];
+                    // Robot_Chassis.Robot_V[0] = rx_frame_mat.data.msg_get[1];
+                    // Robot_Chassis.Robot_V[2] = rx_frame_mat.data.msg_get[2];
+//                    shoot_down_left.setpoint = rx_frame_mat.data.msg_get[0];
+//                    shoot_down_right.setpoint = rx_frame_mat.data.msg_get[1];
+//                    shoot_up_left.setpoint = rx_frame_mat.data.msg_get[2];
+//                    shoot_up_right.setpoint = rx_frame_mat.data.msg_get[3];
+                    // PID_SetParameters(&shoot_up_right, rx_frame_mat.data.msg_get[1], rx_frame_mat.data.msg_get[2], rx_frame_mat.data.msg_get[3]);
+                    //     diffrobot_target.target_left_rpm = rx_frame_mat.data.msg_get[0];
+                    //     PID_SetParameters(&motor_pid_left, rx_frame_mat.data.msg_get[1], rx_frame_mat.data.msg_get[2], rx_frame_mat.data.msg_get[3]);
                 }
-                // ?? UART4 ???
-
                 break;
             case UART_ID_USART2:
                 break;
@@ -337,7 +350,11 @@ void uartRXTask(void *argument)
                 // ?? USART3 ???
                 break;
             case UART_ID_UART4:
-
+                uint8_t esp32_id = handle_serial_data_esp32(msg.data);
+                if (esp32_id == 0x01)
+                {
+                }
+                // ?? UART4 ???
                 break;
             case UART_ID_UART5:
                 // ?? UART5 ???

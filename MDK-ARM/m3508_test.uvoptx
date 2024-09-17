@@ -235,6 +235,26 @@
           <WinNumber>1</WinNumber>
           <ItemText>motorright_r</ItemText>
         </Ww>
+        <Ww>
+          <count>15</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>shoot_down_left</ItemText>
+        </Ww>
+        <Ww>
+          <count>16</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>PPM_buf</ItemText>
+        </Ww>
+        <Ww>
+          <count>17</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Robot_Chassis.Robot_V</ItemText>
+        </Ww>
+        <Ww>
+          <count>18</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Robot_Chassis.Robot_V[2] * 0.3149 + 0.6712 * Robot_Chassis.Robot_V[1] - Robot_Chassis.Robot_V[0] * 0.7412</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>
@@ -346,6 +366,21 @@
           <count>21</count>
           <WinNumber>2</WinNumber>
           <ItemText>SHOOT_MOTOR_INFO</ItemText>
+        </Ww>
+        <Ww>
+          <count>22</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>Robot_Chassis.Robot_V[1]</ItemText>
+        </Ww>
+        <Ww>
+          <count>23</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>ROCK_L_X</ItemText>
+        </Ww>
+        <Ww>
+          <count>24</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>Robot_Chassis.Robot_V</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow1>

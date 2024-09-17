@@ -24,10 +24,11 @@ uint16_t Microsecond_Cnt = 0;
 
 uint16_t PPM_buf[10] = {0};
 
-int RL_Y = 0, RL_X = 0, RR_X = 0, RR_Y = 0, SA = 0, SB = 0, SC = 0, SD = 0;
 uint8_t ppm_update_flag = 0;
 uint32_t now_ppm_time_send = 0;
 uint32_t TIME_ISR_CNT = 0, LAST_TIME_ISR_CNT = 0;
+
+uint8_t shoot_flag =0;
 
 /**
  * 函数功能: 按键外部中断回调函数
@@ -55,111 +56,92 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		// PPM解析开始
 		if (ppm_ready == 1) // 判断帧结束时，开始解析新的一轮PPM
 		{
-			if (ppm_time_delta >= 2100) // 帧结束电平至少2ms=2000us，由于部分老版本遥控器、//接收机输出PPM信号不标准，当出现解析异常时，尝试改小此值，该情况仅出现一例：使用天地飞老版本遥控器
-			{
-				// memcpy(PPM_Databuf,PPM_buf,ppm_sample_cnt*sizeof(uint16));
-				ppm_ready = 1;
-				ppm_sample_cnt = 0; // 对应的通道值
-				ppm_update_flag = 1;
-			}
-			else if (ppm_time_delta >= 9 && ppm_time_delta <= 2050) // 单个PWM脉宽在1000-2000us，这里设定900-2100，应该是为了提升容错
-			{
-				PPM_buf[ppm_sample_cnt] = ppm_time_delta; // 对应通道写入缓冲区，cnt++计算有多少个元素
-				ppm_sample_cnt++;
-
-				if (ppm_sample_cnt >= 9) // 单次解析结束0-7表示8个通道。我这里可以显示10个通道，故这个值应该为0-9！！待修改
+				if (ppm_time_delta >= 2100) // 帧结束电平至少2ms=2000us，由于部分老版本遥控器、//接收机输出PPM信号不标准，当出现解析异常时，尝试改小此值，该情况仅出现一例：使用天地飞老版本遥控器
 				{
-					memcpy(PPM_Databuf, PPM_buf, ppm_sample_cnt * sizeof(uint16_t));
-					ppm_ready = 0;
-					ppm_sample_cnt = 0;
+						// memcpy(PPM_Databuf,PPM_buf,ppm_sample_cnt*sizeof(uint16));
+						ppm_ready = 1;
+						ppm_sample_cnt = 0; // 对应的通道值
+						ppm_update_flag = 0;
 				}
-			}
-
-			else
-				ppm_ready = 0;
-		}
+				else if (ppm_time_delta >= 9 && ppm_time_delta <= 2050) // 单个PWM脉宽在1000-2000us，这里设定900-2100，应该是为了提升容错
+				{
+						PPM_buf[ppm_sample_cnt] = ppm_time_delta; // 对应通道写入缓冲区，cnt++计算有多少个元素
+						ppm_sample_cnt++;
+						
+						if (ppm_sample_cnt >= 8) // 单次解析结束0-7表示8个通道。我这里可以显示10个通道，故这个值应该为0-9！！待修改
+						{
+								memcpy(PPM_Databuf, PPM_buf, ppm_sample_cnt * sizeof(uint16_t));
+								ppm_ready = 0;
+								ppm_sample_cnt = 0;
+								ppm_update_flag = 1;	//数据全部接收到之后就可以更新电机目标速度数据了
+						}
+					
+				}
+				else
+						ppm_ready = 0;//掉线情况
+		}	
 
 		else if (ppm_time_delta >= 2100) // 帧结束电平至少2ms=2000us
 		{
 			ppm_ready = 1;
 			ppm_sample_cnt = 0;
 			ppm_update_flag = 0;
+
 		}
 
-		if (PPM_buf[3] > 1450 && PPM_buf[3] < 1550)
-			PPM_buf[3] = 1500;
-		if (ROCK_L_Y > 1450 && ROCK_L_Y < 1550)
-			ROCK_L_Y = 1500;
-
-		if (ROCK_R_X > 1400 && ROCK_R_X < 1600)
-			ROCK_R_X = 1500;
-		if (ROCK_R_Y > 1450 && ROCK_R_Y < 1550)
-			ROCK_R_Y = 1500;
-
-		/*if (SWA > 900 && SWA < 1100)
-			SWA = 1000;*/
-		if (SWA > 1900 && SWA < 2100)
-			SWA = 2000;
-
-		if (SWD > 900 && SWD < 1100)
-			SWD = 1000;
-		if (SWD > 1900 && SWD < 2100)
-			SWD = 2000;
-
-		if (SWB > 900 && SWB < 1100)
-			SWB = 1000;
-		if (SWB > 1450 && SWB < 1550)
-			SWB = 1500;
-		if (SWB > 1900 && SWB < 2100)
-			SWB = 2000;
-
-		if (SWC > 900 && SWC < 1100)
-			SWC = 1000;
-		if (SWC > 1450 && SWC < 1550)
-			SWC = 1500;
-		if (SWC > 1900 && SWC < 2100)
-			SWC = 2000;
+		reduce_jitter();//消抖
+		
+		if(SWB <1700)
+		{
+			shoot_flag =0;
+		}
+		else if(SWB>1700)
+		{
+			shoot_flag =1;
+		}
+		
 	}
-	RL_Y = ROCK_L_Y;
-	RL_X = ROCK_L_X;
-	RR_X = ROCK_R_X;
-	RR_Y = ROCK_R_Y;
-	SA = SWA;
-	SB = SWB;
-	SC = SWC;
-	SD = SWD;
+
 }
 
-//	//上升下降沿均触发
-//	if(GPIO_Pin==GPIO_PIN_11)
-//	{
-//		KEY_DATA.KEY_armtop=HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_11);
-//	}
-//	if(GPIO_Pin==GPIO_PIN_12)
-//	{
-//		KEY_DATA.KEY_armbottom=HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_12);
-//	}
-//	if(GPIO_Pin==GPIO_PIN_13)
-//	{
-//		KEY_DATA.KEY_push=HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_13);
-//	}
+
+void reduce_jitter(void)
+{
+	for(int i =0;i<4;i++)
+	{
+		if(PPM_buf[i] > 1350 && PPM_buf[i] < 1650 )
+		{
+			PPM_buf[i] = 1500;
+		}
+	}
+	
+}
+
 
 void remote_control(void)
 {
-
+	//最大摇杆程度，ROCK-1500为500，最终Robot_V会被转化为实际 m/s 的单位，所以给其除个500实际上就是转化为每秒1m
+	//然后再乘一个系数（设为V)便可认为最大转速为V/s
+	//轮径大概为0.072m，一圈走0.2261m，经过逆速度解算后，前进距离为0.15986m，相当于每秒6.255转就是以1m/s速度前进
+	//但在这里不用这么麻烦，轮子逆解算后速度为1/sqrt(2) = 0.707
+	//我们设置车速最大为0.5m/s，则sqrt(2)/500 = 0.0028约为0.003
+	//V1为Vx，V0为Vy，V2为Vw
 	Robot_Chassis.Robot_V[1] = (ROCK_L_X - 1500) * 0.003f;
 	Robot_Chassis.Robot_V[0] = (ROCK_L_Y - 1500) * 0.003f;
+	Robot_Chassis.Robot_V[2] = (ROCK_R_X - 1500) * 0.007f;
+
 	//	Robot_Chassis.World_V[2]=(ROCK_R_X-1500)*0.003f;
 	//	Robot_Chassis.World_V[1]=-(ROCK_L_X-1500)*0.0001328212f*(ROCK_L_X-1500)*0.0001328212f*(ROCK_L_X-1500)*0.0001328212f*10*(ROCK_L_X-1500);
 	//	Robot_Chassis.World_V[0]=-(ROCK_L_Y-1500)*0.0001328212f*(ROCK_L_Y-1500)*0.0001328212f*(ROCK_L_Y-1500)*0.0001328212f*10*(ROCK_L_Y-1500);
-	Robot_Chassis.Robot_V[2] = (ROCK_R_X - 1500) * 0.003f;
-	// robot_tf(); // 速度分解
-	if (ROCK_L_X == 1500 && ROCK_L_Y == 1500)
-	{
-		VelCrl(&MOTOR_REAL_INFO[0], 0);
-		VelCrl(&MOTOR_REAL_INFO[1], 0);
-		VelCrl(&MOTOR_REAL_INFO[2], 0);
-	}
+	 
+	robot_tf(); // 速度分解
+	
+//	if (ROCK_L_X == 1500 && ROCK_L_Y == 1500)
+//	{
+//		VelCrl(&MOTOR_REAL_INFO[0], 0);
+//		VelCrl(&MOTOR_REAL_INFO[1], 0);
+//		VelCrl(&MOTOR_REAL_INFO[2], 0);
+//	}
 
 	//	Robot_Chassis.World_V[0]=vx;
 	//	Robot_Chassis.World_V[1]=vy;
@@ -169,6 +151,26 @@ void remote_control(void)
 
 	//	Kinematic_Analysis1(Robot_Chassis);
 	//	Kinematic_Analysis1(Robot_Chassis);
+}
+
+void shoot_control(void)
+{
+	if(shoot_flag == 1)
+				{
+					HAL_GPIO_WritePin(shoot_key_GPIO_Port,shoot_key_Pin,GPIO_PIN_SET);
+					shoot_down_left.setpoint  =2400;
+					shoot_down_right.setpoint =-2400;
+					shoot_up_left.setpoint    =3600; 
+					shoot_up_right.setpoint   =-3600;
+				}
+				if(shoot_flag == 0)
+				{
+					HAL_GPIO_WritePin(shoot_key_GPIO_Port,shoot_key_Pin,GPIO_PIN_RESET);
+					shoot_down_left.setpoint  =0;
+					shoot_down_right.setpoint =0;
+					shoot_up_left.setpoint    =0; 
+					shoot_up_right.setpoint   =0;
+				}
 }
 
 void Adjust_Countrol(void)

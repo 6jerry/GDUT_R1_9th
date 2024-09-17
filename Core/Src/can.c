@@ -25,7 +25,7 @@
 #include <stm32f4xx_hal_can.h>
 #include <stm32f407xx.h>
 CAN_TxHeaderTypeDef TxHeader; // 发�??
-uint8_t RxData[8];            // 数据接收数组，can的数据帧只有8�?
+uint8_t RxData[8];            // 数据接收数组，can的数据帧只有8�??
 uint8_t RxData2[8];
 int Rx_Flag = 1;
 /* USER CODE END 0 */
@@ -62,9 +62,10 @@ void MX_CAN1_Init(void)
   }
   /* USER CODE BEGIN CAN1_Init 2 */
   CAN1_Filter_Init();
-  HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING); // �?活指定的中断函数
+  HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING); // �??活指定的中断函数
 
   /* USER CODE END CAN1_Init 2 */
+
 }
 /* CAN2 init function */
 void MX_CAN2_Init(void)
@@ -97,23 +98,23 @@ void MX_CAN2_Init(void)
   CAN2_Filter_Init();
   HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
   /* USER CODE END CAN2_Init 2 */
+
 }
 
-static uint32_t HAL_RCC_CAN1_CLK_ENABLED = 0;
+static uint32_t HAL_RCC_CAN1_CLK_ENABLED=0;
 
-void HAL_CAN_MspInit(CAN_HandleTypeDef *canHandle)
+void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if (canHandle->Instance == CAN1)
+  if(canHandle->Instance==CAN1)
   {
-    /* USER CODE BEGIN CAN1_MspInit 0 */
+  /* USER CODE BEGIN CAN1_MspInit 0 */
 
-    /* USER CODE END CAN1_MspInit 0 */
+  /* USER CODE END CAN1_MspInit 0 */
     /* CAN1 clock enable */
     HAL_RCC_CAN1_CLK_ENABLED++;
-    if (HAL_RCC_CAN1_CLK_ENABLED == 1)
-    {
+    if(HAL_RCC_CAN1_CLK_ENABLED==1){
       __HAL_RCC_CAN1_CLK_ENABLE();
     }
 
@@ -122,7 +123,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef *canHandle)
     PA11     ------> CAN1_RX
     PA12     ------> CAN1_TX
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_12;
+    GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -130,28 +131,21 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef *canHandle)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* CAN1 interrupt Init */
-    HAL_NVIC_SetPriority(CAN1_TX_IRQn, 2, 0);
-    HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
-    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 2, 0);
+    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 7, 0);
     HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
-    HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 2, 0);
-    HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
-    HAL_NVIC_SetPriority(CAN1_SCE_IRQn, 2, 0);
-    HAL_NVIC_EnableIRQ(CAN1_SCE_IRQn);
-    /* USER CODE BEGIN CAN1_MspInit 1 */
+  /* USER CODE BEGIN CAN1_MspInit 1 */
 
-    /* USER CODE END CAN1_MspInit 1 */
+  /* USER CODE END CAN1_MspInit 1 */
   }
-  else if (canHandle->Instance == CAN2)
+  else if(canHandle->Instance==CAN2)
   {
-    /* USER CODE BEGIN CAN2_MspInit 0 */
+  /* USER CODE BEGIN CAN2_MspInit 0 */
 
-    /* USER CODE END CAN2_MspInit 0 */
+  /* USER CODE END CAN2_MspInit 0 */
     /* CAN2 clock enable */
     __HAL_RCC_CAN2_CLK_ENABLE();
     HAL_RCC_CAN1_CLK_ENABLED++;
-    if (HAL_RCC_CAN1_CLK_ENABLED == 1)
-    {
+    if(HAL_RCC_CAN1_CLK_ENABLED==1){
       __HAL_RCC_CAN1_CLK_ENABLE();
     }
 
@@ -160,7 +154,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef *canHandle)
     PB12     ------> CAN2_RX
     PB13     ------> CAN2_TX
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_12 | GPIO_PIN_13;
+    GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -168,32 +162,25 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef *canHandle)
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /* CAN2 interrupt Init */
-    HAL_NVIC_SetPriority(CAN2_TX_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(CAN2_TX_IRQn);
-    HAL_NVIC_SetPriority(CAN2_RX0_IRQn, 5, 0);
+    HAL_NVIC_SetPriority(CAN2_RX0_IRQn, 8, 0);
     HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
-    HAL_NVIC_SetPriority(CAN2_RX1_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(CAN2_RX1_IRQn);
-    HAL_NVIC_SetPriority(CAN2_SCE_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(CAN2_SCE_IRQn);
-    /* USER CODE BEGIN CAN2_MspInit 1 */
+  /* USER CODE BEGIN CAN2_MspInit 1 */
 
-    /* USER CODE END CAN2_MspInit 1 */
+  /* USER CODE END CAN2_MspInit 1 */
   }
 }
 
-void HAL_CAN_MspDeInit(CAN_HandleTypeDef *canHandle)
+void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 {
 
-  if (canHandle->Instance == CAN1)
+  if(canHandle->Instance==CAN1)
   {
-    /* USER CODE BEGIN CAN1_MspDeInit 0 */
+  /* USER CODE BEGIN CAN1_MspDeInit 0 */
 
-    /* USER CODE END CAN1_MspDeInit 0 */
+  /* USER CODE END CAN1_MspDeInit 0 */
     /* Peripheral clock disable */
     HAL_RCC_CAN1_CLK_ENABLED--;
-    if (HAL_RCC_CAN1_CLK_ENABLED == 0)
-    {
+    if(HAL_RCC_CAN1_CLK_ENABLED==0){
       __HAL_RCC_CAN1_CLK_DISABLE();
     }
 
@@ -201,27 +188,23 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef *canHandle)
     PA11     ------> CAN1_RX
     PA12     ------> CAN1_TX
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_11 | GPIO_PIN_12);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_11|GPIO_PIN_12);
 
     /* CAN1 interrupt Deinit */
-    HAL_NVIC_DisableIRQ(CAN1_TX_IRQn);
     HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
-    HAL_NVIC_DisableIRQ(CAN1_RX1_IRQn);
-    HAL_NVIC_DisableIRQ(CAN1_SCE_IRQn);
-    /* USER CODE BEGIN CAN1_MspDeInit 1 */
+  /* USER CODE BEGIN CAN1_MspDeInit 1 */
 
-    /* USER CODE END CAN1_MspDeInit 1 */
+  /* USER CODE END CAN1_MspDeInit 1 */
   }
-  else if (canHandle->Instance == CAN2)
+  else if(canHandle->Instance==CAN2)
   {
-    /* USER CODE BEGIN CAN2_MspDeInit 0 */
+  /* USER CODE BEGIN CAN2_MspDeInit 0 */
 
-    /* USER CODE END CAN2_MspDeInit 0 */
+  /* USER CODE END CAN2_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_CAN2_CLK_DISABLE();
     HAL_RCC_CAN1_CLK_ENABLED--;
-    if (HAL_RCC_CAN1_CLK_ENABLED == 0)
-    {
+    if(HAL_RCC_CAN1_CLK_ENABLED==0){
       __HAL_RCC_CAN1_CLK_DISABLE();
     }
 
@@ -229,16 +212,13 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef *canHandle)
     PB12     ------> CAN2_RX
     PB13     ------> CAN2_TX
     */
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_12 | GPIO_PIN_13);
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_12|GPIO_PIN_13);
 
     /* CAN2 interrupt Deinit */
-    HAL_NVIC_DisableIRQ(CAN2_TX_IRQn);
     HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
-    HAL_NVIC_DisableIRQ(CAN2_RX1_IRQn);
-    HAL_NVIC_DisableIRQ(CAN2_SCE_IRQn);
-    /* USER CODE BEGIN CAN2_MspDeInit 1 */
+  /* USER CODE BEGIN CAN2_MspDeInit 1 */
 
-    /* USER CODE END CAN2_MspDeInit 1 */
+  /* USER CODE END CAN2_MspDeInit 1 */
   }
 }
 
@@ -249,17 +229,17 @@ void CAN1_Filter_Init(void)
   CAN_FilterTypeDef sFilterConfig;
 
   sFilterConfig.FilterBank = 0;                      /* 过滤器组0 */
-  sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  /* 屏蔽位模�? */
+  sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  /* 屏蔽位模�?? */
   sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; /* 32位�??*/
 
   sFilterConfig.FilterIdHigh = (((uint32_t)CAN_RxExtId << 3) & 0xFFFF0000) >> 16; /* 要过滤的ID高位 */                  // 0x0000
   sFilterConfig.FilterIdLow = (((uint32_t)CAN_RxExtId << 3) | CAN_ID_EXT | CAN_RTR_DATA) & 0xFFFF; /* 要过滤的ID低位 */ // 0x0000
-  //  sFilterConfig.FilterMaskIdHigh     = 0xFFFF;			/* 过滤器高16位每位必须匹�? */
-  //  sFilterConfig.FilterMaskIdLow      = 0xFFFF;			/* 过滤器低16位每位必须匹�? */
+  //  sFilterConfig.FilterMaskIdHigh     = 0xFFFF;			/* 过滤器高16位每位必须匹�?? */
+  //  sFilterConfig.FilterMaskIdLow      = 0xFFFF;			/* 过滤器低16位每位必须匹�?? */
   sFilterConfig.FilterMaskIdHigh = 0x0000;           /* 实际上是关闭了过滤器 */
   sFilterConfig.FilterMaskIdLow = 0x0000;            /* 实际上是关闭了过滤器 */
   sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0; /* 过滤器被关联到FIFO 0 */
-  sFilterConfig.FilterActivation = ENABLE;           /* 使能过滤�? */
+  sFilterConfig.FilterActivation = ENABLE;           /* 使能过滤�?? */
   // sFilterConfig.SlaveStartFilterBank = 14;
 
   if (HAL_CAN_ConfigFilter(&hcan1, &sFilterConfig) != HAL_OK)
@@ -281,9 +261,9 @@ void CAN1_Filter_Init(void)
     Error_Handler();
   }
 
-  TxHeader.ExtId = CAN_TxExtId; // 扩展标识�?(29�?)
-  TxHeader.IDE = CAN_ID_EXT;    // 使用标准�?
-  TxHeader.RTR = CAN_RTR_DATA;  // 数据�?
+  TxHeader.ExtId = CAN_TxExtId; // 扩展标识�??(29�??)
+  TxHeader.IDE = CAN_ID_EXT;    // 使用标准�??
+  TxHeader.RTR = CAN_RTR_DATA;  // 数据�??
   TxHeader.DLC = 8;
   TxHeader.TransmitGlobalTime = DISABLE;
 }
@@ -294,17 +274,17 @@ void CAN2_Filter_Init(void)
   CAN_FilterTypeDef sFilterConfig;
 
   sFilterConfig.FilterBank = 14;                     /* 过滤器组0 */
-  sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  /* 屏蔽位模�? */
+  sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  /* 屏蔽位模�?? */
   sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; /* 32位�??*/
 
   sFilterConfig.FilterIdHigh = (((uint32_t)CAN_RxExtId << 3) & 0xFFFF0000) >> 16; /* 要过滤的ID高位 */                  // 0x0000
   sFilterConfig.FilterIdLow = (((uint32_t)CAN_RxExtId << 3) | CAN_ID_EXT | CAN_RTR_DATA) & 0xFFFF; /* 要过滤的ID低位 */ // 0x0000
-  //  sFilterConfig.FilterMaskIdHigh     = 0xFFFF;			/* 过滤器高16位每位必须匹�? */
-  //  sFilterConfig.FilterMaskIdLow      = 0xFFFF;			/* 过滤器低16位每位必须匹�? */
+  //  sFilterConfig.FilterMaskIdHigh     = 0xFFFF;			/* 过滤器高16位每位必须匹�?? */
+  //  sFilterConfig.FilterMaskIdLow      = 0xFFFF;			/* 过滤器低16位每位必须匹�?? */
   sFilterConfig.FilterMaskIdHigh = 0x0000;
   sFilterConfig.FilterMaskIdLow = 0x0000;
   sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0; /* 过滤器被关联到FIFO 0 */
-  sFilterConfig.FilterActivation = ENABLE;           /* 使能过滤�? */
+  sFilterConfig.FilterActivation = ENABLE;           /* 使能过滤�?? */
   sFilterConfig.SlaveStartFilterBank = 14;
 
   if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK)
@@ -326,9 +306,9 @@ void CAN2_Filter_Init(void)
     Error_Handler();
   }
 
-  TxHeader.ExtId = CAN_TxExtId; // 扩展标识�?(29�?)
-  TxHeader.IDE = CAN_ID_EXT;    // 使用标准�?
-  TxHeader.RTR = CAN_RTR_DATA;  // 数据�?
+  TxHeader.ExtId = CAN_TxExtId; // 扩展标识�??(29�??)
+  TxHeader.IDE = CAN_ID_EXT;    // 使用标准�??
+  TxHeader.RTR = CAN_RTR_DATA;  // 数据�??
   TxHeader.DLC = 8;
   TxHeader.TransmitGlobalTime = DISABLE;
 }
@@ -340,14 +320,14 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
   if (hcan == &hcan1)
   {
     CAN_RxHeaderTypeDef RxHeader; // 接收
-    Rx_Flag = 1;                  // 接收标志�?
+    Rx_Flag = 1;                  // 接收标志�??
     HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &RxHeader, RxData);
     m3508_update_info(&RxHeader, RxData); // M3508电机数据处理
   }
   if (hcan == &hcan2)
   {
     CAN_RxHeaderTypeDef RxHeader2; // 接收
-    Rx_Flag = 0;                   // 接收标志�?
+    Rx_Flag = 0;                   // 接收标志�??
     HAL_CAN_GetRxMessage(&hcan2, CAN_RX_FIFO0, &RxHeader2, RxData2);
     shoot_motor_update(&RxHeader2, RxData2);
   }
@@ -357,7 +337,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
   if (hcan == &hcan2)
   {
     CAN_RxHeaderTypeDef RxHeader; // 接收
-    Rx_Flag = 0;                  // 接收标志�?
+    Rx_Flag = 0;                  // 接收标志�??
     HAL_CAN_GetRxMessage(&hcan2, CAN_RX_FIFO1, &RxHeader, RxData2);
   }
 }

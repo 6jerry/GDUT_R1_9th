@@ -101,7 +101,7 @@ void Kinematic_Analysis1(ROBOT_CHASSIS motor_target)
 void robot_tf()
 {
 
-	MOTOR_REAL_INFO[0].TARGET_RPM = v_to_rpm((Robot_Chassis.Robot_V[2] * 0.3149 + 0.6712 * Robot_Chassis.Robot_V[1] - Robot_Chassis.Robot_V[0] * 0.7412));
+	MOTOR_REAL_INFO[0].TARGET_RPM = v_to_rpm(Robot_Chassis.Robot_V[2] * 0.3149 + 0.6712 * Robot_Chassis.Robot_V[1] - Robot_Chassis.Robot_V[0] * 0.7412);
 
 	MOTOR_REAL_INFO[1].TARGET_RPM = v_to_rpm(Robot_Chassis.Robot_V[2] * 0.3149 + 0.6712 * Robot_Chassis.Robot_V[1] + Robot_Chassis.Robot_V[0] * 0.7412); // y,x,w
 

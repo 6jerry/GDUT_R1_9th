@@ -7,7 +7,7 @@
 #include "queue.h"
 #include "crc_util.h"
 #include <stdbool.h>
-
+#include "MoveBase.h"
 #define FRAME_HEAD_0_ESP32 0xFC
 #define FRAME_HEAD_1_ESP32 0xFB
 #define FRAME_ID_ESP32 0x01 // 示例数据帧ID
@@ -65,6 +65,7 @@ typedef struct
 uint8_t handle_serial_data_esp32(uint8_t byte);
 void send_serial_frame_esp32(UART_HandleTypeDef *huart, uint8_t frame_id, uint8_t data_length, float *data);
 void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData);
+void xbox_remote_control();
 extern XboxControllerData_t xbox_msgs;
 extern serial_frame_esp32_t rx_frame_esp32;
 

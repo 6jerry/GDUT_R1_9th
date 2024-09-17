@@ -73,9 +73,10 @@ void EnableDebugIRQ(void)
 	HAL_UARTEx_ReceiveToIdle_DMA(&huart2, USART2_Rx_buf, RX_BUF_SIZE);
 	HAL_UARTEx_ReceiveToIdle_DMA(&huart6, USART6_Rx_buf, RX_BUF_SIZE);*/
 
-	uartQueue = xQueueCreate(1, sizeof(UART_Message));
 	HAL_UART_Receive_IT(&huart1, rx_buffer1, 1);
 	HAL_UART_Receive_IT(&huart4, rx_buffer4, 1);
+	HAL_UART_Receive_IT(&huart3, RxBuffer_for4, 1);
+	uartQueue = xQueueCreate(1, sizeof(UART_Message));
 }
 
 /*
@@ -166,7 +167,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		xQueueOverwriteFromISR(uartQueue, &msg, &xHigherPriorityTaskWoken);
 	}
 
-	else if (huart == &huart3)
+	else if (huart->Instance == USART3)
 	{
 		Action_State++;
 		static uint8_t count = 0;
@@ -283,7 +284,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	//
 	//
 	//   }
-	else if (huart == &huart4)
+	else if (huart->Instance == UART4)
 	{
 
 		// uart4_ReceiveData(&No1_Data.WOrld_x, &No1_Data.WOrld_y, &No1_Data.WOrld_w, &No1_Data.flag);
@@ -291,7 +292,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		msg.data = rx_buffer4[0];
 		HAL_UART_Receive_IT(&huart4, rx_buffer4, 1);
 		// BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-		xQueueOverwriteFromISR(uartQueue, &msg, &xHigherPriorityTaskWoken);
+		// xQueueOverwriteFromISR(uartQueue, &msg, &xHigherPriorityTaskWoken);
 		// portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 		//		No1_Porcessing(No1_Data);
 		/*Remote_Process();

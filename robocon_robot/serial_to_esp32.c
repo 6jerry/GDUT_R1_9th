@@ -184,3 +184,16 @@ void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData)
     controllerData->trigLT = ((uint16_t)xbox_datas[24] << 8) | xbox_datas[25];
     controllerData->trigRT = ((uint16_t)xbox_datas[26] << 8) | xbox_datas[27];
 }
+void xbox_remote_control()
+{
+
+    
+
+
+
+
+
+
+
+
+}
