@@ -184,8 +184,14 @@ void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData)
     controllerData->trigLT = ((uint16_t)xbox_datas[24] << 8) | xbox_datas[25];
     controllerData->trigRT = ((uint16_t)xbox_datas[26] << 8) | xbox_datas[27];
 }
+int head_locking_flag = 0;
 void xbox_remote_control()
 {
+    detectButtonEdge(xbox_msgs.btnRS, &xbox_msgs.btnRS_last, &head_locking_flag, 1);
+    if (xbox_msgs.btnXbox == 1)
+    {
+        action_relocate();
+    }
     if (xbox_msgs.joyLHori > 31000 && xbox_msgs.joyLHori < 350000)
     {
         xbox_msgs.joyLHori_map = 0.0f;
@@ -244,5 +250,37 @@ void xbox_remote_control()
 
     Robot_Chassis.Robot_V[1] = MAX_ROBOT_SPEED_X * xbox_msgs.joyLHori_map;
     Robot_Chassis.Robot_V[0] = MAX_ROBOT_SPEED_Y * xbox_msgs.joyLVert_map;
-    Robot_Chassis.Robot_V[2] = -MAX_ROBOT_SPEED_W * xbox_msgs.joyRHori_map;
+    if (head_locking_flag == 0)
+    {
+        Robot_Chassis.Robot_V[2] = -MAX_ROBOT_SPEED_W * xbox_msgs.joyRHori_map;
+    }
+    if (head_locking_flag == 1)
+    {
+        if (xbox_msgs.btnDirUp == 1)
+        {
+            heading_lock.setpoint = 0.0f;
+        }
+        else if (xbox_msgs.btnDirLeft == 1)
+        {
+            // heading_lock.setpoint = -1.5705f;
+        }
+        else if (xbox_msgs.btnDirRight == 1)
+        {
+            // heading_lock.setpoint = 1.5705f;
+        }
+        else if (xbox_msgs.btnDirDown == 1)
+        {
+            // heading_lock.setpoint = 3.0f;
+        }
+    }
+    // Robot_Chassis.Robot_V[2] = -MAX_ROBOT_SPEED_W * xbox_msgs.joyRHori_map;
+}
+
+void detectButtonEdge(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState)
+{
+    if (currentBtnState && !(*lastBtnState))
+    { // 检测到上升沿
+        *toggleState = (*toggleState + 1) % (maxState + 1);
+    }
+    *lastBtnState = currentBtnState;
 }

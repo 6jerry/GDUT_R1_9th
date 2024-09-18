@@ -53,11 +53,15 @@ m3508_test\main.o: ../robocon_robot/motor.h
 m3508_test\main.o: ../robocon_robot/pid.h
 m3508_test\main.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\cstdint
 m3508_test\main.o: ../robocon_robot/new_pid.h
+m3508_test\main.o: ../robocon_robot/MoveBase.h
+m3508_test\main.o: ../robocon_robot/hardware.h
+m3508_test\main.o: ../robocon_robot/motor.h
 m3508_test\main.o: ../robocon_robot/pid_adjust.h
 m3508_test\main.o: ../robocon_robot/driver_usart.h
 m3508_test\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+m3508_test\main.o: ../robocon_robot/serial_to_matlab.h
+m3508_test\main.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+m3508_test\main.o: ../robocon_robot/crc_util.h
 m3508_test\main.o: ../robocon_robot/ring_buffer.h
-m3508_test\main.o: ../robocon_robot/hardware.h
 m3508_test\main.o: ../robocon_robot/calculation.h
-m3508_test\main.o: ../robocon_robot/MoveBase.h
 m3508_test\main.o: ../robocon_robot/FSM.h

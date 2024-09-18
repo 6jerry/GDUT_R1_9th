@@ -38,6 +38,7 @@ m3508_test\fsm.o: ..\robocon_robot\pid.h
 m3508_test\fsm.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\cstdint
 m3508_test\fsm.o: ..\robocon_robot\new_pid.h
 m3508_test\fsm.o: ..\robocon_robot\MoveBase.h
+m3508_test\fsm.o: ..\robocon_robot\hardware.h
 m3508_test\fsm.o: ..\robocon_robot\calculation.h
 m3508_test\fsm.o: ..\robocon_robot\communicate.h
 m3508_test\fsm.o: ..\robocon_robot\communicate.h

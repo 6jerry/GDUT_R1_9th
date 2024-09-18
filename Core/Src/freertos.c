@@ -224,12 +224,12 @@ void MotorControl(void *argument)
         // MOVE_FSM();
         // Photogate_FSM();
 
-        test_msgss[0] = SHOOT_MOTOR_INFO[0].RPM;
-        test_msgss[1] = SHOOT_MOTOR_INFO[1].RPM;
+        test_msgss[0] = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
+        test_msgss[1] = heading_lock.setpoint;
         test_msgss[2] = SHOOT_MOTOR_INFO[2].RPM;
         test_msgss[3] = SHOOT_MOTOR_INFO[3].RPM;
         test_msgss[4] = SHOOT_MOTOR_INFO[0].real_current;
-        send_serial_frame_mat(&huart1, 0x01, 8, test_msgss);
+        send_serial_frame_mat(&huart2, 0x01, 8, test_msgss);
         vTaskDelay(10);
     }
     /* USER CODE END MotorControl */
@@ -266,7 +266,7 @@ void RobotState(void *argument)
         //		}
         // Retry_FSM();
         // move_Laser();
-
+        robot_speed_control();
         // MoveCtrl();
         //	ZONE2_FSM();
         vTaskDelay(5);
@@ -285,7 +285,7 @@ void RobotMove(void *argument)
 {
     /* USER CODE BEGIN RobotMove */
     //	static portTickType move_xLastWakeTime;
-    //	const portTickType move_xFrequency = pdMS_TO_TICKS(10); // ��ʱ10ms
+    //	const portTickType move_xFrequency = pdMS_TO_TICKS(10); // ��?10ms
     /* Infinite loop */
     for (;;)
     {
@@ -295,7 +295,7 @@ void RobotMove(void *argument)
         }
         // shoot_control();
 
-        if (ROCK_L_X < 800) // 小于500相当于掉线，此时ppm是0，轮子会疯转（掉线保护）
+        if (ROCK_L_X < 800) // ??500????????ppm?0????????????
         {
             ROCK_L_X = 1500;
             ROCK_L_Y = 1500;
@@ -304,7 +304,7 @@ void RobotMove(void *argument)
         }
         MotorCtrl();
         vTaskDelay(1);
-        // vTaskDelayUntil(&move_xLastWakeTime, move_xFrequency); // ������ʱ
+        // vTaskDelayUntil(&move_xLastWakeTime, move_xFrequency); // ������?
     }
     /* USER CODE END RobotMove */
 }

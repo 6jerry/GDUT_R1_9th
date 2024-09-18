@@ -5,7 +5,8 @@
 #include <cstdint>
 #include "FreeRTOS.h"
 #include <queue.h>
-
+#include "serial_to_matlab.h"
+#include "motor.h"
 #define RX_BUF_SIZE 12
 #define Max_BUFF_Len 100
 

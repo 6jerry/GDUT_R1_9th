@@ -48,3 +48,11 @@ m3508_test\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrapp
 m3508_test\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 m3508_test\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 m3508_test\usart.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+m3508_test\usart.o: ../robocon_robot/serial_to_matlab.h
+m3508_test\usart.o: ../robocon_robot/crc_util.h
+m3508_test\usart.o: ../robocon_robot/motor.h
+m3508_test\usart.o: ../robocon_robot/pid.h
+m3508_test\usart.o: ../robocon_robot/new_pid.h
+m3508_test\usart.o: ../robocon_robot/MoveBase.h
+m3508_test\usart.o: ../robocon_robot/hardware.h
+m3508_test\usart.o: ../robocon_robot/motor.h

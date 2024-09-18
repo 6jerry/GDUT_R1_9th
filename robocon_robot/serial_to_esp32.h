@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include "MoveBase.h"
 #include "motor.h"
+#include "hardware.h"
 #define FRAME_HEAD_0_ESP32 0xFC
 #define FRAME_HEAD_1_ESP32 0xFB
 #define FRAME_ID_ESP32 0x01 // 示例数据帧ID
@@ -43,21 +44,37 @@ typedef struct
 {
     // 按键数据（bool类型）
     bool btnY;
+    bool btnY_last;
     bool btnB;
+    bool btnB_last;
     bool btnA;
+    bool btnA_last;
     bool btnX;
+    bool btnX_last;
     bool btnShare;
+    bool btnShare_last;
     bool btnStart;
+    bool btnStart_last;
     bool btnSelect;
+    bool btnSelect_last;
     bool btnXbox;
+    bool btnXbox_last;
     bool btnLB;
+    bool btnLB_last;
     bool btnRB;
+    bool btnRB_last;
     bool btnLS;
+    bool btnLS_last;
     bool btnRS;
+    bool btnRS_last;
     bool btnDirUp;
+    bool btnDirup_last;
     bool btnDirLeft;
+    bool btnDirLeft_last;
     bool btnDirRight;
+    bool btnDirRight_last;
     bool btnDirDown;
+    bool btnDirDown_last;
 
     // 霍尔值（16位数值）
     uint16_t joyLHori;
@@ -74,11 +91,13 @@ typedef struct
     float trigLT_map;
     float trigRT_map;
 } XboxControllerData_t;
-
+extern int head_locking_flag; // 0是不锁死，1是锁死
+// int32_t msg_count = 0;
 uint8_t handle_serial_data_esp32(uint8_t byte);
 void send_serial_frame_esp32(UART_HandleTypeDef *huart, uint8_t frame_id, uint8_t data_length, float *data);
 void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData);
 void xbox_remote_control();
+void detectButtonEdge(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState);
 extern XboxControllerData_t xbox_msgs;
 extern serial_frame_esp32_t rx_frame_esp32;
 

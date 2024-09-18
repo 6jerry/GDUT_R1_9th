@@ -12,7 +12,7 @@
 Air_Contorl Device;
 
 ACTION_GL_POS ACTION_GL_POS_INFO;
-
+ROBOT_CHASSIS Robot_Chassis;
 ROBOT_CHASSIS ROBOT_REAL_POS_INFO;
 
 ROBOT_REAL_POS ROBOT_REAL_POS_DATA;
@@ -28,7 +28,7 @@ uint8_t ppm_update_flag = 0;
 uint32_t now_ppm_time_send = 0;
 uint32_t TIME_ISR_CNT = 0, LAST_TIME_ISR_CNT = 0;
 
-uint8_t shoot_flag =0;
+uint8_t shoot_flag = 0;
 
 /**
  * 函数功能: 按键外部中断回调函数
@@ -56,76 +56,69 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		// PPM解析开始
 		if (ppm_ready == 1) // 判断帧结束时，开始解析新的一轮PPM
 		{
-				if (ppm_time_delta >= 2100) // 帧结束电平至少2ms=2000us，由于部分老版本遥控器、//接收机输出PPM信号不标准，当出现解析异常时，尝试改小此值，该情况仅出现一例：使用天地飞老版本遥控器
+			if (ppm_time_delta >= 2100) // 帧结束电平至少2ms=2000us，由于部分老版本遥控器、//接收机输出PPM信号不标准，当出现解析异常时，尝试改小此值，该情况仅出现一例：使用天地飞老版本遥控器
+			{
+				// memcpy(PPM_Databuf,PPM_buf,ppm_sample_cnt*sizeof(uint16));
+				ppm_ready = 1;
+				ppm_sample_cnt = 0; // 对应的通道值
+				ppm_update_flag = 0;
+			}
+			else if (ppm_time_delta >= 9 && ppm_time_delta <= 2050) // 单个PWM脉宽在1000-2000us，这里设定900-2100，应该是为了提升容错
+			{
+				PPM_buf[ppm_sample_cnt] = ppm_time_delta; // 对应通道写入缓冲区，cnt++计算有多少个元素
+				ppm_sample_cnt++;
+
+				if (ppm_sample_cnt >= 8) // 单次解析结束0-7表示8个通道。我这里可以显示10个通道，故这个值应该为0-9！！待修改
 				{
-						// memcpy(PPM_Databuf,PPM_buf,ppm_sample_cnt*sizeof(uint16));
-						ppm_ready = 1;
-						ppm_sample_cnt = 0; // 对应的通道值
-						ppm_update_flag = 0;
+					memcpy(PPM_Databuf, PPM_buf, ppm_sample_cnt * sizeof(uint16_t));
+					ppm_ready = 0;
+					ppm_sample_cnt = 0;
+					ppm_update_flag = 1; // 数据全部接收到之后就可以更新电机目标速度数据了
 				}
-				else if (ppm_time_delta >= 9 && ppm_time_delta <= 2050) // 单个PWM脉宽在1000-2000us，这里设定900-2100，应该是为了提升容错
-				{
-						PPM_buf[ppm_sample_cnt] = ppm_time_delta; // 对应通道写入缓冲区，cnt++计算有多少个元素
-						ppm_sample_cnt++;
-						
-						if (ppm_sample_cnt >= 8) // 单次解析结束0-7表示8个通道。我这里可以显示10个通道，故这个值应该为0-9！！待修改
-						{
-								memcpy(PPM_Databuf, PPM_buf, ppm_sample_cnt * sizeof(uint16_t));
-								ppm_ready = 0;
-								ppm_sample_cnt = 0;
-								ppm_update_flag = 1;	//数据全部接收到之后就可以更新电机目标速度数据了
-						}
-					
-				}
-				else
-						ppm_ready = 0;//掉线情况
-		}	
+			}
+			else
+				ppm_ready = 0; // 掉线情况
+		}
 
 		else if (ppm_time_delta >= 2100) // 帧结束电平至少2ms=2000us
 		{
 			ppm_ready = 1;
 			ppm_sample_cnt = 0;
 			ppm_update_flag = 0;
-
 		}
 
-		reduce_jitter();//消抖
-		
-		if(SWB <1700)
+		reduce_jitter(); // 消抖
+
+		if (SWB < 1700)
 		{
-			shoot_flag =0;
+			shoot_flag = 0;
 		}
-		else if(SWB>1700)
+		else if (SWB > 1700)
 		{
-			shoot_flag =1;
+			shoot_flag = 1;
 		}
-		
 	}
-
 }
-
 
 void reduce_jitter(void)
 {
-	for(int i =0;i<4;i++)
+	for (int i = 0; i < 4; i++)
 	{
-		if(PPM_buf[i] > 1350 && PPM_buf[i] < 1650 )
+		if (PPM_buf[i] > 1350 && PPM_buf[i] < 1650)
 		{
 			PPM_buf[i] = 1500;
 		}
 	}
-	
 }
-
 
 void remote_control(void)
 {
-	//最大摇杆程度，ROCK-1500为500，最终Robot_V会被转化为实际 m/s 的单位，所以给其除个500实际上就是转化为每秒1m
-	//然后再乘一个系数（设为V)便可认为最大转速为V/s
-	//轮径大概为0.072m，一圈走0.2261m，经过逆速度解算后，前进距离为0.15986m，相当于每秒6.255转就是以1m/s速度前进
-	//但在这里不用这么麻烦，轮子逆解算后速度为1/sqrt(2) = 0.707
-	//我们设置车速最大为0.5m/s，则sqrt(2)/500 = 0.0028约为0.003
-	//V1为Vx，V0为Vy，V2为Vw
+	// 最大摇杆程度，ROCK-1500为500，最终Robot_V会被转化为实际 m/s 的单位，所以给其除个500实际上就是转化为每秒1m
+	// 然后再乘一个系数（设为V)便可认为最大转速为V/s
+	// 轮径大概为0.072m，一圈走0.2261m，经过逆速度解算后，前进距离为0.15986m，相当于每秒6.255转就是以1m/s速度前进
+	// 但在这里不用这么麻烦，轮子逆解算后速度为1/sqrt(2) = 0.707
+	// 我们设置车速最大为0.5m/s，则sqrt(2)/500 = 0.0028约为0.003
+	// V1为Vx，V0为Vy，V2为Vw
 	Robot_Chassis.Robot_V[1] = (ROCK_L_X - 1500) * 0.003f;
 	Robot_Chassis.Robot_V[0] = (ROCK_L_Y - 1500) * 0.003f;
 	Robot_Chassis.Robot_V[2] = (ROCK_R_X - 1500) * 0.007f;
@@ -133,15 +126,15 @@ void remote_control(void)
 	//	Robot_Chassis.World_V[2]=(ROCK_R_X-1500)*0.003f;
 	//	Robot_Chassis.World_V[1]=-(ROCK_L_X-1500)*0.0001328212f*(ROCK_L_X-1500)*0.0001328212f*(ROCK_L_X-1500)*0.0001328212f*10*(ROCK_L_X-1500);
 	//	Robot_Chassis.World_V[0]=-(ROCK_L_Y-1500)*0.0001328212f*(ROCK_L_Y-1500)*0.0001328212f*(ROCK_L_Y-1500)*0.0001328212f*10*(ROCK_L_Y-1500);
-	 
+
 	robot_tf(); // 速度分解
-	
-//	if (ROCK_L_X == 1500 && ROCK_L_Y == 1500)
-//	{
-//		VelCrl(&MOTOR_REAL_INFO[0], 0);
-//		VelCrl(&MOTOR_REAL_INFO[1], 0);
-//		VelCrl(&MOTOR_REAL_INFO[2], 0);
-//	}
+
+	//	if (ROCK_L_X == 1500 && ROCK_L_Y == 1500)
+	//	{
+	//		VelCrl(&MOTOR_REAL_INFO[0], 0);
+	//		VelCrl(&MOTOR_REAL_INFO[1], 0);
+	//		VelCrl(&MOTOR_REAL_INFO[2], 0);
+	//	}
 
 	//	Robot_Chassis.World_V[0]=vx;
 	//	Robot_Chassis.World_V[1]=vy;
@@ -155,22 +148,22 @@ void remote_control(void)
 
 void shoot_control(void)
 {
-	if(shoot_flag == 1)
-				{
-					HAL_GPIO_WritePin(shoot_key_GPIO_Port,shoot_key_Pin,GPIO_PIN_SET);
-					shoot_down_left.setpoint  =2400;
-					shoot_down_right.setpoint =-2400;
-					shoot_up_left.setpoint    =3600; 
-					shoot_up_right.setpoint   =-3600;
-				}
-				if(shoot_flag == 0)
-				{
-					HAL_GPIO_WritePin(shoot_key_GPIO_Port,shoot_key_Pin,GPIO_PIN_RESET);
-					shoot_down_left.setpoint  =0;
-					shoot_down_right.setpoint =0;
-					shoot_up_left.setpoint    =0; 
-					shoot_up_right.setpoint   =0;
-				}
+	if (shoot_flag == 1)
+	{
+		HAL_GPIO_WritePin(shoot_key_GPIO_Port, shoot_key_Pin, GPIO_PIN_SET);
+		shoot_down_left.setpoint = 2400;
+		shoot_down_right.setpoint = -2400;
+		shoot_up_left.setpoint = 3600;
+		shoot_up_right.setpoint = -3600;
+	}
+	if (shoot_flag == 0)
+	{
+		HAL_GPIO_WritePin(shoot_key_GPIO_Port, shoot_key_Pin, GPIO_PIN_RESET);
+		shoot_down_left.setpoint = 0;
+		shoot_down_right.setpoint = 0;
+		shoot_up_left.setpoint = 0;
+		shoot_up_right.setpoint = 0;
+	}
 }
 
 void Adjust_Countrol(void)
@@ -221,6 +214,7 @@ void Update_Action_gl_position(float value[6])
 	// 储存上一次的值
 	ACTION_GL_POS_INFO.LAST_POS_X = ACTION_GL_POS_INFO.POS_X;
 	ACTION_GL_POS_INFO.LAST_POS_Y = ACTION_GL_POS_INFO.POS_Y;
+	ACTION_GL_POS_INFO.LAST_POS_Z = ACTION_GL_POS_INFO.ANGLE_Z;
 
 	// 记录此次的值
 	ACTION_GL_POS_INFO.ANGLE_Z = value[0]; // 角度，-180~180
@@ -235,10 +229,12 @@ void Update_Action_gl_position(float value[6])
 	// 差分运算
 	ACTION_GL_POS_INFO.DELTA_POS_X = ACTION_GL_POS_INFO.POS_X - ACTION_GL_POS_INFO.LAST_POS_X;
 	ACTION_GL_POS_INFO.DELTA_POS_Y = ACTION_GL_POS_INFO.POS_Y - ACTION_GL_POS_INFO.LAST_POS_Y;
+	ACTION_GL_POS_INFO.DELTA_POS_Z = ACTION_GL_POS_INFO.ANGLE_Z - ACTION_GL_POS_INFO.LAST_POS_Z;
 
 	// 累加得出最终真实位置
 	ACTION_GL_POS_INFO.REAL_X += (ACTION_GL_POS_INFO.DELTA_POS_X); // action安装时跟场地坐标系有一个变换
 	ACTION_GL_POS_INFO.REAL_Y += (ACTION_GL_POS_INFO.DELTA_POS_Y);
+	ACTION_GL_POS_INFO.REAL_Z += ACTION_GL_POS_INFO.DELTA_POS_Z;
 	//	ACTION_GL_POS_INFO.REAL_X = ACTION_GL_POS_INFO.POS_X;
 	//	ACTION_GL_POS_INFO.REAL_Y = ACTION_GL_POS_INFO.POS_Y;
 	// 变换到底盘中心
@@ -249,15 +245,23 @@ void Update_Action_gl_position(float value[6])
 	ROBOT_REAL_POS_INFO.Angle = ACTION_GL_POS_INFO.ANGLE_Z;
 
 	// 偏航角直接赋值（逆时针为正，顺时针为负）
-	ROBOT_REAL_POS_DATA.POS_YAW = -ROBOT_REAL_POS_INFO.Angle;
-
+	ROBOT_REAL_POS_DATA.POS_YAW = -ACTION_GL_POS_INFO.REAL_Z;
+	ROBOT_REAL_POS_DATA.POS_YAW_RAD = ROBOT_REAL_POS_DATA.POS_YAW * 0.01745f;
 	// 消除机械误差,赋值X、Y
-	ROBOT_REAL_POS_DATA.POS_X = (ACTION_GL_POS_INFO.REAL_X * cos(one_yaw) - (ACTION_GL_POS_INFO.REAL_Y * sin(one_yaw))) / 1000; //+ INSTALL_ERROR_Y * sin(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f);
-	ROBOT_REAL_POS_DATA.POS_Y = (ACTION_GL_POS_INFO.REAL_X * sin(one_yaw) + (ACTION_GL_POS_INFO.REAL_Y * cos(one_yaw))) / 1000; //- INSTALL_ERROR_Y * (cos(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f)-1);
-																																//	ROBOT_REAL_POS_DATA.POS_X = (ACTION_GL_POS_INFO.REAL_X*cos((-PI*45/180.0f))-(ACTION_GL_POS_INFO.REAL_Y*sin((-PI*45/180.0f))))/1000; //+ INSTALL_ERROR_Y * sin(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f);
-																																//	ROBOT_REAL_POS_DATA.POS_Y = (ACTION_GL_POS_INFO.REAL_X*sin((-PI*45/180.0f))+(ACTION_GL_POS_INFO.REAL_Y*cos((-PI*45/180.0f))))/1000; //- INSTALL_ERROR_Y * (cos(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f)-1);
-																																//	ROBOT_REAL_POS_DATA.POS_X = (ACTION_GL_POS_INFO.REAL_X*cos((PI*45/180.0f))-(ACTION_GL_POS_INFO.REAL_Y*sin((PI*45/180.0f))))/1000; //+ INSTALL_ERROR_Y * sin(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f);
-																																//	ROBOT_REAL_POS_DATA.POS_Y = (ACTION_GL_POS_INFO.REAL_X*sin((PI*45/180.0f))+(ACTION_GL_POS_INFO.REAL_Y*cos((PI*45/180.0f))))/1000; //- INSTALL_ERROR_Y * (cos(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f)-1);
+	// ROBOT_REAL_POS_DATA.POS_X = (ACTION_GL_POS_INFO.REAL_X * cos(one_yaw) - (ACTION_GL_POS_INFO.REAL_Y * sin(one_yaw))) / 1000; //+ INSTALL_ERROR_Y * sin(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f);
+	// ROBOT_REAL_POS_DATA.POS_Y = (ACTION_GL_POS_INFO.REAL_X * sin(one_yaw) + (ACTION_GL_POS_INFO.REAL_Y * cos(one_yaw))) / 1000; //- INSTALL_ERROR_Y * (cos(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f)-1);
+	//	ROBOT_REAL_POS_DATA.POS_X = (ACTION_GL_POS_INFO.REAL_X*cos((-PI*45/180.0f))-(ACTION_GL_POS_INFO.REAL_Y*sin((-PI*45/180.0f))))/1000; //+ INSTALL_ERROR_Y * sin(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f);
+	//	ROBOT_REAL_POS_DATA.POS_Y = (ACTION_GL_POS_INFO.REAL_X*sin((-PI*45/180.0f))+(ACTION_GL_POS_INFO.REAL_Y*cos((-PI*45/180.0f))))/1000; //- INSTALL_ERROR_Y * (cos(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f)-1);
+	//	ROBOT_REAL_POS_DATA.POS_X = (ACTION_GL_POS_INFO.REAL_X*cos((PI*45/180.0f))-(ACTION_GL_POS_INFO.REAL_Y*sin((PI*45/180.0f))))/1000; //+ INSTALL_ERROR_Y * sin(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f);
+	//	ROBOT_REAL_POS_DATA.POS_Y = (ACTION_GL_POS_INFO.REAL_X*sin((PI*45/180.0f))+(ACTION_GL_POS_INFO.REAL_Y*cos((PI*45/180.0f))))/1000; //- INSTALL_ERROR_Y * (cos(ROBOT_REAL_POS_DATA.POS_YAW * PI / 180.0f)-1);
+}
+
+void action_relocate(void)
+{
+
+	ACTION_GL_POS_INFO.REAL_Z = 0.0f;
+	ACTION_GL_POS_INFO.DELTA_POS_Y = 0.0f;
+	ACTION_GL_POS_INFO.DELTA_POS_X = 0.0f;
 }
 
 /*---------------------------------------------------------激光通讯--------------------------------------------------------------*/

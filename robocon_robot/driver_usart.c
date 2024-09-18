@@ -30,7 +30,7 @@ uint8_t USART2_Rx_buf[12];
 uint8_t USART6_Rx_buf[12];
 
 uint8_t rx_buffer1[1] = {0};
-uint8_t rx_buffer4[1] = {0};
+uint8_t rx_buffer2[1] = {0};
 /*
  *  函数名：EnableDebugIRQ
  *  功能描述：使能USART1的中断+使能UART4的中断
@@ -74,7 +74,7 @@ void EnableDebugIRQ(void)
 	HAL_UARTEx_ReceiveToIdle_DMA(&huart6, USART6_Rx_buf, RX_BUF_SIZE);*/
 
 	HAL_UART_Receive_IT(&huart1, rx_buffer1, 1);
-	HAL_UART_Receive_IT(&huart4, rx_buffer4, 1);
+	HAL_UART_Receive_IT(&huart2, rx_buffer2, 1);
 	HAL_UART_Receive_IT(&huart3, RxBuffer_for4, 1);
 	uartQueue = xQueueCreate(1, sizeof(UART_Message));
 }
@@ -251,50 +251,22 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		HAL_UART_Receive_IT(&huart3, RxBuffer_for4, 1); // 每接收一个数据，就打开一次串口中断接收
 	}
 
-	//   if(huart==&huart2)
-	//   {
-	//	   if( HAL_UART_Receive_IT(&huart2,&UART2_Receiver,1)!= HAL_OK)Error_Handler();
-	//		/* 开启接收错误中断 */
-	//		__HAL_UART_ENABLE_IT(&huart2, UART_IT_ERR);
-	//
-	//	   Laser_ReadData(&Laser_Real_Data.Laser_X);
-	//	   xx++;
-	//
-	//	__HAL_UNLOCK(&huart2);
-	//	__HAL_UART_CLEAR_FLAG(&huart2, UART_FLAG_PE);//清标志
-	//	__HAL_UART_CLEAR_FLAG(&huart2, UART_FLAG_FE);
-	//	__HAL_UART_CLEAR_FLAG(&huart2, UART_FLAG_NE);
-	//	__HAL_UART_CLEAR_FLAG(&huart2, UART_FLAG_ORE);
-	//   }
-	//
-	//   if(huart==&huart6)
-	//   {
-	//	   if( HAL_UART_Receive_IT(&huart6,&UART6_Receiver,1)!= HAL_OK)Error_Handler();
-	//		/* 开启接收错误中断 */
-	//		__HAL_UART_ENABLE_IT(&huart6, UART_IT_ERR);
-	//	   Laser_ReadData2(&Laser_Real_Data.Laser_Y);
-	//	   yy++;
-	//
-	//
-	//	 __HAL_UNLOCK(&huart6);
-
-	//	__HAL_UART_CLEAR_FLAG(&huart6, UART_FLAG_PE);//清标志
-	//	__HAL_UART_CLEAR_FLAG(&huart6, UART_FLAG_FE);
-	//	__HAL_UART_CLEAR_FLAG(&huart6, UART_FLAG_NE);
-	//	__HAL_UART_CLEAR_FLAG(&huart6, UART_FLAG_ORE);
-	//
-	//
-	//   }
-	else if (huart->Instance == UART4)
+	else if (huart->Instance == USART2)
 	{
 
 		// uart4_ReceiveData(&No1_Data.WOrld_x, &No1_Data.WOrld_y, &No1_Data.WOrld_w, &No1_Data.flag);
 		msg.uart_id = UART_ID_UART4;
-		msg.data = rx_buffer4[0];
-		HAL_UART_Receive_IT(&huart4, rx_buffer4, 1);
-		// BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-		// xQueueOverwriteFromISR(uartQueue, &msg, &xHigherPriorityTaskWoken);
-		// portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+		msg.data = rx_buffer2[0];
+		uint32_t mat_id = handle_serial_data_mat(rx_buffer2[0]);
+		if (mat_id == 0x01)
+		{
+			// heading_lock.setpoint = rx_frame_mat.data.msg_get[0];
+			// PID_SetParameters(&heading_lock, rx_frame_mat.data.msg_get[1], rx_frame_mat.data.msg_get[2], rx_frame_mat.data.msg_get[3]);
+		}
+		// HAL_UART_Receive_IT(&huart2, rx_buffer2, 1);
+		//  BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+		//  xQueueOverwriteFromISR(uartQueue, &msg, &xHigherPriorityTaskWoken);
+		//  portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 		//		No1_Porcessing(No1_Data);
 		/*Remote_Process();
 		//	   __HAL_UART_ENABLE_IT(&huart4, UART_IT_ERR);
@@ -306,7 +278,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		__HAL_UART_CLEAR_FLAG(&huart4, UART_FLAG_NE);
 		__HAL_UART_CLEAR_FLAG(&huart4, UART_FLAG_ORE);*/
 	}
-	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+	// portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
 /*
@@ -316,7 +288,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  *  输出参数：无
  *  返回值：无
  */
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
+/*void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
 
 	if (huart == &huart6)
@@ -334,4 +306,4 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 		HAL_UARTEx_ReceiveToIdle_DMA(&huart2, USART2_Rx_buf, Max_BUFF_Len);
 		__HAL_DMA_DISABLE_IT(&hdma_usart2_rx, DMA_IT_HT); // 关闭DMA半传输中断
 	}
-}
+}*/

@@ -5,29 +5,28 @@
 #include "stm32f4xx_hal.h"
 #include "motor.h"
 
-//½«Ò£¿ØÆ÷µÄ×óÓÒÒ¡¸ËºÍPPM_buf°ó¶¨
+// ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡ï¿½Ëºï¿½PPM_bufï¿½ï¿½
 
-//×óÒ¡¸Ë¿ØÖÆ½øÍËºÍ×óÓÒÒÆ¶¯
-#define ROCK_L_Y			PPM_buf[1]				//ROLL 1000-1500-2000//Î´Öªbug
-#define	ROCK_L_X		  PPM_buf[0]				//PITCH 1000-1500-2000P
+// ï¿½ï¿½Ò¡ï¿½Ë¿ï¿½ï¿½Æ½ï¿½ï¿½Ëºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
+#define ROCK_L_Y PPM_buf[1] // ROLL 1000-1500-2000//Î´Öªbug
+#define ROCK_L_X PPM_buf[0] // PITCH 1000-1500-2000P
 
-//ÓÒÒ¡¸Ë¿ØÖÆÐý×ª
-#define ROCK_R_X			PPM_buf[3]					//YAW  1000-1500-2000
-#define ROCK_R_Y			PPM_buf[2]					//THR  1000-1500-2000
+// ï¿½ï¿½Ò¡ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½×ª
+#define ROCK_R_X PPM_buf[3] // YAW  1000-1500-2000
+#define ROCK_R_Y PPM_buf[2] // THR  1000-1500-2000
 
-//½«Ò£¿ØÆ÷µÄÉÏËÄ¼üºÍPPM_buf°ó¶¨
-#define SWA		PPM_buf[4]				//AUX4 1000~2000//Ã»ÓÃ
-#define SWB		PPM_buf[5]				//AUX2 1000-1500-2000
-#define SWD		PPM_buf[7]			//AUX1 1000~2000
-#define SWC		PPM_buf[6]				//AUX3 1000-1500-2000
+// ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½PPM_bufï¿½ï¿½
+#define SWA PPM_buf[4] // AUX4 1000~2000//Ã»ï¿½ï¿½
+#define SWB PPM_buf[5] // AUX2 1000-1500-2000
+#define SWD PPM_buf[7] // AUX1 1000~2000
+#define SWC PPM_buf[6] // AUX3 1000-1500-2000
 
 #define Rotary_L PPM_buf[8]
 
-#define ZONE_1   0x01
-#define ZONE_2   0x02
+#define ZONE_1 0x01
+#define ZONE_2 0x02
 
-
-static uint16_t PPM_Databuf[10]={0};
+static uint16_t PPM_Databuf[10] = {0};
 
 extern uint16_t PPM_buf[10];
 
@@ -37,78 +36,78 @@ extern uint8_t ppm_update_flag;
 
 typedef struct
 {
-	struct  //Ò£¿ØÔ­Ê¼Êý¾Ý£¬8Í¨µÀ
+	struct // Ò£ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½Ý£ï¿½8Í¨ï¿½ï¿½
 	{
-	 uint16_t roll;			//ÓÒÒ¡¸Ë
-	 uint16_t pitch;		//
-	 uint16_t thr;
-	 uint16_t yaw;
-	 uint16_t AUX1;
-	 uint16_t AUX2;
-	 uint16_t AUX3;
-	 uint16_t AUX4; 
-	 uint16_t BUX1;
-	 uint16_t BUX2;		
-	}Remote; 
+		uint16_t roll;	// ï¿½ï¿½Ò¡ï¿½ï¿½
+		uint16_t pitch; //
+		uint16_t thr;
+		uint16_t yaw;
+		uint16_t AUX1;
+		uint16_t AUX2;
+		uint16_t AUX3;
+		uint16_t AUX4;
+		uint16_t BUX1;
+		uint16_t BUX2;
+	} Remote;
 
-}Air_Contorl;
+} Air_Contorl;
 
-typedef struct KEY_Type//·¢ÉäÊý¾Ý
+typedef struct KEY_Type // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 {
-  
-	int KEY_armtop;//armtop
-	int KEY_armbottom;//armbottom
-	int KEY_push;//push
-}KEY_Type;
 
+	int KEY_armtop;	   // armtop
+	int KEY_armbottom; // armbottom
+	int KEY_push;	   // push
+} KEY_Type;
 
-/* Action¶Áµ½µÄÊý¾Ý */
-// ¶«´óÈ«³¡¶¨Î»Ä£¿é¶¨Î»µÄÎ»ÖÃ
+/* Actionï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+// ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½Î»Ä£ï¿½é¶¨Î»ï¿½ï¿½Î»ï¿½ï¿½
 typedef struct ACTION_GL_POS
 {
 	float ANGLE_Z;
 	float ANGLE_X;
-	float ANGLE_Y;	
+	float ANGLE_Y;
 	float POS_X;
 	float POS_Y;
 	float W_Z;
-	
+
 	float LAST_POS_X;
 	float LAST_POS_Y;
-	
+	float LAST_POS_Z;
+
 	float DELTA_POS_X;
-	float DELTA_POS_Y;	
-	
-	//×îºóµÄÕæÊµÎ»ÖÃ
+	float DELTA_POS_Y;
+	float DELTA_POS_Z;
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÊµÎ»ï¿½ï¿½
 	float REAL_X;
 	float REAL_Y;
-}ACTION_GL_POS;
+	float REAL_Z;
+} ACTION_GL_POS;
 
-
-/* »úÆ÷ÈËµÄÕæÊµÎ»ÖÃ */
-typedef struct ROBOT_CHASSIS
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ÊµÎ»ï¿½ï¿½ */
+typedef struct ROBOT_CHASSIS_s
 {
 
-	float World_V[3]; // Y , X , W
-	float Robot_V[3];//Y , X , W
-	float Position[2];//µ±Ç°×ø±ê
+	float World_V[3];  // Y , X , W
+	float Robot_V[3];  // Y , X , W
+	float Position[2]; // ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 	float Motor_RPM[3];
-	float expect_angle ;
+	float expect_angle;
 	float Angle;
 } ROBOT_CHASSIS;
 
-
-// »úÆ÷ÈËµÄÕæÊµÎ»ÖÃ
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ÊµÎ»ï¿½ï¿½
 typedef struct ROBOT_REAL_POS
 {
-  float POS_X;
-  float POS_Y;     
-  float POS_YAW;
-int robot_location;
-}ROBOT_REAL_POS;
+	float POS_X;
+	float POS_Y;
+	float POS_YAW;
+	float POS_YAW_RAD;
+	int robot_location;
+} ROBOT_REAL_POS;
 
-
-/*¼¤¹âÊý¾Ý*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 typedef struct Laser_Data
 {
 	float Laser_X;
@@ -126,19 +125,18 @@ extern uint32_t TIME_ISR_CNT;
 extern uint32_t LAST_TIME_ISR_CNT;
 extern uint16_t Time_Sys[4];
 extern uint16_t Microsecond_Cnt;
-
+extern ROBOT_CHASSIS Robot_Chassis;
 void remote_control(void);
 void reduce_jitter(void);
 void shoot_control(void);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 void Update_Action_gl_position(float value[6]);
-void Laser_ReadData2(float* Laser_Data);
-void Laser_ReadData(float* Laser_Data);
- void processData(uint8_t* data,Laser_Data* laser,int uart);
+void Laser_ReadData2(float *Laser_Data);
+void Laser_ReadData(float *Laser_Data);
+void processData(uint8_t *data, Laser_Data *laser, int uart);
 void Adjust_Countrol(void);
 void Remote_Process(void);
 void ZONE2_Adjust(void);
+void action_relocate(void);
 #endif
-
-

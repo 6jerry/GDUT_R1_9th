@@ -24,6 +24,8 @@
 #include "communicate.h"
 #include "driver_usart.h"
 #include <stm32f4xx_hal_rcc.h>
+#include <stm32f407xx.h>
+#include <stm32f4xx_hal_gpio_ex.h>
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart4;
@@ -102,7 +104,7 @@ void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 9600;
+  huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -198,9 +200,6 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
     GPIO_InitStruct.Alternate = GPIO_AF8_UART4;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-    /* UART4 interrupt Init */
-    HAL_NVIC_SetPriority(UART4_IRQn, 5, 3);
-    HAL_NVIC_EnableIRQ(UART4_IRQn);
     /* USER CODE BEGIN UART4_MspInit 1 */
 
     /* USER CODE END UART4_MspInit 1 */
@@ -271,6 +270,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
 
     __HAL_LINKDMA(uartHandle, hdmarx, hdma_usart2_rx);
 
+    /* USART2 interrupt Init */
+    HAL_NVIC_SetPriority(USART2_IRQn, 3, 0);
+    HAL_NVIC_EnableIRQ(USART2_IRQn);
     /* USER CODE BEGIN USART2_MspInit 1 */
 
     /* USER CODE END USART2_MspInit 1 */
@@ -374,8 +376,6 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *uartHandle)
     */
     HAL_GPIO_DeInit(GPIOC, GPIO_PIN_10 | GPIO_PIN_11);
 
-    /* UART4 interrupt Deinit */
-    HAL_NVIC_DisableIRQ(UART4_IRQn);
     /* USER CODE BEGIN UART4_MspDeInit 1 */
 
     /* USER CODE END UART4_MspDeInit 1 */
@@ -416,6 +416,9 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *uartHandle)
 
     /* USART2 DMA DeInit */
     HAL_DMA_DeInit(uartHandle->hdmarx);
+
+    /* USART2 interrupt Deinit */
+    HAL_NVIC_DisableIRQ(USART2_IRQn);
     /* USER CODE BEGIN USART2_MspDeInit 1 */
 
     /* USER CODE END USART2_MspDeInit 1 */

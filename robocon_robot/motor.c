@@ -37,7 +37,7 @@ pid MOTOR_PID_POS[8] = {0}; // 位置pid信息
 MOTOR_RPM MOTOR_TARGET_RPM;
 MOTOR_POS MOTOR_TARGET_POS;
 
-PID_Controller motorleft_r, motorright_r, motorfront_r, shoot_down_left, shoot_down_right, shoot_up_left, shoot_up_right;
+PID_Controller motorleft_r, motorright_r, motorfront_r, shoot_down_left, shoot_down_right, shoot_up_left, shoot_up_right, heading_lock;
 
 /*!
  * \fn     m3508_Init
@@ -70,6 +70,7 @@ void m3508_Init()
 	PID_Init(&shoot_down_right, 16.5, 0.25, 1.96, 1000000, 20000, 5, 750);
 	PID_Init(&shoot_up_left, 16, 0.22, 1.86, 1000000, 20000, 5, 750);
 	PID_Init(&shoot_up_right, 16.8, 0.23, 2.1, 1000000, 20000, 5, 750);
+	PID_Init(&heading_lock, 7, 0, 0.7, 100000, 5, 0.01f, 0.5f);
 	/* pid参数初始化 */
 	//	/* 速度模式初始化 */
 	PID_parameter_init(&MOTOR_PID_RPM[0], 12.0f, 1.4f, 0.1, 20000, 20000, -0.5);
@@ -345,11 +346,14 @@ void MotorCtrl(void)
 	SHOOT_MOTOR_INFO[1].TARGET_CURRENT = rcurrent_to_vcurrent(PID_Compute(&shoot_down_right, SHOOT_MOTOR_INFO[1].RPM));
 	SHOOT_MOTOR_INFO[2].TARGET_CURRENT = rcurrent_to_vcurrent(PID_Compute(&shoot_up_left, SHOOT_MOTOR_INFO[2].RPM));
 	SHOOT_MOTOR_INFO[3].TARGET_CURRENT = rcurrent_to_vcurrent(PID_Compute(&shoot_up_right, SHOOT_MOTOR_INFO[3].RPM));
-	SHOOT_MOTOR_INFO[0].real_current = vcurrent_to_rcurrent(SHOOT_MOTOR_INFO[0].CURRENT);
-	SHOOT_MOTOR_INFO[0].real_target_current = vcurrent_to_rcurrent(SHOOT_MOTOR_INFO[0].TARGET_CURRENT);
+	// SHOOT_MOTOR_INFO[0].real_current = vcurrent_to_rcurrent(SHOOT_MOTOR_INFO[0].CURRENT);
+	// SHOOT_MOTOR_INFO[0].real_target_current = vcurrent_to_rcurrent(SHOOT_MOTOR_INFO[0].TARGET_CURRENT);
 	chassis_m3508_send_motor_currents();
 }
-
+void robot_speed_control(void)
+{
+	Robot_Chassis.Robot_V[2] = PID_Compute(&heading_lock, ROBOT_REAL_POS_DATA.POS_YAW_RAD);
+}
 float VelCrl(MOTO_REAL_INFO *MOTOR_REAL_INFO, float target_vel)
 {
 	MOTOR_REAL_INFO->unitMode = SPEED_CONTROL_MODE;

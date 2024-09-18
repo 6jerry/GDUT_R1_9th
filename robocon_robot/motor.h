@@ -30,6 +30,7 @@
 #include "pid.h"
 #include <cstdint>
 #include "new_pid.h"
+#include "MoveBase.h"
 #define SPEED_CONTROL_MODE 1
 #define POSITION_CONTROL_MODE 2
 #define CURRENT_MODE 3
@@ -116,6 +117,7 @@ void shoot_motor_update(CAN_RxHeaderTypeDef *msg, uint8_t can1_RxData[8]);
 /* pid计算后，打包can报文发送回电机 */
 void chassis_m3508_send_motor_currents(void);
 void MotorCtrl(void);
+void robot_speed_control(void);
 float VelCrl(MOTO_REAL_INFO *MOTOR_REAL_INFO, float target_vel);
 float CurrentCrl(MOTO_REAL_INFO *MOTOR_REAL_INFO, float target_current);
 float vcurrent_to_rcurrent(int16_t vc);
@@ -125,7 +127,7 @@ extern MOTO_REAL_INFO MOTOR_REAL_INFO[8]; // 1-4分别对应顺时针方向的�
 extern MOTO_REAL_INFO SHOOT_MOTOR_INFO[8];
 extern pid MOTOR_PID_RPM[8]; // 速度pid信息 1-4底盘电机 5-6发射电机
 extern pid MOTOR_PID_POS[8]; // 位置pid信息
-extern PID_Controller motorleft_r, motorright_r, motorfront_r, shoot_down_left, shoot_down_right, shoot_up_left, shoot_up_right;
+extern PID_Controller motorleft_r, motorright_r, motorfront_r, shoot_down_left, shoot_down_right, shoot_up_left, shoot_up_right, heading_lock;
 extern MOTOR_RPM MOTOR_TARGET_RPM;
 extern MOTOR_POS MOTOR_TARGET_POS;
 

@@ -950,6 +950,11 @@
               <FileType>5</FileType>
               <FilePath>..\robocon_robot\serial_to_esp32.h</FilePath>
             </File>
+            <File>
+              <FileName>hardware.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\robocon_robot\hardware.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

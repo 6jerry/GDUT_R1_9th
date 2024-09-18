@@ -37,3 +37,6 @@ m3508_test\can.o: ../robocon_robot/motor.h
 m3508_test\can.o: ../robocon_robot/pid.h
 m3508_test\can.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\cstdint
 m3508_test\can.o: ../robocon_robot/new_pid.h
+m3508_test\can.o: ../robocon_robot/MoveBase.h
+m3508_test\can.o: ../robocon_robot/hardware.h
+m3508_test\can.o: ../robocon_robot/motor.h

@@ -35,6 +35,9 @@ m3508_test\motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 m3508_test\motor.o: ..\robocon_robot\pid.h
 m3508_test\motor.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\cstdint
 m3508_test\motor.o: ..\robocon_robot\new_pid.h
+m3508_test\motor.o: ..\robocon_robot\MoveBase.h
+m3508_test\motor.o: ..\robocon_robot\hardware.h
+m3508_test\motor.o: ..\robocon_robot\motor.h
 m3508_test\motor.o: ../Core/Inc/main.h
 m3508_test\motor.o: ../Core/Inc/can.h
 m3508_test\motor.o: ..\robocon_robot\pid_adjust.h
