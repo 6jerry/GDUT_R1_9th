@@ -107,6 +107,11 @@ void robot_tf()
 
 	MOTOR_REAL_INFO[2].TARGET_RPM = v_to_rpm(-Robot_Chassis.Robot_V[1] + 0.20024 * Robot_Chassis.Robot_V[2]);
 }
+void world_tf()
+{
+	Robot_Chassis.Robot_V[1] = cos(ROBOT_REAL_POS_DATA.POS_YAW_RAD) * Robot_Chassis.World_V[1] + sin(ROBOT_REAL_POS_DATA.POS_YAW_RAD) * Robot_Chassis.World_V[0];
+	Robot_Chassis.Robot_V[0] = cos(ROBOT_REAL_POS_DATA.POS_YAW_RAD) * Robot_Chassis.World_V[0] - sin(ROBOT_REAL_POS_DATA.POS_YAW_RAD) * Robot_Chassis.World_V[1];
+}
 /*!
  * \fn     Kinematic_Analysis
  * \brief  ������ȫ�����˶���� ��Ŀ�����������ٶ��ٶ�ת��Ϊÿ������ת��
