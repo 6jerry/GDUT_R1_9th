@@ -8,6 +8,12 @@
 serial_frame_esp32_t tx_frame_esp32;
 serial_frame_esp32_t rx_frame_esp32;
 XboxControllerData_t xbox_msgs;
+float MAX_ROBOT_SPEED_Y = 1.50f;
+float MAX_ROBOT_SPEED_X = 1.50f;
+float locking_heading = 0.0f;
+float MAX_ROBOT_SPEED_W = 3.60f;
+int catch_ball_flag = 0;
+uint8_t speed_level = 1; // 0---低速，1---中速，2---高速
 // 状态机状态定义
 typedef enum
 {
@@ -187,7 +193,28 @@ void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData)
 int head_locking_flag = 0;
 void xbox_remote_control()
 {
-    detectButtonEdge(xbox_msgs.btnRS, &xbox_msgs.btnRS_last, &head_locking_flag, 1);
+    detectButtonEdgeRs(xbox_msgs.btnRS, &xbox_msgs.btnRS_last, &head_locking_flag, 1);
+    detectButtonEdge(xbox_msgs.btnLB, &xbox_msgs.btnLB_last, &catch_ball_flag, 1);
+    detectButtonEdgeDirleft(xbox_msgs.btnDirLeft, &xbox_msgs.btnDirLeft_last);
+    detectButtonEdgeDirright(xbox_msgs.btnDirRight, &xbox_msgs.btnDirRight_last);
+    if (speed_level == 1)
+    {
+        MAX_ROBOT_SPEED_X = 1.20f;
+        MAX_ROBOT_SPEED_Y = 1.20f;
+        MAX_ROBOT_SPEED_W = 3.20f;
+    }
+    if (speed_level == 0)
+    {
+        MAX_ROBOT_SPEED_X = 0.60f;
+        MAX_ROBOT_SPEED_Y = 0.60f;
+        MAX_ROBOT_SPEED_W = 1.40f;
+    }
+    if (speed_level == 2)
+    {
+        MAX_ROBOT_SPEED_X = 1.85f;
+        MAX_ROBOT_SPEED_Y = 1.85f;
+        MAX_ROBOT_SPEED_W = 3.90f;
+    }
     if (xbox_msgs.btnXbox == 1)
     {
         action_relocate();
@@ -247,7 +274,14 @@ void xbox_remote_control()
         shoot_up_left.setpoint = MAX_SHOOT_RPM_UP * xbox_msgs.trigRT_map;
         shoot_up_right.setpoint = -shoot_up_left.setpoint;
     }
-
+    if (catch_ball_flag == 0)
+    {
+        HAL_GPIO_WritePin(shoot_key_GPIO_Port, shoot_key_Pin, GPIO_PIN_RESET);
+    }
+    if (catch_ball_flag == 1)
+    {
+        HAL_GPIO_WritePin(shoot_key_GPIO_Port, shoot_key_Pin, GPIO_PIN_SET);
+    }
     Robot_Chassis.Robot_V[1] = MAX_ROBOT_SPEED_X * xbox_msgs.joyLHori_map;
     Robot_Chassis.Robot_V[0] = MAX_ROBOT_SPEED_Y * xbox_msgs.joyLVert_map;
     if (head_locking_flag == 0)
@@ -259,6 +293,10 @@ void xbox_remote_control()
         if (xbox_msgs.btnDirUp == 1)
         {
             heading_lock.setpoint = 0.0f;
+        }
+        if (xbox_msgs.btnDirUp != 1)
+        {
+            heading_lock.setpoint = locking_heading;
         }
         else if (xbox_msgs.btnDirLeft == 1)
         {
@@ -281,6 +319,43 @@ void detectButtonEdge(bool currentBtnState, bool *lastBtnState, int *toggleState
     if (currentBtnState && !(*lastBtnState))
     { // 检测到上升沿
         *toggleState = (*toggleState + 1) % (maxState + 1);
+        // locking_heading = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
+    }
+    *lastBtnState = currentBtnState;
+}
+void detectButtonEdgeRs(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState)
+{
+    if (currentBtnState && !(*lastBtnState))
+    { // 检测到上升沿
+        *toggleState = (*toggleState + 1) % (maxState + 1);
+        locking_heading = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
+    }
+    *lastBtnState = currentBtnState;
+}
+void detectButtonEdgeDirleft(bool currentBtnState, bool *lastBtnState)
+{
+
+    if (currentBtnState && !(*lastBtnState))
+    { // 检测到上升沿
+        //*toggleState = (*toggleState + 1) % (maxState + 1);
+        // locking_heading = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
+        if (speed_level > 0)
+        {
+            speed_level--;
+        }
+    }
+    *lastBtnState = currentBtnState;
+}
+void detectButtonEdgeDirright(bool currentBtnState, bool *lastBtnState)
+{
+    if (currentBtnState && !(*lastBtnState))
+    { // 检测到上升沿
+        //*toggleState = (*toggleState + 1) % (maxState + 1);
+        // locking_heading = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
+        if (speed_level < 2)
+        {
+            speed_level++;
+        }
     }
     *lastBtnState = currentBtnState;
 }

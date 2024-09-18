@@ -51,4 +51,5 @@ m3508_test\serial_to_esp32.o: ..\robocon_robot\pid.h
 m3508_test\serial_to_esp32.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\cstdint
 m3508_test\serial_to_esp32.o: ..\robocon_robot\new_pid.h
 m3508_test\serial_to_esp32.o: ..\robocon_robot\MoveBase.h
+m3508_test\serial_to_esp32.o: ../Core/Inc/main.h
 m3508_test\serial_to_esp32.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

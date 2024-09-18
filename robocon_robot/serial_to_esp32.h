@@ -10,18 +10,21 @@
 #include "MoveBase.h"
 #include "motor.h"
 #include "hardware.h"
+#include "main.h"
 #define FRAME_HEAD_0_ESP32 0xFC
 #define FRAME_HEAD_1_ESP32 0xFB
 #define FRAME_ID_ESP32 0x01 // 示例数据帧ID
 #define FRAME_END_0_ESP32 0xFD
 #define FRAME_END_1_ESP32 0xFE
 #define MAX_DATA_LENGTH_ESP32 28
-#define MAX_ROBOT_SPEED_X 1.50f
-#define MAX_ROBOT_SPEED_Y 1.50f
-#define MAX_ROBOT_SPEED_W 3.60f
-
-#define MAX_SHOOT_RPM_UP 4000.0f
-#define MAX_SHOOT_RPM_DOWN 3200.0f
+// #define MAX_ROBOT_SPEED_X 1.50f
+// #define MAX_ROBOT_SPEED_Y 1.50f
+// #define MAX_ROBOT_SPEED_W 3.60f
+extern float MAX_ROBOT_SPEED_X;
+extern float MAX_ROBOT_SPEED_Y;
+extern float MAX_ROBOT_SPEED_W;
+#define MAX_SHOOT_RPM_UP 4600.0f
+#define MAX_SHOOT_RPM_DOWN 2500.0f
 typedef struct serial_frame_esp32
 {
     uint8_t data_length;
@@ -92,12 +95,16 @@ typedef struct
     float trigRT_map;
 } XboxControllerData_t;
 extern int head_locking_flag; // 0是不锁死，1是锁死
+extern int catch_ball_flag;   // 0是松开，1是夹紧
 // int32_t msg_count = 0;
 uint8_t handle_serial_data_esp32(uint8_t byte);
 void send_serial_frame_esp32(UART_HandleTypeDef *huart, uint8_t frame_id, uint8_t data_length, float *data);
 void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData);
 void xbox_remote_control();
 void detectButtonEdge(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState);
+void detectButtonEdgeRs(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState);
+void detectButtonEdgeDirleft(bool currentBtnState, bool *lastBtnState);
+void detectButtonEdgeDirright(bool currentBtnState, bool *lastBtnState);
 extern XboxControllerData_t xbox_msgs;
 extern serial_frame_esp32_t rx_frame_esp32;
 
