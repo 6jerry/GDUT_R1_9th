@@ -195,12 +195,12 @@ void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData)
 int head_locking_flag = 0;
 void xbox_remote_control()
 {
-    detectButtonEdgeRs(xbox_msgs.btnRS, &xbox_msgs.btnRS_last, &head_locking_flag, 1);
+    detectButtonEdgeRb(xbox_msgs.btnRB, &xbox_msgs.btnRB_last, &head_locking_flag, 1);
     detectButtonEdge(xbox_msgs.btnLS, &xbox_msgs.btnLS_last, &robot_stop_flag, 1);
-    detectButtonEdge(xbox_msgs.btnSelect, &xbox_msgs.btnSelect_last, &world_robot_flag, 1);
+    detectButtonEdge(xbox_msgs.btnRS, &xbox_msgs.btnRS_last, &world_robot_flag, 1);
     detectButtonEdge(xbox_msgs.btnLB, &xbox_msgs.btnLB_last, &catch_ball_flag, 1);
-    detectButtonEdgeD(xbox_msgs.btnDirLeft, &xbox_msgs.btnDirLeft_last);
-    detectButtonEdgeI(xbox_msgs.btnDirRight, &xbox_msgs.btnDirRight_last);
+    detectButtonEdgeD(xbox_msgs.btnX, &xbox_msgs.btnX_last);
+    detectButtonEdgeI(xbox_msgs.btnB, &xbox_msgs.btnB_last);
     if (speed_level == 1)
     {
         MAX_ROBOT_SPEED_X = 1.20f;
@@ -272,6 +272,7 @@ void xbox_remote_control()
     if (xbox_msgs.trigRT > 0)
     {
         xbox_msgs.trigRT_map = (float)xbox_msgs.trigRT / 1023.0f;
+        xbox_msgs.trigLT_map = (float)xbox_msgs.trigLT / 1023.0f;
         shoot_down_left.setpoint = MAX_SHOOT_RPM_DOWN * xbox_msgs.trigRT_map;
         shoot_down_right.setpoint = -shoot_down_left.setpoint;
 
@@ -341,7 +342,7 @@ void detectButtonEdge(bool currentBtnState, bool *lastBtnState, int *toggleState
     }
     *lastBtnState = currentBtnState;
 }
-void detectButtonEdgeRs(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState)
+void detectButtonEdgeRb(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState)
 {
     if (currentBtnState && !(*lastBtnState))
     { // 检测到上升沿

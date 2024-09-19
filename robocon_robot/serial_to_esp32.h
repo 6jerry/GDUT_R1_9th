@@ -105,7 +105,7 @@ void send_serial_frame_esp32(UART_HandleTypeDef *huart, uint8_t frame_id, uint8_
 void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData);
 void xbox_remote_control();
 void detectButtonEdge(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState);
-void detectButtonEdgeRs(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState);
+void detectButtonEdgeRb(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState);
 void detectButtonEdgeD(bool currentBtnState, bool *lastBtnState);
 void detectButtonEdgeI(bool currentBtnState, bool *lastBtnState);
 extern XboxControllerData_t xbox_msgs;
