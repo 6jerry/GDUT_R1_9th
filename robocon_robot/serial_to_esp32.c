@@ -249,7 +249,7 @@ void xbox_remote_control()
         xbox_msgs.joyLVert_map = (35000.0f - (float)xbox_msgs.joyLVert) / 30535.0f;
     }
 
-    if (xbox_msgs.joyRHori > 31000 && xbox_msgs.joyRHori < 350000)
+    if (xbox_msgs.joyRHori > 31000 && xbox_msgs.joyRHori < 35000)
     {
         xbox_msgs.joyRHori_map = 0.0f;
     }
