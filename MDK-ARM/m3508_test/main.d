@@ -65,3 +65,4 @@ m3508_test\main.o: ../robocon_robot/crc_util.h
 m3508_test\main.o: ../robocon_robot/ring_buffer.h
 m3508_test\main.o: ../robocon_robot/calculation.h
 m3508_test\main.o: ../robocon_robot/FSM.h
+m3508_test\main.o: ..\GDUT_ROBOCON\SIMPLE_TASK.h

@@ -1,0 +1,17 @@
+m3508_test\simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.cpp
+m3508_test\simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.h
+m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+m3508_test\simple_task.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+m3508_test\simple_task.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+m3508_test\simple_task.o: ../Core/Inc/FreeRTOSConfig.h
+m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+m3508_test\simple_task.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\cstdint
+m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
+m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
+m3508_test\simple_task.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h

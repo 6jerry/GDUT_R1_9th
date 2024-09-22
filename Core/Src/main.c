@@ -37,7 +37,7 @@
 #include "calculation.h"
 #include "MoveBase.h"
 #include "FSM.h"
-
+#include "SIMPLE_TASK.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -126,7 +126,7 @@ int main(void)
   Adjust_Init();
   ring_buffer_init(&test_buffer);
   Move_Init();
-  
+
   m3508_Init();
   Kalmanfiter_Init(&Kalman_LaserX);
   // Set_target_current=0.0f;
@@ -137,9 +137,9 @@ int main(void)
 
   /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init();
-
+  create_tasks();
   /* Start scheduler */
-  osKernelStart();
+  // osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */

@@ -53,7 +53,8 @@
 "m3508_test\cmsis_os2.o"
 "m3508_test\heap_4.o"
 "m3508_test\port.o"
---library_type=microlib --strict --scatter "m3508_test\m3508_test.sct"
+"m3508_test\simple_task.o"
+--strict --scatter "m3508_test\m3508_test.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "m3508_test.map" -o m3508_test\m3508_test.axf
