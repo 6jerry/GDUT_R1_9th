@@ -73,9 +73,9 @@ void EnableDebugIRQ(void)
 	HAL_UARTEx_ReceiveToIdle_DMA(&huart2, USART2_Rx_buf, RX_BUF_SIZE);
 	HAL_UARTEx_ReceiveToIdle_DMA(&huart6, USART6_Rx_buf, RX_BUF_SIZE);*/
 
-	HAL_UART_Receive_IT(&huart1, rx_buffer1, 1);
+	// HAL_UART_Receive_IT(&huart1, rx_buffer1, 1);
 	HAL_UART_Receive_IT(&huart2, rx_buffer2, 1);
-	HAL_UART_Receive_IT(&huart3, RxBuffer_for4, 1);
+	// HAL_UART_Receive_IT(&huart3, RxBuffer_for4, 1);
 	uartQueue = xQueueCreate(1, sizeof(UART_Message));
 }
 
@@ -154,7 +154,7 @@ static union
 	uint8_t data[24];
 	float ActVal[6];
 } posture;
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+/*void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	UART_Message msg;
 	BaseType_t xHigherPriorityTaskWoken = pdFALSE; // freertos任务调度标志位
@@ -277,9 +277,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		__HAL_UART_CLEAR_FLAG(&huart4, UART_FLAG_FE);
 		__HAL_UART_CLEAR_FLAG(&huart4, UART_FLAG_NE);
 		__HAL_UART_CLEAR_FLAG(&huart4, UART_FLAG_ORE);*/
-	}
-	// portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-}
+//}
+// portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+//}
 
 /*
  *  函数名：HAL_UARTEx_RxEventCallback

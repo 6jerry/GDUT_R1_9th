@@ -1,9 +1,9 @@
 #include "SIMPLE_TASK.h"
 
 // 全局变量：两个任务实例，初始化时设置不同的执行频率
- SimpleTask task1("Task1", 128, tskIDLE_PRIORITY + 1, pdMS_TO_TICKS(100)); // 100ms 自增一次
-SimpleTask task2("Task2", 128, tskIDLE_PRIORITY + 1, pdMS_TO_TICKS(1000));         // 500ms 自增一次
-
+// SimpleTask task1("Task1", 128, tskIDLE_PRIORITY + 1, pdMS_TO_TICKS(100));  // 100ms 自增一次
+// SimpleTask task2("Task2", 128, tskIDLE_PRIORITY + 1, pdMS_TO_TICKS(1000)); // 500ms 自增一次
+RC9Protocol ros_serial(&huart2, true, true);
 // 构造函数：初始化类时创建任务，并传入任务的执行频率
 SimpleTask::SimpleTask(const char *taskName, uint16_t stackSize, UBaseType_t priority, TickType_t tickDelay)
     : taskName_(taskName), stackSize_(stackSize), priority_(priority), taskHandle_(nullptr), counter_(0), tickDelay_(tickDelay)
@@ -42,7 +42,7 @@ void SimpleTask::taskFunction()
 extern "C" void create_tasks(void)
 {
     // 全局变量已经定义，任务实例已经创建，这里不需要再重复创建
-
+    ros_serial.startUartReceiveIT();
     // 启动 FreeRTOS 调度器
     osKernelStart(); // 开始任务调度，不会返回
 }

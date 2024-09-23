@@ -486,12 +486,12 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
     HAL_UARTEx_ReceiveToIdle_DMA(&huart6, Usart6.ProcessBuff, Max_BUFF_Len);
     __HAL_DMA_DISABLE_IT(&hdma_usart6_rx, DMA_IT_HT); // 关闭DMA半传输中�?
   }
-  else if (huart == &huart2)
+  /*else if (huart == &huart2)
   {
     HAL_UART_AbortReceive(&huart2);
     HAL_UARTEx_ReceiveToIdle_DMA(&huart2, Usart2.ProcessBuff, Max_BUFF_Len);
     __HAL_DMA_DISABLE_IT(&hdma_usart2_rx, DMA_IT_HT); // 关闭DMA半传输中�?
-  }
+  }*/
 }
 
 /* USER CODE END 1 */

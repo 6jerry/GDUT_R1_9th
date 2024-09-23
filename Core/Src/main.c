@@ -122,9 +122,9 @@ int main(void)
   // HAL_CAN_Start(&hcan2);
 
   HAL_TIM_Base_Start_IT(&htim2);
-  EnableDebugIRQ();
-  Adjust_Init();
-  ring_buffer_init(&test_buffer);
+  // EnableDebugIRQ();
+  // Adjust_Init();
+  // ring_buffer_init(&test_buffer);
   Move_Init();
 
   m3508_Init();

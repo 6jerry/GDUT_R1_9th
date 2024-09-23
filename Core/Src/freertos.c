@@ -229,7 +229,7 @@ void MotorControl(void *argument)
         test_msgss[2] = SHOOT_MOTOR_INFO[2].RPM;
         test_msgss[3] = SHOOT_MOTOR_INFO[3].RPM;
         test_msgss[4] = SHOOT_MOTOR_INFO[0].real_current;
-        send_serial_frame_mat(&huart2, 0x01, 8, test_msgss);
+        // send_serial_frame_mat(&huart2, 0x01, 8, test_msgss);
         vTaskDelay(10);
     }
     /* USER CODE END MotorControl */
@@ -313,7 +313,7 @@ void RobotMove(void *argument)
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
-void uartRXTask(void *argument)
+/*void uartRXTask(void *argument)
 {
     UART_Message msg;
     for (;;)
@@ -355,4 +355,4 @@ void uartRXTask(void *argument)
             }
         }
     }
-}
+}*/

@@ -17,7 +17,7 @@ SerialDevice::SerialDevice(UART_HandleTypeDef *huart, bool enableSendTask)
     }
 
     // 自动启动 UART 接收中断
-    startUartReceiveIT();
+    // startUartReceiveIT();
 
     // 自动启动发送任务
     autoStartSendTask();
@@ -33,37 +33,26 @@ void SerialDevice::registerInstance(SerialDevice *instance)
 void SerialDevice::startUartReceiveIT()
 {
     // 启用 UART 接收中断
+    // HAL_UART_Receive_IT(&huart2, rxBuffer_, RX_BUFFER_SIZE);
+
+    /* code */
     HAL_UART_Receive_IT(huart_, rxBuffer_, RX_BUFFER_SIZE);
 }
-
-// 静态成员函数：处理 UART 接收中断
-void SerialDevice::handleRxCallback(UART_HandleTypeDef *huart, uint8_t rxByte)
-{
-    // 遍历所有实例，找到对应的 UART 实例
-    for (int i = 0; i < instanceCount_; i++)
-    {
-        if (instances_[i]->huart_ == huart)
-        {
-            // 调用该实例的接收处理逻辑
-            instances_[i]->handleReceiveData(rxByte);
-        }
-    }
-}
-
 // 全局回调函数：HAL 库调用该函数
-extern "C" void SerialDevice::HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+extern "C" void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     uint8_t rxByte;
     // 获取 UART 接收的字节
-    for (int i = 0; i < instanceCount_; i++)
+    for (int i = 0; i < SerialDevice::instanceCount_; i++)
     {
-        if (instances_[i]->huart_ == huart)
+        if (SerialDevice::instances_[i]->huart_ == huart)
         {
-            rxByte = instances_[i]->rxBuffer_[0]; // 读取接收缓冲区中的字节
-            // 调用静态成员函数来处理接收数据
-            SerialDevice::handleRxCallback(huart, rxByte);
-            // 再次启用 UART 接收中断
-            HAL_UART_Receive_IT(huart, instances_[i]->rxBuffer_, RX_BUFFER_SIZE);
+            rxByte = SerialDevice::instances_[i]->rxBuffer_[0]; // 读取接收缓冲区中的字
+            SerialDevice::instances_[i]->handleReceiveData(rxByte);
+
+            HAL_UART_Receive_IT(huart, SerialDevice::instances_[i]->rxBuffer_, RX_BUFFER_SIZE);
+
+            // HAL_UART_Receive_IT(huart, SerialDevice::instances_[i]->rxBuffer_, //RX_BUFFER_SIZE);
         }
     }
 }
