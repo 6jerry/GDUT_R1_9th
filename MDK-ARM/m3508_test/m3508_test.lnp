@@ -52,9 +52,11 @@
 "m3508_test\cmsis_os2.o"
 "m3508_test\heap_4.o"
 "m3508_test\port.o"
-"m3508_test\simple_task.o"
+"m3508_test\taskmanager.o"
 "m3508_test\rc9protocol.o"
 "m3508_test\serial_device.o"
+"m3508_test\simple_task.o"
+"m3508_test\acton.o"
 --strict --scatter "m3508_test\m3508_test.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

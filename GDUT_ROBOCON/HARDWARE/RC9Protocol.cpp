@@ -1,11 +1,16 @@
 #include "RC9Protocol.h"
 
 // 使用你提供的联合体结构体
-serial_frame_mat_t rx_frame_mat;
 
 // 构造函数：传入 UART 句柄，是否启用 CRC 校验
-RC9Protocol::RC9Protocol(UART_HandleTypeDef *huart, bool enableSendTask, bool enableCrcCheck)
-    : SerialDevice(huart, enableSendTask), state_(WAITING_FOR_HEADER_0), rxIndex_(0), enableCrcCheck_(enableCrcCheck) {}
+RC9Protocol::RC9Protocol(UART_HandleTypeDef *huart, bool enableCrcCheck)
+    : SerialDevice(huart), state_(WAITING_FOR_HEADER_0), rxIndex_(0), enableCrcCheck_(enableCrcCheck)
+{
+    for (int i = 0; i < MAX_SUBSCRIBERS; i++)
+    {
+        observers_[i] = nullptr;
+    }
+}
 
 // 实现接收数据的处理逻辑
 void RC9Protocol::handleReceiveData(uint8_t byte)
@@ -80,6 +85,9 @@ void RC9Protocol::handleReceiveData(uint8_t byte)
                     {
                         rx_frame_mat.data.buff_msg[i] = rx_frame_mat.rx_temp_data_mat[i];
                     }
+
+                    publish(rx_frame_mat.frame_id, rx_frame_mat.data.buff_msg, rx_frame_mat.data.msg_get); // 发布数据
+
                     state_ = WAITING_FOR_HEADER_0;
                 }
             }
@@ -89,6 +97,9 @@ void RC9Protocol::handleReceiveData(uint8_t byte)
                 {
                     rx_frame_mat.data.buff_msg[i] = rx_frame_mat.rx_temp_data_mat[i];
                 }
+
+                publish(rx_frame_mat.frame_id, rx_frame_mat.data.buff_msg, rx_frame_mat.data.msg_get);
+
                 state_ = WAITING_FOR_HEADER_0;
             }
         }
@@ -101,15 +112,8 @@ void RC9Protocol::handleReceiveData(uint8_t byte)
 }
 
 // 实现获取待发送的数据
-uint8_t *RC9Protocol::getSendData(size_t *length)
+void RC9Protocol::process_data()
 {
-
-    tx_frame_mat.data_length = 3 * 4; // 数据长度
-
-    *length = tx_frame_mat.data_length + 8;
-
-    // std::memcpy(tx_frame_mat.data.msg_get, data, 3 * sizeof(float)); // 存储要发送的浮点数
-    tx_frame_mat.data.msg_get[0] = 777.0f;
 
     sendBuffer_[0] = FRAME_HEAD_0_RC9;
     sendBuffer_[1] = FRAME_HEAD_1_RC9;
@@ -128,5 +132,29 @@ uint8_t *RC9Protocol::getSendData(size_t *length)
     sendBuffer_[6 + tx_frame_mat.data_length] = FRAME_END_0_RC9;
     sendBuffer_[7 + tx_frame_mat.data_length] = FRAME_END_1_RC9;
 
-    return sendBuffer_;
+    HAL_UART_Transmit(huart_, sendBuffer_, sizeof(sendBuffer_), HAL_MAX_DELAY);
+}
+
+// 注册观察者函数
+bool RC9Protocol::addsubscriber(RC9Protocol_subscriber *observer)
+{
+    if (observerCount_ < MAX_SUBSCRIBERS)
+    {
+        observers_[observerCount_++] = observer;
+        observer->subtarget = this; // 建立联系
+        return true;
+    }
+    return false; // 注册失败，观察者数量已达到上限
+}
+
+void RC9Protocol::publish(uint8_t data_id, const uint8_t *data_char, const float *data_float)
+{
+
+    for (int i = 0; i < observerCount_; i++)
+    {
+        if (observers_[i] != nullptr)
+        {
+            observers_[i]->update(data_id, data_char, data_float); // 调用观察者的update方法
+        }
+    }
 }

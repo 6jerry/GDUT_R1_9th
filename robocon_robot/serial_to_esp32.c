@@ -3,6 +3,7 @@
 #include "task.h"
 #include "queue.h"
 #include <string.h>
+#include <main.h>
 
 // 数据帧结构体实例
 serial_frame_esp32_t tx_frame_esp32;

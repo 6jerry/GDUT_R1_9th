@@ -462,6 +462,31 @@
           <WinNumber>2</WinNumber>
           <ItemText>crc_calculated</ItemText>
         </Ww>
+        <Ww>
+          <count>40</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>test1</ItemText>
+        </Ww>
+        <Ww>
+          <count>41</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>test2</ItemText>
+        </Ww>
+        <Ww>
+          <count>42</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>test3</ItemText>
+        </Ww>
+        <Ww>
+          <count>43</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>test4</ItemText>
+        </Ww>
+        <Ww>
+          <count>44</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>task_core</ItemText>
+        </Ww>
       </WatchWindow2>
       <MemoryWindow1>
         <Mm>
@@ -1268,8 +1293,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\GDUT_ROBOCON\SIMPLE_TASK.cpp</PathWithFileName>
-      <FilenameWithoutPath>SIMPLE_TASK.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\GDUT_ROBOCON\HARDWARE\TaskManager.cpp</PathWithFileName>
+      <FilenameWithoutPath>TaskManager.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1280,8 +1305,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\GDUT_ROBOCON\SIMPLE_TASK.h</PathWithFileName>
-      <FilenameWithoutPath>SIMPLE_TASK.h</FilenameWithoutPath>
+      <PathWithFileName>..\GDUT_ROBOCON\HARDWARE\TaskManager.h</PathWithFileName>
+      <FilenameWithoutPath>TaskManager.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1330,6 +1355,54 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\GDUT_ROBOCON\HARDWARE\Serial_device.h</PathWithFileName>
       <FilenameWithoutPath>Serial_device.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>64</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\GDUT_ROBOCON\SIMPLE_TASK.cpp</PathWithFileName>
+      <FilenameWithoutPath>SIMPLE_TASK.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>65</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\GDUT_ROBOCON\SIMPLE_TASK.h</PathWithFileName>
+      <FilenameWithoutPath>SIMPLE_TASK.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>66</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\GDUT_ROBOCON\HARDWARE\Action.h</PathWithFileName>
+      <FilenameWithoutPath>Action.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>67</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\GDUT_ROBOCON\HARDWARE\Acton.cpp</PathWithFileName>
+      <FilenameWithoutPath>Acton.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

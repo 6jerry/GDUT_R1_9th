@@ -16,6 +16,8 @@ m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_
 m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 m3508_test\simple_task.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 m3508_test\simple_task.o: ..\GDUT_ROBOCON\HARDWARE\RC9Protocol.h
+m3508_test\simple_task.o: ../robocon_robot/crc_util.h
+m3508_test\simple_task.o: ..\GDUT_ROBOCON\HARDWARE\TaskManager.h
 m3508_test\simple_task.o: ..\GDUT_ROBOCON\HARDWARE\Serial_device.h
 m3508_test\simple_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 m3508_test\simple_task.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -51,6 +53,5 @@ m3508_test\simple_task.o: ../Core/Inc/usart.h
 m3508_test\simple_task.o: ../Core/Inc/main.h
 m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 m3508_test\simple_task.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-m3508_test\simple_task.o: ../robocon_robot/crc_util.h
-m3508_test\simple_task.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\cstring
-m3508_test\simple_task.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+m3508_test\simple_task.o: ..\GDUT_ROBOCON\HARDWARE\Action.h
+m3508_test\simple_task.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
