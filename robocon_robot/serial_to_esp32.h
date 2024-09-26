@@ -12,20 +12,28 @@
 #include "hardware.h"
 #include "main.h"
 #include "calculation.h"
+
 #define FRAME_HEAD_0_ESP32 0xFC
 #define FRAME_HEAD_1_ESP32 0xFB
 #define FRAME_ID_ESP32 0x01 // 示例数据帧ID
 #define FRAME_END_0_ESP32 0xFD
 #define FRAME_END_1_ESP32 0xFE
 #define MAX_DATA_LENGTH_ESP32 28
-// #define MAX_ROBOT_SPEED_X 1.50f
-// #define MAX_ROBOT_SPEED_Y 1.50f
-// #define MAX_ROBOT_SPEED_W 3.60f
+
+#define MAX_SHOOT_RPM_UP 4600.0f
+#define MAX_SHOOT_RPM_DOWN 3600.0f
+
 extern float MAX_ROBOT_SPEED_X;
 extern float MAX_ROBOT_SPEED_Y;
 extern float MAX_ROBOT_SPEED_W;
-#define MAX_SHOOT_RPM_UP 4600.0f
-#define MAX_SHOOT_RPM_DOWN 3600.0f
+extern int head_locking_flag;   // 0是不锁死，1是锁死
+extern int catch_ball_flag;     // 0是松开，1是夹紧
+extern int world_robot_flag;    // 0是机器人坐标系控制，1是世界坐标系控制
+extern int robot_stop_flag;     // 0是正常运行，1是触发急停
+extern XboxControllerData_t xbox_msgs;
+extern serial_frame_esp32_t rx_frame_esp32;
+
+// 串口数据帧结构体
 typedef struct serial_frame_esp32
 {
     uint8_t data_length;
@@ -44,6 +52,8 @@ typedef struct serial_frame_esp32
     } check_code_e;
     uint8_t frame_end[2];
 } serial_frame_esp32_t;
+
+// Xbox手柄数据结构体
 typedef struct
 {
     // 按键数据（bool类型）
@@ -87,7 +97,7 @@ typedef struct
     uint16_t joyRVert;
     uint16_t trigLT;
     uint16_t trigRT;
-
+    // 映射百分比
     float joyLHori_map;
     float joyLVert_map;
     float joyRHori_map;
@@ -95,20 +105,21 @@ typedef struct
     float trigLT_map;
     float trigRT_map;
 } XboxControllerData_t;
-extern int head_locking_flag; // 0是不锁死，1是锁死
-extern int catch_ball_flag;   // 0是松开，1是夹紧
-extern int world_robot_flag;  // 0是机器人坐标系控制，1是世界坐标系控制
-extern int robot_stop_flag;   // 0是正常运行，1是触发急停
-// int32_t msg_count = 0;
+
+// 按键控制模式枚举
+typedef enum {
+    FLAG_CHANGE,
+    LOCK_HEAD,
+    DECREASE_SPEED,
+    INCREASE_SPEED
+} ButtonAction;
+
 uint8_t handle_serial_data_esp32(uint8_t byte);
 void send_serial_frame_esp32(UART_HandleTypeDef *huart, uint8_t frame_id, uint8_t data_length, float *data);
 void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData);
 void xbox_remote_control();
-void detectButtonEdge(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState);
-void detectButtonEdgeRb(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState);
-void detectButtonEdgeD(bool currentBtnState, bool *lastBtnState);
-void detectButtonEdgeI(bool currentBtnState, bool *lastBtnState);
-extern XboxControllerData_t xbox_msgs;
-extern serial_frame_esp32_t rx_frame_esp32;
+float joydata_to_map(float joydata);
+void detectButtonEdge(bool currentBtnState, bool *lastBtnState, int *toggleState, ButtonAction action);
+void setRobotSpeed(uint8_t speed_level_);
 
 #endif // __SERIAL_TO_ESP32_H__

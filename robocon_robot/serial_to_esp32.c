@@ -8,36 +8,28 @@
 serial_frame_esp32_t tx_frame_esp32;
 serial_frame_esp32_t rx_frame_esp32;
 XboxControllerData_t xbox_msgs;
+
 float MAX_ROBOT_SPEED_Y = 1.50f;
 float MAX_ROBOT_SPEED_X = 1.50f;
-float locking_heading = 0.0f;
 float MAX_ROBOT_SPEED_W = 3.60f;
+float locking_heading = 0.0f;
+
+// 标志位
+int head_locking_flag = 0;
 int catch_ball_flag = 0;
 int world_robot_flag = 0;
 int robot_stop_flag = 0;
 uint8_t speed_level = 1; // 0---低速，1---中速，2---高速
-// 状态机状态定义
-typedef enum
-{
-    WAITING_FOR_HEADER_0_ESP32,
-    WAITING_FOR_HEADER_1_ESP32,
-    WAITING_FOR_ID_ESP32,
-    WAITING_FOR_LENGTH_ESP32,
-    WAITING_FOR_DATA_ESP32,
-    WAITING_FOR_CRC_0_ESP32,
-    WAITING_FOR_CRC_1_ESP32,
-    WAITING_FOR_END_0_ESP32,
-    WAITING_FOR_END_1_ESP32
-} rx_state_esp32_t;
 
-// 当前状态机状态
-static rx_state_esp32_t rx_state_esp32 = WAITING_FOR_HEADER_0_ESP32;
-// 数据索引
-static uint8_t rx_index_esp32 = 0;
-// 临时接收数据存储
-static uint8_t rx_temp_data_esp32[MAX_DATA_LENGTH_ESP32 * 4];
+static rx_state_esp32_t rx_state_esp32 = WAITING_FOR_HEADER_0_ESP32;  // 当前状态机状态
+static uint8_t rx_index_esp32 = 0;                                    // 数据索引
+static uint8_t rx_temp_data_esp32[MAX_DATA_LENGTH_ESP32 * 4];         // 临时接收数据存储
 
-// 数据处理函数，使用状态机实现接收解包
+/**
+ * @brief 处理ESP32串口数据函数
+ * @param byte 串口接收到的数据
+ * @return 完成接收返回数据帧ID，否则返回0
+ */
 uint8_t handle_serial_data_esp32(uint8_t byte)
 {
     switch (rx_state_esp32)
@@ -131,7 +123,14 @@ uint8_t handle_serial_data_esp32(uint8_t byte)
     return 0;
 }
 
-// 发送数据帧的函数
+/**
+ * @brief 发送数据帧到ESP32
+ * @param huart 串口句柄
+ * @param frame_id 数据帧ID
+ * @param data_length 数据长度
+ * @param data 数据指针
+ * @return None
+ */
 void send_serial_frame_esp32(UART_HandleTypeDef *huart, uint8_t frame_id, uint8_t data_length, float *data)
 {
     uint8_t buff_msg[data_length * 4 + 8];
@@ -164,6 +163,12 @@ void send_serial_frame_esp32(UART_HandleTypeDef *huart, uint8_t frame_id, uint8_
     // 使用UART发送数据
     HAL_UART_Transmit(huart, buff_msg, sizeof(buff_msg), HAL_MAX_DELAY);
 }
+
+/**
+ * @brief Xbox手柄数据更新
+ * @param xbox_datas 接收的Xbox数据包
+ * @param controllerData Xbox控制器数据
+ */
 void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData)
 {
     // 解析按键数据 (bool 值)
@@ -192,75 +197,31 @@ void parseXboxData(uint8_t *xbox_datas, XboxControllerData_t *controllerData)
     controllerData->trigLT = ((uint16_t)xbox_datas[24] << 8) | xbox_datas[25];
     controllerData->trigRT = ((uint16_t)xbox_datas[26] << 8) | xbox_datas[27];
 }
-int head_locking_flag = 0;
+
+/**
+ * @brief 根据数据控制机器人运动
+ * @return None
+ */
 void xbox_remote_control()
 {
-    detectButtonEdgeRb(xbox_msgs.btnRB, &xbox_msgs.btnRB_last, &head_locking_flag, 1);
-    detectButtonEdge(xbox_msgs.btnLS, &xbox_msgs.btnLS_last, &robot_stop_flag, 1);
-    detectButtonEdge(xbox_msgs.btnRS, &xbox_msgs.btnRS_last, &world_robot_flag, 1);
-    detectButtonEdge(xbox_msgs.btnLB, &xbox_msgs.btnLB_last, &catch_ball_flag, 1);
-    detectButtonEdgeD(xbox_msgs.btnX, &xbox_msgs.btnX_last);
-    detectButtonEdgeI(xbox_msgs.btnB, &xbox_msgs.btnB_last);
-    if (speed_level == 1)
-    {
-        MAX_ROBOT_SPEED_X = 1.20f;
-        MAX_ROBOT_SPEED_Y = 1.20f;
-        MAX_ROBOT_SPEED_W = 3.20f;
-    }
-    if (speed_level == 0)
-    {
-        MAX_ROBOT_SPEED_X = 0.40f;
-        MAX_ROBOT_SPEED_Y = 0.40f;
-        MAX_ROBOT_SPEED_W = 1.10f;
-    }
-    if (speed_level == 2)
-    {
-        MAX_ROBOT_SPEED_X = 1.96f;
-        MAX_ROBOT_SPEED_Y = 1.96f;
-        MAX_ROBOT_SPEED_W = 3.98f;
-    }
+    detectButtonEdge(xbox_msgs.btnRB, &xbox_msgs.btnRB_last, &head_locking_flag, LOCK_HEAD);
+    detectButtonEdge(xbox_msgs.btnLS, &xbox_msgs.btnLS_last, &robot_stop_flag, FLAG_CHANGE);
+    detectButtonEdge(xbox_msgs.btnRS, &xbox_msgs.btnRS_last, &world_robot_flag, FLAG_CHANGE);
+    detectButtonEdge(xbox_msgs.btnLB, &xbox_msgs.btnLB_last, &catch_ball_flag, FLAG_CHANGE);
+    detectButtonEdge(xbox_msgs.btnX, &xbox_msgs.btnX_last, NULL, DECREASE_SPEED);
+    detectButtonEdge(xbox_msgs.btnB, &xbox_msgs.btnB_last, NULL, INCREASE_SPEED);
+
+    setRobotSpeed(speed_level);
+
     if (xbox_msgs.btnXbox == 1)
     {
         action_relocate();
     }
-    if (xbox_msgs.joyLHori > 31000 && xbox_msgs.joyLHori < 350000)
-    {
-        xbox_msgs.joyLHori_map = 0.0f;
-    }
-    if (xbox_msgs.joyLHori <= 31000)
-    {
-        xbox_msgs.joyLHori_map = (31000.0f - (float)xbox_msgs.joyLHori) / 31000.0f;
-    }
-    if (xbox_msgs.joyLHori >= 35000)
-    {
-        xbox_msgs.joyLHori_map = (35000.0f - (float)xbox_msgs.joyLHori) / 30535.0f;
-    }
 
-    if (xbox_msgs.joyLVert > 31000 && xbox_msgs.joyLVert < 350000)
-    {
-        xbox_msgs.joyLVert_map = 0.0f;
-    }
-    if (xbox_msgs.joyLVert <= 31000)
-    {
-        xbox_msgs.joyLVert_map = (31000.0f - (float)xbox_msgs.joyLVert) / 31000.0f;
-    }
-    if (xbox_msgs.joyLVert >= 35000)
-    {
-        xbox_msgs.joyLVert_map = (35000.0f - (float)xbox_msgs.joyLVert) / 30535.0f;
-    }
-
-    if (xbox_msgs.joyRHori > 31000 && xbox_msgs.joyRHori < 35000)
-    {
-        xbox_msgs.joyRHori_map = 0.0f;
-    }
-    if (xbox_msgs.joyRHori <= 31000)
-    {
-        xbox_msgs.joyRHori_map = (31000.0f - (float)xbox_msgs.joyRHori) / 31000.0f;
-    }
-    if (xbox_msgs.joyRHori >= 35000)
-    {
-        xbox_msgs.joyRHori_map = (35000.0f - (float)xbox_msgs.joyRHori) / 30535.0f;
-    }
+    // 摇杆数据映射
+    xbox_msgs.joyLHori_map = joydata_to_map(xbox_msgs.joyLHori);
+    xbox_msgs.joyLVert_map = joydata_to_map(xbox_msgs.joyLVert);
+    xbox_msgs.joyRHori_map = joydata_to_map(xbox_msgs.joyRHori);
 
     if (xbox_msgs.trigRT == 0)
     {
@@ -333,48 +294,91 @@ void xbox_remote_control()
     // Robot_Chassis.Robot_V[2] = -MAX_ROBOT_SPEED_W * xbox_msgs.joyRHori_map;
 }
 
-void detectButtonEdge(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState)
+/**
+ * @brief 将摇杆数据映射到-1.0f~1.0f之间
+ * @param joydata 摇杆数据
+ * @return 映射后的数据
+ */
+float joydata_to_map(float joydata)
 {
-    if (currentBtnState && !(*lastBtnState))
-    { // 检测到上升沿
-        *toggleState = (*toggleState + 1) % (maxState + 1);
-        // locking_heading = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
+    if (joydata > 31000 && joydata < 35000)
+    {
+        return 0.0f;
     }
-    *lastBtnState = currentBtnState;
-}
-void detectButtonEdgeRb(bool currentBtnState, bool *lastBtnState, int *toggleState, int maxState)
-{
-    if (currentBtnState && !(*lastBtnState))
-    { // 检测到上升沿
-        *toggleState = (*toggleState + 1) % (maxState + 1);
-        locking_heading = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
+    else if (joydata <= 31000)
+    {
+        return (31000.0f - (float)joydata) / 31000.0f;
     }
-    *lastBtnState = currentBtnState;
+    else if (joydata >= 35000)
+    {
+        return (35000.0f - (float)joydata) / 30535.0f;
+    }
+    return 0.0f;
 }
-void detectButtonEdgeD(bool currentBtnState, bool *lastBtnState)
-{
 
+/**
+ * @brief 按键边沿检测函数,并做出对应操作（置标志位、增加/减少速度）
+ * @param currentBtnState 当前按键状态
+ * @param lastBtnState 上一次按键状态
+ * @param toggleState 修改标志位模式需传入的标志位指针
+ * @param action 按键控制模式枚举
+ * @return None
+ */
+void detectButtonEdge(bool currentBtnState, bool *lastBtnState, int *toggleState, ButtonAction action)
+{
     if (currentBtnState && !(*lastBtnState))
-    { // 检测到上升沿
-        //*toggleState = (*toggleState + 1) % (maxState + 1);
-        // locking_heading = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
-        if (speed_level > 0)
+    {
+        switch (action)
         {
-            speed_level--;
+        case TOGGLE_STATE:
+            *toggleState = (*toggleState + 1) % 2;
+            break;
+        case TOGGLE_STATE_LOCKHEAD:
+            *toggleState = (*toggleState + 1) % 2;
+            locking_heading = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
+            break;
+        case DECREASE_SPEED:
+            if (speed_level > 0)
+            {
+                speed_level--;
+            }
+            break;
+        case INCREASE_SPEED:
+            if (speed_level < 2)
+            {
+                speed_level++;
+            }
+            break;
         }
     }
     *lastBtnState = currentBtnState;
 }
-void detectButtonEdgeI(bool currentBtnState, bool *lastBtnState)
+
+/**
+ * @brief 设置机器人速度挡位
+ * @param speed_level_ 速度等级
+ * @return None
+ */
+void setRobotSpeed(uint8_t speed_level_)
 {
-    if (currentBtnState && !(*lastBtnState))
-    { // 检测到上升沿
-        //*toggleState = (*toggleState + 1) % (maxState + 1);
-        // locking_heading = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
-        if (speed_level < 2)
-        {
-            speed_level++;
-        }
+    switch (speed_level_)
+    {
+    case 0:
+        MAX_ROBOT_SPEED_X = 0.40f;
+        MAX_ROBOT_SPEED_Y = 0.40f;
+        MAX_ROBOT_SPEED_W = 1.10f;
+        break;
+    case 1:
+        MAX_ROBOT_SPEED_X = 1.20f;
+        MAX_ROBOT_SPEED_Y = 1.20f;
+        MAX_ROBOT_SPEED_W = 3.20f;
+        break;
+    case 2:
+        MAX_ROBOT_SPEED_X = 1.96f;
+        MAX_ROBOT_SPEED_Y = 1.96f;
+        MAX_ROBOT_SPEED_W = 3.98f;
+        break;
+    default:
+        break;
     }
-    *lastBtnState = currentBtnState;
 }
