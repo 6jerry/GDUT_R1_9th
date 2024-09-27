@@ -7,12 +7,12 @@ int CanDevice::instanceCount_m3508_can2 = 0;
 
 uint16_t CanDevice::m3508_process()
 {
-    return;
+    return 12;
 }
 
 uint16_t CanDevice::m2006_process()
 {
-    return;
+    return 12;
 }
 void CanDevice::m3508_update()
 {

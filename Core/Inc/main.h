@@ -75,20 +75,6 @@ void Error_Handler(void);
 #define Blue_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-#define x  		0
-#define y 		1
-#define w  		2
-
-#define Hour         3
-#define Minute       2
-#define Second       1
-#define MicroSecond  0
-extern float target_current;
-extern float Set_target_current;
-
-
-extern uint8_t RxBuffer_for4[1];//串口接收缓冲
-extern uint8_t DataBuff_for4[200];
 
 /* USER CODE END Private defines */
 

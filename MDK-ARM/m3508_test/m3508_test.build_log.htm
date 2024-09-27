@@ -9,12 +9,12 @@ License Information: 1 1517752988@qq.com, 1, LIC=X96CK-ZR6MF-X7SRZ-JQD8Y-UFX88-Y
  
 Tool Versions:
 Toolchain:       MDK-ARM Plus  Version: 5.39.0.0
-Toolchain Path:  G:\Keil_v5\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.06 update 7 (build 960)
-Assembler:       Armasm.exe V5.06 update 7 (build 960)
-Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
-Library Manager: ArmAr.exe V5.06 update 7 (build 960)
-Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+Toolchain Path:  G:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.21
+Assembler:       Armasm.exe V6.21
+Linker/Locator:  ArmLink.exe V6.21
+Library Manager: ArmAr.exe V6.21
+Hex Converter:   FromElf.exe V6.21
 CPU DLL:         SARMCM3.DLL V5.39.0.0
 Dialog DLL:      DCM.DLL V1.17.5.0
 Target DLL:      CMSIS_AGDI.dll V1.33.16.0
@@ -25,15 +25,14 @@ G:\STM32_PROJECT\R1_NEW\R1_No2 - ¸Ä¶¯\MDK-ARM\m3508_test.uvprojx
 Project File Date:  09/27/2024
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'G:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V6.21', folder: 'G:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'm3508_test'
-compiling can_device.cpp...
-Warning: C3910W: Old syntax, please use '--c99'.
-Warning: C3910W: Old syntax, please use '--cpp11'.
+compiling gpio.c...
+compiling main.c...
 linking...
-Program Size: Code=28926 RO-data=1614 RW-data=260 ZI-data=26636  
+Program Size: Code=24382 RO-data=1086 RW-data=1060 ZI-data=21924  
 FromELF: creating hex file...
-"m3508_test\m3508_test.axf" - 0 Error(s), 2 Warning(s).
+"m3508_test\m3508_test.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -57,7 +56,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@5.6.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

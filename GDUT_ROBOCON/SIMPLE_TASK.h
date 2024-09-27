@@ -8,18 +8,19 @@ extern "C"
 
 #include "FreeRTOS.h"
 #include "task.h"
-#include <cstdint>
+// #include <stdint.h>
 #include <cmsis_os.h>
 #include "RC9Protocol.h"
 #include "usart.h"
 #include "TaskManager.h"
 #include "Action.h"
 #include "can_device.h"
+void create_tasks(void);
 #ifdef __cplusplus
 }
 #endif
 #ifdef __cplusplus
 // C 的接口函数，用于在 main.c 中调用
-extern "C" void create_tasks(void);
+
 #endif
 #endif // SIMPLE_TASK_H

@@ -8,7 +8,7 @@ extern "C"
 #endif
 #include <FreeRTOS.h>
 #include <task.h>
-#include <cstdint>
+// #include <stdint.h>
 #include <cmsis_os.h>
 
 #ifdef __cplusplus
@@ -16,8 +16,8 @@ extern "C"
 #endif
 
 #ifdef __cplusplus
-//#include "RC9Protocol.h"
-// 最大任务数和每个任务允许的类实例数
+// #include "RC9Protocol.h"
+//  最大任务数和每个任务允许的类实例数
 #define MAX_TASKS 10
 #define MAX_CLASSES_PER_TASK 20
 // 接口类
@@ -26,8 +26,8 @@ class ITaskProcessor
 {
 public:
     virtual void process_data() = 0; // 纯虚函数
-    virtual ~ITaskProcessor() {}; 
-    char name[16] = {'0'};           // 实例的名字，便于debug
+    virtual ~ITaskProcessor() {};
+    char name[16] = {'0'}; // 实例的名字，便于debug
 };
 
 // 任务信息结构体
@@ -56,8 +56,6 @@ private:
     static TaskInfo tasks[MAX_TASKS];
     static void TaskFunction(void *parameters); // 任务执行函数
 };
-
-
 
 #endif
 

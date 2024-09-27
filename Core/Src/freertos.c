@@ -20,21 +20,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
 #include "task.h"
-#include "main.h"
+//#include "main.h"
 #include "cmsis_os.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "motor.h"
-#include "driver_usart.h"
-#include "hardware.h"
-#include "calculation.h"
-#include "hardware.h"
-#include "FSM.h"
-#include "MoveBase.h"
-#include "communicate.h"
-#include "serial_to_matlab.h"
-#include "serial_to_esp32.h"
+//#include "motor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,12 +80,7 @@ const osThreadAttr_t robot_move_attributes = {
     .stack_size = 128 * 4,
     .priority = (osPriority_t)osPriorityLow,
 };
-osThreadId_t uartRXTaskHandle;
-const osThreadAttr_t uartRXTask_attributes = {
-    .name = "RXTask",
-    .stack_size = 128 * 4,
-    .priority = (osPriority_t)osPriorityNormal,
-};
+
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 
@@ -104,7 +90,7 @@ void StartDefaultTask(void *argument);
 void MotorControl(void *argument);
 void RobotState(void *argument);
 void RobotMove(void *argument);
-void uartRXTask(void *argument);
+
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
@@ -146,7 +132,7 @@ void MX_FREERTOS_Init(void)
 
     /* creation of robot_move */
     robot_moveHandle = osThreadNew(RobotMove, NULL, &robot_move_attributes);
-    // uartRXTaskHandle = osThreadNew(uartRXTask, NULL, &uartRXTask_attributes);
+
     /* USER CODE BEGIN RTOS_THREADS */
     /* add threads, ... */
     /* USER CODE END RTOS_THREADS */
@@ -209,7 +195,6 @@ void StartDefaultTask(void *argument)
  * @retval None
  */
 /* USER CODE END Header_MotorControl */
-float test_msgss[8] = {0};
 void MotorControl(void *argument)
 {
     /* USER CODE BEGIN MotorControl */
@@ -224,12 +209,12 @@ void MotorControl(void *argument)
         // MOVE_FSM();
         // Photogate_FSM();
 
-        test_msgss[0] = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
-        test_msgss[1] = heading_lock.setpoint;
-        test_msgss[2] = SHOOT_MOTOR_INFO[2].RPM;
-        test_msgss[3] = SHOOT_MOTOR_INFO[3].RPM;
-        test_msgss[4] = SHOOT_MOTOR_INFO[0].real_current;
-        // send_serial_frame_mat(&huart2, 0x01, 8, test_msgss);
+        // test_msgss[0] = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
+        // test_msgss[1] = heading_lock.setpoint;
+        // test_msgss[2] = SHOOT_MOTOR_INFO[2].RPM;
+        // test_msgss[3] = SHOOT_MOTOR_INFO[3].RPM;
+        // test_msgss[4] = SHOOT_MOTOR_INFO[0].real_current;
+        //  send_serial_frame_mat(&huart2, 0x01, 8, test_msgss);
         vTaskDelay(10);
     }
     /* USER CODE END MotorControl */
@@ -313,46 +298,3 @@ void RobotMove(void *argument)
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
-/*void uartRXTask(void *argument)
-{
-    UART_Message msg;
-    for (;;)
-    {
-        // ????????
-        if (xQueueReceive(uartQueue, &msg, portMAX_DELAY) == pdPASS)
-        {
-            // ?? uart_id ????????
-            switch (msg.uart_id)
-            {
-            case UART_ID_USART1:
-                uint8_t esp32_id = handle_serial_data_esp32(msg.data);
-                if (esp32_id == 0x01)
-                {
-                }
-                // ?? UART4 ???
-
-                break;
-            case UART_ID_USART2:
-                break;
-            case UART_ID_USART3:
-                // ?? USART3 ???
-                break;
-            case UART_ID_UART4:
-
-                break;
-            case UART_ID_UART5:
-                // ?? UART5 ???
-                break;
-            case UART_ID_UART7:
-                // ?? UART7 ???
-                break;
-            case UART_ID_UART8:
-                // ?? UART8 ???
-                break;
-            default:
-                // ?? UART
-                break;
-            }
-        }
-    }
-}*/

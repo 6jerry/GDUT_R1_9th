@@ -28,15 +28,15 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
-#include "motor.h"
-#include "pid.h"
-#include "pid_adjust.h"
-#include "driver_usart.h"
-#include "ring_buffer.h"
-#include "hardware.h"
-#include "calculation.h"
-#include "MoveBase.h"
-#include "FSM.h"
+// #include "motor.h"
+// #include "pid.h"
+// #include "pid_adjust.h"
+// #include "driver_usart.h"
+// #include "ring_buffer.h"
+// #include "hardware.h"
+// #include "calculation.h"
+// #include "MoveBase.h"
+// #include "FSM.h"
 #include "SIMPLE_TASK.h"
 /* USER CODE END Includes */
 
@@ -58,7 +58,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-ring_buffer test_buffer;
+// ring_buffer test_buffer;
 float Set_TARGET_POS = 0.0f;
 float Set_TARGET_RPM = 5.f;
 float Set_target_current = 0.0f;
@@ -71,7 +71,7 @@ uint8_t DataBuff_for4[200];
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void MX_FREERTOS_Init(void);
+//void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -125,20 +125,21 @@ int main(void)
   // EnableDebugIRQ();
   // Adjust_Init();
   // ring_buffer_init(&test_buffer);
-  Move_Init();
+  // Move_Init();
 
-  m3508_Init();
-  Kalmanfiter_Init(&Kalman_LaserX);
-  // Set_target_current=0.0f;
+  // m3508_Init();
+  // Kalmanfiter_Init(&Kalman_LaserX);
+  //  Set_target_current=0.0f;
   /* USER CODE END 2 */
 
   /* Init scheduler */
   osKernelInitialize();
 
   /* Call init function for freertos objects (in freertos.c) */
-  // MX_FREERTOS_Init();
-  create_tasks();
+  //MX_FREERTOS_Init();
+
   /* Start scheduler */
+  create_tasks();
   // osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
@@ -218,32 +219,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   {
     HAL_IncTick();
   }
-  /* USER CODE BEGIN Callback 1 */
-  else if (htim->Instance == TIM2) // �?查是否是TIM2定时器中�?
-  {
-    LAST_TIME_ISR_CNT = TIME_ISR_CNT;
-    TIME_ISR_CNT++;
-    Microsecond_Cnt++;
-    if (Microsecond_Cnt >= 100)
-    {
-      Microsecond_Cnt = 0;
-      Time_Sys[Second]++;
-      if (Time_Sys[Second] >= 60)
-      {
-        Time_Sys[Second] = 0;
-        Time_Sys[Minute]++;
-        if (Time_Sys[Minute] >= 60)
-        {
-          Time_Sys[Minute] = 0;
-          Time_Sys[Hour]++;
-        }
-      }
-    }
-    Time_Sys[MicroSecond] = Microsecond_Cnt;
-  }
-  /* USER CODE END Callback 1 */
 }
-
 /**
  * @brief  This function is executed in case of error occurrence.
  * @retval None

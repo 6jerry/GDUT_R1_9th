@@ -1,12 +1,11 @@
-m3508_test\list.o: ../Middlewares/Third_Party/FreeRTOS/Source/list.c
-m3508_test\list.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-m3508_test\list.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-m3508_test\list.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-m3508_test\list.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-m3508_test\list.o: ../Core/Inc/FreeRTOSConfig.h
-m3508_test\list.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
-m3508_test\list.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
-m3508_test\list.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
-m3508_test\list.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
-m3508_test\list.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
-m3508_test\list.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+m3508_test/list.o: ..\Middlewares\Third_Party\FreeRTOS\Source\list.c \
+  G:\Keil_v5\ARM\ARMCLANG\include\stdlib.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\stddef.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\stdint.h ..\Core\Inc\FreeRTOSConfig.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h
