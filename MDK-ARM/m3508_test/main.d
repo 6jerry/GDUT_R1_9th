@@ -72,3 +72,4 @@ m3508_test\main.o: ..\GDUT_ROBOCON\HARDWARE\Serial_device.h
 m3508_test\main.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 m3508_test\main.o: ..\GDUT_ROBOCON\HARDWARE\Action.h
 m3508_test\main.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+m3508_test\main.o: ..\GDUT_ROBOCON\HARDWARE\can_device.h

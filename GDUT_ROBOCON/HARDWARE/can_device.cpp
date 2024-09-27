@@ -1,4 +1,9 @@
 #include "can_device.h"
+// 静态变量定义
+CanDevice *CanDevice::m3508_instances_can1[MAX_INSTANCES] = {nullptr};
+CanDevice *CanDevice::m3508_instances_can2[MAX_INSTANCES] = {nullptr};
+int CanDevice::instanceCount_m3508_can1 = 0;
+int CanDevice::instanceCount_m3508_can2 = 0;
 
 uint16_t CanDevice::m3508_process()
 {
@@ -90,4 +95,105 @@ CanDevice::CanDevice(CanDeviceType deviceType_, CAN_HandleTypeDef *hcan_, uint8_
             break;
         }
     }
+}
+
+void CanManager::CAN1_Filter_Init(void)
+{
+    CAN_FilterTypeDef sFilterConfig;
+
+    sFilterConfig.FilterBank = 0;                      /* čżćť¤ĺ¨çť0 */
+    sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  /* ĺąč˝ä˝ć¨Ąďż?? */
+    sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; /* 32ä˝ďż˝??*/
+
+    sFilterConfig.FilterIdHigh = (((uint32_t)CAN_RxExtId << 3) & 0xFFFF0000) >> 16; /* čŚčżćť¤çIDéŤä˝ */                  // 0x0000
+    sFilterConfig.FilterIdLow = (((uint32_t)CAN_RxExtId << 3) | CAN_ID_EXT | CAN_RTR_DATA) & 0xFFFF; /* čŚčżćť¤çIDä˝ä˝ */ // 0x0000
+    //  sFilterConfig.FilterMaskIdHigh     = 0xFFFF;			/* čżćť¤ĺ¨éŤ16ä˝ćŻä˝ĺżéĄťĺšďż?? */
+    //  sFilterConfig.FilterMaskIdLow      = 0xFFFF;			/* čżćť¤ĺ¨ä˝16ä˝ćŻä˝ĺżéĄťĺšďż?? */
+    sFilterConfig.FilterMaskIdHigh = 0x0000;           /* ĺŽéä¸ćŻĺłé­äşčżćť¤ĺ¨ */
+    sFilterConfig.FilterMaskIdLow = 0x0000;            /* ĺŽéä¸ćŻĺłé­äşčżćť¤ĺ¨ */
+    sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0; /* čżćť¤ĺ¨č˘Ťĺłčĺ°FIFO 0 */
+    sFilterConfig.FilterActivation = ENABLE;           /* ä˝żč˝čżćť¤ďż?? */
+    // sFilterConfig.SlaveStartFilterBank = 14;
+
+    if (HAL_CAN_ConfigFilter(&hcan1, &sFilterConfig) != HAL_OK)
+    {
+        /* Filter configuration Error */
+        Error_Handler();
+    }
+
+    if (HAL_CAN_Start(&hcan1) != HAL_OK)
+    {
+        /* Start Error */
+        Error_Handler();
+    }
+
+    /*##-4- Activate CAN RX notification #######################################*/
+    if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
+    {
+        /* Start Error */
+        Error_Handler();
+    }
+
+    TxHeader.ExtId = CAN_TxExtId; // ćŠĺąć čŻďż??(29ďż??)
+    TxHeader.IDE = CAN_ID_EXT;    // ä˝żç¨ć ĺďż??
+    TxHeader.RTR = CAN_RTR_DATA;  // ć°ćŽďż??
+    TxHeader.DLC = 8;
+    TxHeader.TransmitGlobalTime = DISABLE;
+}
+
+void CanManager::CAN2_Filter_Init(void)
+{
+
+    CAN_FilterTypeDef sFilterConfig;
+
+    sFilterConfig.FilterBank = 14;                     /* čżćť¤ĺ¨çť0 */
+    sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  /* ĺąč˝ä˝ć¨Ąďż?? */
+    sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; /* 32ä˝ďż˝??*/
+
+    sFilterConfig.FilterIdHigh = (((uint32_t)CAN_RxExtId << 3) & 0xFFFF0000) >> 16; /* čŚčżćť¤çIDéŤä˝ */                  // 0x0000
+    sFilterConfig.FilterIdLow = (((uint32_t)CAN_RxExtId << 3) | CAN_ID_EXT | CAN_RTR_DATA) & 0xFFFF; /* čŚčżćť¤çIDä˝ä˝ */ // 0x0000
+    //  sFilterConfig.FilterMaskIdHigh     = 0xFFFF;			/* čżćť¤ĺ¨éŤ16ä˝ćŻä˝ĺżéĄťĺšďż?? */
+    //  sFilterConfig.FilterMaskIdLow      = 0xFFFF;			/* čżćť¤ĺ¨ä˝16ä˝ćŻä˝ĺżéĄťĺšďż?? */
+    sFilterConfig.FilterMaskIdHigh = 0x0000;
+    sFilterConfig.FilterMaskIdLow = 0x0000;
+    sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0; /* čżćť¤ĺ¨č˘Ťĺłčĺ°FIFO 0 */
+    sFilterConfig.FilterActivation = ENABLE;           /* ä˝żč˝čżćť¤ďż?? */
+    sFilterConfig.SlaveStartFilterBank = 14;
+
+    if (HAL_CAN_ConfigFilter(&hcan2, &sFilterConfig) != HAL_OK)
+    {
+        /* Filter configuration Error */
+        Error_Handler();
+    }
+
+    if (HAL_CAN_Start(&hcan2) != HAL_OK)
+    {
+        /* Start Error */
+        Error_Handler();
+    }
+
+    /*##-4- Activate CAN RX notification #######################################*/
+    if (HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
+    {
+        /* Start Error */
+        Error_Handler();
+    }
+
+    TxHeader.ExtId = CAN_TxExtId; // ćŠĺąć čŻďż??(29ďż??)
+    TxHeader.IDE = CAN_ID_EXT;    // ä˝żç¨ć ĺďż??
+    TxHeader.RTR = CAN_RTR_DATA;  // ć°ćŽďż??
+    TxHeader.DLC = 8;
+    TxHeader.TransmitGlobalTime = DISABLE;
+}
+
+CanManager::CanManager()
+{
+    CAN1_Filter_Init();
+    CAN2_Filter_Init();
+    HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+    HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
+}
+
+void CanManager::process_data()
+{
 }

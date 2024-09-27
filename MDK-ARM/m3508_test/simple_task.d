@@ -55,3 +55,5 @@ m3508_test\simple_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/que
 m3508_test\simple_task.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 m3508_test\simple_task.o: ..\GDUT_ROBOCON\HARDWARE\Action.h
 m3508_test\simple_task.o: G:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+m3508_test\simple_task.o: ..\GDUT_ROBOCON\HARDWARE\can_device.h
+m3508_test\simple_task.o: ../Core/Inc/can.h

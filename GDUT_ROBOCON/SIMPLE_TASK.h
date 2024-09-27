@@ -14,6 +14,7 @@ extern "C"
 #include "usart.h"
 #include "TaskManager.h"
 #include "Action.h"
+#include "can_device.h"
 #ifdef __cplusplus
 }
 #endif

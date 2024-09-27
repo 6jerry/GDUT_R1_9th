@@ -61,8 +61,8 @@ void MX_CAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
-  CAN1_Filter_Init();
-  HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING); // �??活指定的中断函数
+  // CAN1_Filter_Init();
+  // HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING); // �??活指定的中断函数
 
   /* USER CODE END CAN1_Init 2 */
 }
@@ -94,8 +94,8 @@ void MX_CAN2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN2_Init 2 */
-  CAN2_Filter_Init();
-  HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
+  // CAN2_Filter_Init();
+  // HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
   /* USER CODE END CAN2_Init 2 */
 }
 

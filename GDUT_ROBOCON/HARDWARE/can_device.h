@@ -6,6 +6,9 @@ extern "C"
 {
 #endif
 
+    // #include <stm32f4xx_hal_can.h>
+    // #include <stm32f407xx.h>
+
 #include <stdbool.h>
 #include "can.h"
 #include "TaskManager.h"
@@ -14,7 +17,7 @@ extern "C"
 #endif
 #ifdef __cplusplus
 #define MAX_INSTANCES 4 // 一条can上最多挂四个3508
-enum class CanDeviceType
+enum CanDeviceType
 {
     M3508,
     M2006,
@@ -53,6 +56,7 @@ private:
 
 public:
     void process_data();
+    CanManager();
 };
 
 #endif
