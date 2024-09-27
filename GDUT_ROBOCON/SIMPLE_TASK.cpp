@@ -1,8 +1,8 @@
 #include "SIMPLE_TASK.h"
 
-RC9Protocol ros_serial(&huart2, true);
-action Action(&huart3, 0, 0); // 还未封装完全，明天继续搞
-TaskManager task_core;
+RC9Protocol ros_serial(&huart2, true); // 九期的通用协议类，可用于ros调参，ros通讯,与esp32通讯等
+action Action(&huart3, 0, 0);          // 还未封装完全，明天继续搞
+TaskManager task_core;                 // 这是整个架构的地基
 
 // C 的接口函数，调用 C++ 类来创建 FreeRTOS 任务
 extern "C" void create_tasks(void)
