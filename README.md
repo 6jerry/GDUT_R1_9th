@@ -1,1 +1,1 @@
-去看GDUT_ROBOCON文件夹里的simple_task.cpp文件，最新的封装测试都在里面,该分支旨在测试各种cpp开发，寻找一种高效的cpp开发模式和架构
+去看GDUT_ROBOCON文件夹里的simple_task.cpp文件，最新的封装测试都在里面,现在已经全面换装v6去编译，更快，更小
