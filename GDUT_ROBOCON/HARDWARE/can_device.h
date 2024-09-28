@@ -41,8 +41,8 @@ public:
     CAN_HandleTypeDef *hcan_;  // CAN 句柄
     CanDeviceType deviceType_; // 设备类型
     uint8_t can_id = 0;
-    virtual uint16_t m3508_process(); // 给m3508用的接口，其他电机不要管
-    virtual uint16_t m2006_process();
+    virtual int16_t m3508_process(); // 给m3508用的接口，其他电机不要管
+    virtual int16_t m2006_process();
 
     virtual void can_update(uint8_t can_RxData[8]) = 0;
 
@@ -61,10 +61,17 @@ class CanManager : public ITaskProcessor
 private:
     void CAN1_Filter_Init(void);
     void CAN2_Filter_Init(void);
+    CAN_TxHeaderTypeDef tx_message_1, tx_message_2;
+    uint8_t send_buf1[8] = {0};
+    uint8_t send_buf2[8] = {0};
+    uint32_t msg_box1 = 0;
+    uint32_t msg_box2 = 0;
+    int8_t error_flag = 0;
 
 public:
-    void process_data();
-    // CanManager();
+    void
+    process_data();
+    CanManager();
     void init();
 
     static uint8_t RxData1[8];

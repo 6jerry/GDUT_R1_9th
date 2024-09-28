@@ -1,6 +1,6 @@
 #include "M3508.h"
 
-m3508::m3508(CanDeviceType deviceType_, uint8_t can_id, CAN_HandleTypeDef *hcan_, uint8_t gear_ratio) : CanDevice(deviceType_, hcan_, can_id), gear_ratio(gear_ratio)
+m3508::m3508(uint8_t can_id, CAN_HandleTypeDef *hcan_, uint8_t gear_ratio, float kp_, float ki_, float kd_) : CanDevice(M3508, hcan_, can_id), gear_ratio(gear_ratio), pid(kp_, ki_, kd_, 1000000.0f, 20000.0f, 5.0f, 960.0f) // 选择使用积分分离的话积分限幅就是无意义的，随便给个爆大的值就行
 {
 }
 
@@ -15,9 +15,11 @@ void m3508::can_update(uint8_t can_RxData[8])
     rcurrent = vcurrent_to_rcurrent(vcurrent);
 }
 
-uint16_t m3508::m3508_process()
+int16_t m3508::m3508_process()
 {
-    return 0;
+    setpoint = target_rpm * (float)gear_ratio;
+    vtarget_current = rcurrent_to_vcurrent(PID_Compute(rpm));
+    return vtarget_current;
 }
 
 float m3508::vcurrent_to_rcurrent(int16_t vc)

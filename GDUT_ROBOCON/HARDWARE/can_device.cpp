@@ -8,17 +8,16 @@ int CanDevice::instanceCount_m3508_can2 = 0;
 uint8_t CanManager::RxData1[8] = {0};
 uint8_t CanManager::RxData2[8] = {0};
 
-uint16_t
+int16_t
 CanDevice::m3508_process()
 {
-    return 12;
+    return 0;
 }
 
-uint16_t CanDevice::m2006_process()
+int16_t CanDevice::m2006_process()
 {
-    return 12;
+    return 0;
 }
-
 
 // 以上都是虚函数，不用在基类写具体的东西
 
@@ -192,8 +191,54 @@ void CanManager::init()
     HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
 }
 
+CanManager::CanManager()
+{
+    tx_message_1.IDE = CAN_ID_STD;   // 报文的11位标准标识符CAN_ID_STD表示本报文是标准帧
+    tx_message_1.RTR = CAN_RTR_DATA; // 报文类型标志RTR位CAN_ID_STD表示本报文的数据帧
+    tx_message_1.DLC = 0x08;         // 数据段长度
+    tx_message_1.TransmitGlobalTime = DISABLE;
+    // 配置仲裁段和数据段
+    tx_message_1.StdId = 0x00;
+
+    tx_message_2.IDE = CAN_ID_STD;   // 报文的11位标准标识符CAN_ID_STD表示本报文是标准帧
+    tx_message_2.RTR = CAN_RTR_DATA; // 报文类型标志RTR位CAN_ID_STD表示本报文的数据帧
+    tx_message_2.DLC = 0x08;         // 数据段长度
+    tx_message_2.TransmitGlobalTime = DISABLE;
+
+    // 配置仲裁段和数据段
+    tx_message_2.StdId = 0x00;
+}
+
 void CanManager::process_data()
 {
+    // 处理 CAN1 上的 m3508 设备
+    for (int i = 0; i < CanDevice::instanceCount_m3508_can1; ++i)
+    {
+        int16_t temp_vcurrent = CanDevice::m3508_instances_can1[i]->m3508_process();
+        send_buf1[2 * i] = (uint8_t)(temp_vcurrent >> 8);
+        send_buf1[2 * i + 1] = (uint8_t)temp_vcurrent;
+    }
+    tx_message_1.StdId = 0x200;
+    if (HAL_CAN_AddTxMessage(&hcan1, &tx_message_1, send_buf1, &msg_box1) != HAL_OK)
+    {
+        error_flag = 1;
+        // Failed to add message to the transmit mailbox
+    }
+
+    // 处理 CAN2 上的 m3508 设备
+    for (int i = 0; i < CanDevice::instanceCount_m3508_can2; ++i)
+    {
+        int16_t temp_vcurrent2 = CanDevice::m3508_instances_can2[i]->m3508_process();
+        send_buf1[2 * i] = (uint8_t)(temp_vcurrent2 >> 8);
+        send_buf1[2 * i + 1] = (uint8_t)temp_vcurrent2;
+    }
+    tx_message_2.StdId = 0x200;
+
+    if (HAL_CAN_AddTxMessage(&hcan2, &tx_message_2, send_buf2, &msg_box2) != HAL_OK)
+    {
+        error_flag = 1;
+        // Failed to add message to the transmit mailbox
+    }
 }
 extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {

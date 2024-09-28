@@ -213,4 +213,5 @@ m3508_test/simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.cpp \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdlib.h \
   G:\Keil_v5\ARM\ARMCLANG\include\stdlib.h \
   ..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h \
-  ..\GDUT_ROBOCON\HARDWARE\can_device.h ..\Core\Inc\can.h
+  ..\GDUT_ROBOCON\HARDWARE\can_device.h ..\Core\Inc\can.h \
+  ..\GDUT_ROBOCON\CONTROL\pid.h
