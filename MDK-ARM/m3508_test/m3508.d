@@ -1,4 +1,5 @@
-m3508_test/can_device.o: ..\GDUT_ROBOCON\HARDWARE\can_device.cpp \
+m3508_test/m3508.o: ..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.cpp \
+  ..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h \
   ..\GDUT_ROBOCON\HARDWARE\can_device.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \

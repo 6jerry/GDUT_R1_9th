@@ -8,7 +8,7 @@ extern "C"
 
     // #include <stm32f4xx_hal_can.h>
     // #include <stm32f407xx.h>
-
+#include "stm32f4xx_hal.h"
 #include <stdbool.h>
 #include "can.h"
 #include "TaskManager.h"
@@ -26,6 +26,15 @@ enum CanDeviceType
     M6020
 };
 
+enum can_id
+{
+    m3508_id_1 = 0x201,
+    m3508_id_2 = 0x202,
+    m3508_id_3 = 0x203,
+    m3508_id_4 = 0x204
+
+};
+
 class CanDevice
 {
 public:
@@ -35,8 +44,7 @@ public:
     virtual uint16_t m3508_process(); // 给m3508用的接口，其他电机不要管
     virtual uint16_t m2006_process();
 
-    virtual void m3508_update();
-    virtual void m2006_update();
+    virtual void can_update(uint8_t can_RxData[8]) = 0;
 
     static CanDevice *m3508_instances_can1[MAX_INSTANCES]; // 保存所有实例,供can管理者使用
     static CanDevice *m2006_instances_can1[MAX_INSTANCES];
@@ -56,7 +64,11 @@ private:
 
 public:
     void process_data();
-    CanManager();
+    // CanManager();
+    void init();
+
+    static uint8_t RxData1[8];
+    static uint8_t RxData2[8];
 };
 
 #endif

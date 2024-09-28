@@ -5,7 +5,11 @@ CanDevice *CanDevice::m3508_instances_can2[MAX_INSTANCES] = {nullptr};
 int CanDevice::instanceCount_m3508_can1 = 0;
 int CanDevice::instanceCount_m3508_can2 = 0;
 
-uint16_t CanDevice::m3508_process()
+uint8_t CanManager::RxData1[8] = {0};
+uint8_t CanManager::RxData2[8] = {0};
+
+uint16_t
+CanDevice::m3508_process()
 {
     return 12;
 }
@@ -14,14 +18,8 @@ uint16_t CanDevice::m2006_process()
 {
     return 12;
 }
-void CanDevice::m3508_update()
-{
-    return;
-}
-void CanDevice::m2006_update()
-{
-    return;
-}
+
+
 // 以上都是虚函数，不用在基类写具体的东西
 
 CanDevice::CanDevice(CanDeviceType deviceType_, CAN_HandleTypeDef *hcan_, uint8_t can_id) : deviceType_(deviceType_), hcan_(hcan_), can_id(can_id)
@@ -186,7 +184,7 @@ void CanManager::CAN2_Filter_Init(void)
     TxHeader.TransmitGlobalTime = DISABLE;
 }
 
-CanManager::CanManager()
+void CanManager::init()
 {
     CAN1_Filter_Init();
     CAN2_Filter_Init();
@@ -196,4 +194,78 @@ CanManager::CanManager()
 
 void CanManager::process_data()
 {
+}
+extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+    if (hcan == &hcan1)
+    {
+        CAN_RxHeaderTypeDef RxHeader1;
+
+        HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &RxHeader1, CanManager::RxData1);
+        switch (RxHeader1.StdId)
+        {
+        case m3508_id_1:
+            if (CanDevice::m3508_instances_can1[0] != nullptr)
+            {
+                CanDevice::m3508_instances_can1[0]->can_update(CanManager::RxData1);
+            }
+            break;
+        case m3508_id_2:
+            if (CanDevice::m3508_instances_can1[1] != nullptr)
+            {
+                CanDevice::m3508_instances_can1[1]->can_update(CanManager::RxData1);
+            }
+            break;
+        case m3508_id_3:
+            if (CanDevice::m3508_instances_can1[2] != nullptr)
+            {
+                CanDevice::m3508_instances_can1[2]->can_update(CanManager::RxData1);
+            }
+            break;
+        case m3508_id_4:
+            if (CanDevice::m3508_instances_can1[3] != nullptr)
+            {
+                CanDevice::m3508_instances_can1[3]->can_update(CanManager::RxData1);
+            }
+            break;
+
+        default:
+            break;
+        }
+    }
+    if (hcan == &hcan2)
+    {
+        CAN_RxHeaderTypeDef RxHeader2;
+        HAL_CAN_GetRxMessage(&hcan2, CAN_RX_FIFO0, &RxHeader2, CanManager::RxData2);
+        switch (RxHeader2.StdId)
+        {
+        case m3508_id_1:
+            if (CanDevice::m3508_instances_can2[0] != nullptr)
+            {
+                CanDevice::m3508_instances_can2[0]->can_update(CanManager::RxData2);
+            }
+            break;
+        case m3508_id_2:
+            if (CanDevice::m3508_instances_can2[1] != nullptr)
+            {
+                CanDevice::m3508_instances_can2[1]->can_update(CanManager::RxData2);
+            }
+            break;
+        case m3508_id_3:
+            if (CanDevice::m3508_instances_can2[2] != nullptr)
+            {
+                CanDevice::m3508_instances_can2[2]->can_update(CanManager::RxData2);
+            }
+            break;
+        case m3508_id_4:
+            if (CanDevice::m3508_instances_can2[3] != nullptr)
+            {
+                CanDevice::m3508_instances_can2[3]->can_update(CanManager::RxData2);
+            }
+            break;
+
+        default:
+            break;
+        }
+    }
 }

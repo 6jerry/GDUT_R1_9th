@@ -14,7 +14,7 @@ extern "C"
 #include "usart.h"
 #include "TaskManager.h"
 #include "Action.h"
-#include "can_device.h"
+#include "M3508.h"
 void create_tasks(void);
 #ifdef __cplusplus
 }

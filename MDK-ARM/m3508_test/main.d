@@ -51,4 +51,5 @@ m3508_test/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h \
   ..\GDUT_ROBOCON\HARDWARE\Action.h \
   G:\Keil_v5\ARM\ARMCLANG\include\math.h \
+  ..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h \
   ..\GDUT_ROBOCON\HARDWARE\can_device.h
