@@ -247,6 +247,7 @@ extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
         CAN_RxHeaderTypeDef RxHeader1;
 
         HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &RxHeader1, CanManager::RxData1);
+        // 用这种看起来又臭又长的switch case是为了方便编译器优化
         switch (RxHeader1.StdId)
         {
         case m3508_id_1:

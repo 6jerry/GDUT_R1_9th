@@ -83,6 +83,7 @@ void action::Update_Action_gl_position(float value[6])
 
     action_info.pos_z_sum += action_info.delta_pos_z;
     pose_data.yaw_angle = -action_info.pos_z_sum;
+    pose_data.yaw_rad = pose_data.yaw_angle * 0.01745f;
     action_info.pos_x_sum += action_info.delta_pos_x;
     action_info.pos_y_sum += action_info.delta_pos_y;
 }

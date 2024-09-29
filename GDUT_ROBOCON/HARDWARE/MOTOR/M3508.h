@@ -7,6 +7,7 @@ extern "C"
 
 #include "can_device.h"
 #include "pid.h"
+#include "motor.h"
 
 #ifdef __cplusplus
 }
@@ -14,7 +15,7 @@ extern "C"
 
 #ifdef __cplusplus
 
-class m3508 : public CanDevice, public pid
+class m3508 : public CanDevice, public pid, public power_motor // 动力电机版本的m3508
 {
 private:
     uint8_t gear_ratio = 1;
@@ -32,6 +33,10 @@ public:
     int16_t vtarget_current = 0;
     float rtarget_angle = 0;
     float target_rpm = 0;
+
+    // 动力电机通用接口
+    float get_rpm();
+    void set_rpm(float power_motor_rpm);
 };
 
 #endif

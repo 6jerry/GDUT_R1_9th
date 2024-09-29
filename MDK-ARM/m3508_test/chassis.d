@@ -1,5 +1,6 @@
-m3508_test/simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.cpp \
-  ..\GDUT_ROBOCON\SIMPLE_TASK.h \
+m3508_test/chassis.o: ..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.cpp \
+  ..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h \
+  ..\GDUT_ROBOCON\HARDWARE\TaskManager.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stddef.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config \
@@ -15,8 +16,10 @@ m3508_test/simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.cpp \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.h \
-  ..\GDUT_ROBOCON\HARDWARE\RC9Protocol.h ..\robocon_robot\crc_util.h \
-  ..\GDUT_ROBOCON\HARDWARE\TaskManager.h \
+  ..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h \
+  ..\GDUT_ROBOCON\HARDWARE\Action.h \
   ..\GDUT_ROBOCON\HARDWARE\Serial_device.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
@@ -49,9 +52,7 @@ m3508_test/simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.cpp \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
   ..\Core\Inc\usart.h ..\Core\Inc\main.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h \
-  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h \
-  G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h \
-  ..\GDUT_ROBOCON\HARDWARE\Action.h \
+  ..\robocon_robot\crc_util.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\math.h \
   G:\Keil_v5\ARM\ARMCLANG\include\math.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\abs.h \
@@ -211,8 +212,4 @@ m3508_test/simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.cpp \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\traits.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\trigonometric_functions.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdlib.h \
-  G:\Keil_v5\ARM\ARMCLANG\include\stdlib.h \
-  ..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h \
-  ..\GDUT_ROBOCON\HARDWARE\can_device.h ..\Core\Inc\can.h \
-  ..\GDUT_ROBOCON\CONTROL\pid.h ..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h \
-  ..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h
+  G:\Keil_v5\ARM\ARMCLANG\include\stdlib.h ..\GDUT_ROBOCON\CONTROL\pid.h

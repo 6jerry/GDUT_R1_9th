@@ -15,6 +15,7 @@ extern "C"
 #include "TaskManager.h"
 #include "Action.h"
 #include "M3508.h"
+#include "chassis.h"
 void create_tasks(void);
 #ifdef __cplusplus
 }

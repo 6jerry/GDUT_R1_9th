@@ -20,7 +20,7 @@ TaskManager::TaskManager()
     tasks[0].Priority = 5;
     tasks[0].delay_ms = 1;
     tasks[1].Priority = 4;
-    tasks[1].delay_ms = 1;
+    tasks[1].delay_ms = 2;
     tasks[2].Priority = 4;
     tasks[2].delay_ms = 5;
     tasks[3].Priority = 3;
@@ -65,7 +65,7 @@ void TaskManager::TaskFunction(void *parameters)
     while (true)
     {
         for (int i = 0; i < tasks[run_taskID].instanceCount; ++i)
-        { // 执行所有实例
+        { // 执行所有实例的任务处理需求
             if (tasks[run_taskID].instances[i])
             {
                 tasks[run_taskID].instances[i]->process_data();

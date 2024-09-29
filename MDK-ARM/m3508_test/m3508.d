@@ -49,4 +49,4 @@ m3508_test/m3508.o: ..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.cpp \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.h \
-  ..\GDUT_ROBOCON\CONTROL\pid.h
+  ..\GDUT_ROBOCON\CONTROL\pid.h ..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h

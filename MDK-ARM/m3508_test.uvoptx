@@ -442,6 +442,11 @@
           <WinNumber>2</WinNumber>
           <ItemText>m3508_left</ItemText>
         </Ww>
+        <Ww>
+          <count>36</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>r1_chassis</ItemText>
+        </Ww>
       </WatchWindow2>
       <MemoryWindow1>
         <Mm>
@@ -1226,6 +1231,30 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\GDUT_ROBOCON\CONTROL\PID.h</PathWithFileName>
       <FilenameWithoutPath>PID.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>57</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.cpp</PathWithFileName>
+      <FilenameWithoutPath>chassis.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>58</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h</PathWithFileName>
+      <FilenameWithoutPath>chassis.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

@@ -37,3 +37,13 @@ float m3508::vangle_to_rangle(uint32_t va)
 {
     return ((float)va / 8191.0f) * 360.0f;
 }
+
+float m3508::get_rpm()
+{
+    return rpm;
+}
+
+void m3508::set_rpm(float power_motor_rpm)
+{
+    target_rpm = power_motor_rpm;
+}
