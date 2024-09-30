@@ -8,7 +8,7 @@ extern "C"
 
     // #include <stm32f4xx_hal_can.h>
     // #include <stm32f407xx.h>
-#include "stm32f4xx_hal.h"
+
 #include <stdbool.h>
 #include "can.h"
 #include "TaskManager.h"

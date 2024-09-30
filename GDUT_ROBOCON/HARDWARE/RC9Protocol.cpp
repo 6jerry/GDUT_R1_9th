@@ -86,7 +86,7 @@ void RC9Protocol::handleReceiveData(uint8_t byte)
                         rx_frame_mat.data.buff_msg[i] = rx_frame_mat.rx_temp_data_mat[i];
                     }
 
-                    publish(rx_frame_mat.frame_id, rx_frame_mat.data.buff_msg, rx_frame_mat.data.msg_get); // 发布数据
+                    publish(rx_frame_mat.frame_id, rx_frame_mat.data_length, rx_frame_mat.data.buff_msg, rx_frame_mat.data.msg_get); // 发布数据
 
                     state_ = WAITING_FOR_HEADER_0;
                 }
@@ -98,7 +98,7 @@ void RC9Protocol::handleReceiveData(uint8_t byte)
                     rx_frame_mat.data.buff_msg[i] = rx_frame_mat.rx_temp_data_mat[i];
                 }
 
-                publish(rx_frame_mat.frame_id, rx_frame_mat.data.buff_msg, rx_frame_mat.data.msg_get);
+                publish(rx_frame_mat.frame_id, rx_frame_mat.data_length, rx_frame_mat.data.buff_msg, rx_frame_mat.data.msg_get);
 
                 state_ = WAITING_FOR_HEADER_0;
             }
@@ -147,14 +147,14 @@ bool RC9Protocol::addsubscriber(RC9Protocol_subscriber *observer)
     return false; // 注册失败，观察者数量已达到上限
 }
 
-void RC9Protocol::publish(uint8_t data_id, const uint8_t *data_char, const float *data_float)
+void RC9Protocol::publish(uint8_t data_id, uint8_t datalenth, const uint8_t *data_char, const float *data_float)
 {
 
     for (int i = 0; i < observerCount_; i++)
     {
         if (observers_[i] != nullptr)
         {
-            observers_[i]->update(data_id, data_char, data_float); // 调用观察者的update方法
+            observers_[i]->update(data_id, datalenth, data_char, data_float); // 调用观察者的update方法
         }
     }
 }

@@ -1,7 +1,10 @@
 m3508_test/m3508.o: ..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.cpp \
   ..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h \
   ..\GDUT_ROBOCON\HARDWARE\can_device.h \
-  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config \
+  G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h ..\Core\Inc\can.h \
+  ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h \
@@ -9,7 +12,6 @@ m3508_test/m3508.o: ..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.cpp \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h \
   ..\Drivers\CMSIS\Include\core_cm4.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdint.h \
-  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config \
   G:\Keil_v5\ARM\ARMCLANG\include\stdint.h \
   G:\STM32_PROJECT\R1_NEW\R1_No2\ -\ 改动\Drivers\CMSIS\Include\cmsis_version.h \
   G:\STM32_PROJECT\R1_NEW\R1_No2\ -\ 改动\Drivers\CMSIS\Include\cmsis_compiler.h \
@@ -35,9 +37,7 @@ m3508_test/m3508.o: ..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.cpp \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
-  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h \
-  G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h ..\Core\Inc\can.h \
-  ..\Core\Inc\main.h ..\GDUT_ROBOCON\HARDWARE\TaskManager.h \
+  ..\GDUT_ROBOCON\HARDWARE\TaskManager.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h \
   ..\Core\Inc\FreeRTOSConfig.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h \

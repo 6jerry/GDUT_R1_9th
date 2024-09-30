@@ -26,7 +26,7 @@ public:
     virtual ~RC9Protocol_subscriber() {}
     void *subtarget = nullptr; // 用来建立双向联系的
     // 接口方法：更新数据
-    virtual void update(uint8_t data_id, const uint8_t *data_char, const float *data_float) = 0;
+    virtual void update(uint8_t data_id, uint8_t data_length, const uint8_t *data_char, const float *data_float) = 0;
 };
 
 typedef struct serial_frame_mat
@@ -68,7 +68,7 @@ private:
     uint8_t sendBuffer_[MAX_DATA_LENGTH_RC9 + 8];
     uint8_t rxIndex_; // 当前接收到的字节的索引
 
-    void publish(uint8_t data_id, const uint8_t *data_char, const float *data_float); // 发布数据
+    void publish(uint8_t data_id, uint8_t datalenth, const uint8_t *data_char, const float *data_float); // 发布数据
 
     bool enableCrcCheck_; // 是否启用 CRC 校验
     RC9Protocol_subscriber *observers_[MAX_SUBSCRIBERS] = {nullptr};

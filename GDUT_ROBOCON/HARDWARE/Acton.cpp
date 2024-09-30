@@ -87,3 +87,14 @@ void action::Update_Action_gl_position(float value[6])
     action_info.pos_x_sum += action_info.delta_pos_x;
     action_info.pos_y_sum += action_info.delta_pos_y;
 }
+
+void action::restart()
+{
+    action_info.pos_z_sum = 0.0f;
+    action_info.pos_x_sum = 0.0f;
+    action_info.pos_y_sum = 0.0f;
+}
+void relocate(float x, float y)
+{
+    
+}

@@ -17,8 +17,8 @@ m3508_test/simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.cpp \
   ..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.h \
   ..\GDUT_ROBOCON\HARDWARE\RC9Protocol.h ..\robocon_robot\crc_util.h \
   ..\GDUT_ROBOCON\HARDWARE\TaskManager.h \
-  ..\GDUT_ROBOCON\HARDWARE\Serial_device.h \
-  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
+  ..\GDUT_ROBOCON\HARDWARE\Serial_device.h ..\Core\Inc\usart.h \
+  ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h \
@@ -47,7 +47,6 @@ m3508_test/simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.cpp \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
-  ..\Core\Inc\usart.h ..\Core\Inc\main.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h \
   G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h \
@@ -215,4 +214,5 @@ m3508_test/simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.cpp \
   ..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h \
   ..\GDUT_ROBOCON\HARDWARE\can_device.h ..\Core\Inc\can.h \
   ..\GDUT_ROBOCON\CONTROL\pid.h ..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h \
-  ..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h
+  ..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h \
+  ..\GDUT_ROBOCON\CONTROL\xbox.h

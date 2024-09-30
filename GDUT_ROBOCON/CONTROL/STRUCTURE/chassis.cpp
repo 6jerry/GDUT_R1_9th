@@ -9,7 +9,7 @@ Chassis_mode chassis::get_mode()
     return chassis_mode;
 }
 bool chassis::setrobotv(float rx, float ry, float w)
-{ 
+{
     input_w = w;
     if (chassis_mode == remote_robotv)
     {
@@ -98,6 +98,7 @@ void omni3_unusual::process_data()
     case chassis_standby:
         target_rvx = 0.0f;
         target_rvy = 0.0f;
+        
         break;
     case remote_robotv:
         target_rvx = input_rvx;
@@ -126,7 +127,7 @@ void omni3_unusual::process_data()
         target_w = input_w;
     }
 
-    motors[0]->set_rpm(v_to_rpm(-target_rvx + 0.20024f * target_w));
+    motors[0]->set_rpm(-v_to_rpm(-target_rvx + 0.20024f * target_w));
     motors[1]->set_rpm(v_to_rpm(target_w * 0.3149f + 0.6712f * target_rvx - target_rvy * 0.7412f));
     motors[2]->set_rpm(v_to_rpm(target_w * 0.3149f + 0.6712f * target_rvx + target_rvy * 0.7412f));
 }

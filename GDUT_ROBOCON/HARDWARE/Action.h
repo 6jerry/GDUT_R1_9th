@@ -106,6 +106,8 @@ public:
     action(UART_HandleTypeDef *huart, float install_delta_x, float install_delta_y);
     action_frame rx_action_frame;
     pose_data_ pose_data;
+    void restart();
+    void relocate(float x, float y);
 };
 
 #endif

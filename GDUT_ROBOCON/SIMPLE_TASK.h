@@ -16,6 +16,7 @@ extern "C"
 #include "Action.h"
 #include "M3508.h"
 #include "chassis.h"
+#include "xbox.h"
 void create_tasks(void);
 #ifdef __cplusplus
 }
