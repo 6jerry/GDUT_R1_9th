@@ -71,7 +71,7 @@ uint8_t DataBuff_for4[200];
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-//void MX_FREERTOS_Init(void);
+// void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -134,12 +134,11 @@ int main(void)
 
   /* Init scheduler */
   osKernelInitialize();
-
+  create_tasks();
   /* Call init function for freertos objects (in freertos.c) */
-  //MX_FREERTOS_Init();
+  // MX_FREERTOS_Init();
 
   /* Start scheduler */
-  create_tasks();
   // osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
@@ -219,7 +218,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   {
     HAL_IncTick();
   }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
 }
+
 /**
  * @brief  This function is executed in case of error occurrence.
  * @retval None

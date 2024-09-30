@@ -20,7 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
 #include "task.h"
-//#include "main.h"
+#include "main.h"
 #include "cmsis_os.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -55,30 +55,30 @@ unsigned char Laser_Flag = 0;
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
-    .name = "defaultTask",
-    .stack_size = 128 * 4,
-    .priority = (osPriority_t)osPriorityNormal,
+  .name = "defaultTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for motor_control */
 osThreadId_t motor_controlHandle;
 const osThreadAttr_t motor_control_attributes = {
-    .name = "motor_control",
-    .stack_size = 128 * 4,
-    .priority = (osPriority_t)osPriorityLow,
+  .name = "motor_control",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
 };
 /* Definitions for robot_state */
 osThreadId_t robot_stateHandle;
 const osThreadAttr_t robot_state_attributes = {
-    .name = "robot_state",
-    .stack_size = 128 * 4,
-    .priority = (osPriority_t)osPriorityLow,
+  .name = "robot_state",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
 };
 /* Definitions for robot_move */
 osThreadId_t robot_moveHandle;
 const osThreadAttr_t robot_move_attributes = {
-    .name = "robot_move",
-    .stack_size = 128 * 4,
-    .priority = (osPriority_t)osPriorityLow,
+  .name = "robot_move",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -94,52 +94,52 @@ void RobotMove(void *argument);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
- * @brief  FreeRTOS initialization
- * @param  None
- * @retval None
- */
-void MX_FREERTOS_Init(void)
-{
-    /* USER CODE BEGIN Init */
+  * @brief  FreeRTOS initialization
+  * @param  None
+  * @retval None
+  */
+void MX_FREERTOS_Init(void) {
+  /* USER CODE BEGIN Init */
 
-    /* USER CODE END Init */
+  /* USER CODE END Init */
 
-    /* USER CODE BEGIN RTOS_MUTEX */
+  /* USER CODE BEGIN RTOS_MUTEX */
     /* add mutexes, ... */
-    /* USER CODE END RTOS_MUTEX */
+  /* USER CODE END RTOS_MUTEX */
 
-    /* USER CODE BEGIN RTOS_SEMAPHORES */
+  /* USER CODE BEGIN RTOS_SEMAPHORES */
     /* add semaphores, ... */
-    /* USER CODE END RTOS_SEMAPHORES */
+  /* USER CODE END RTOS_SEMAPHORES */
 
-    /* USER CODE BEGIN RTOS_TIMERS */
+  /* USER CODE BEGIN RTOS_TIMERS */
     /* start timers, add new ones, ... */
-    /* USER CODE END RTOS_TIMERS */
+  /* USER CODE END RTOS_TIMERS */
 
-    /* USER CODE BEGIN RTOS_QUEUES */
+  /* USER CODE BEGIN RTOS_QUEUES */
     /* add queues, ... */
-    /* USER CODE END RTOS_QUEUES */
+  /* USER CODE END RTOS_QUEUES */
 
-    /* Create the thread(s) */
-    /* creation of defaultTask */
-    defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  /* Create the thread(s) */
+  /* creation of defaultTask */
+  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
-    /* creation of motor_control */
-    motor_controlHandle = osThreadNew(MotorControl, NULL, &motor_control_attributes);
+  /* creation of motor_control */
+  motor_controlHandle = osThreadNew(MotorControl, NULL, &motor_control_attributes);
 
-    /* creation of robot_state */
-    robot_stateHandle = osThreadNew(RobotState, NULL, &robot_state_attributes);
+  /* creation of robot_state */
+  robot_stateHandle = osThreadNew(RobotState, NULL, &robot_state_attributes);
 
-    /* creation of robot_move */
-    robot_moveHandle = osThreadNew(RobotMove, NULL, &robot_move_attributes);
+  /* creation of robot_move */
+  robot_moveHandle = osThreadNew(RobotMove, NULL, &robot_move_attributes);
 
-    /* USER CODE BEGIN RTOS_THREADS */
+  /* USER CODE BEGIN RTOS_THREADS */
     /* add threads, ... */
-    /* USER CODE END RTOS_THREADS */
+  /* USER CODE END RTOS_THREADS */
 
-    /* USER CODE BEGIN RTOS_EVENTS */
+  /* USER CODE BEGIN RTOS_EVENTS */
     /* add events, ... */
-    /* USER CODE END RTOS_EVENTS */
+  /* USER CODE END RTOS_EVENTS */
+
 }
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -151,7 +151,7 @@ void MX_FREERTOS_Init(void)
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
 {
-    /* USER CODE BEGIN StartDefaultTask */
+  /* USER CODE BEGIN StartDefaultTask */
     float move_time_counter = 0;
     /* Infinite loop */
     for (;;)
@@ -185,7 +185,7 @@ void StartDefaultTask(void *argument)
         vTaskDelay(10);
     }
 
-    /* USER CODE END StartDefaultTask */
+  /* USER CODE END StartDefaultTask */
 }
 
 /* USER CODE BEGIN Header_MotorControl */
@@ -197,7 +197,7 @@ void StartDefaultTask(void *argument)
 /* USER CODE END Header_MotorControl */
 void MotorControl(void *argument)
 {
-    /* USER CODE BEGIN MotorControl */
+  /* USER CODE BEGIN MotorControl */
     /* Infinite loop */
     for (;;)
     {
@@ -217,7 +217,7 @@ void MotorControl(void *argument)
         //  send_serial_frame_mat(&huart2, 0x01, 8, test_msgss);
         vTaskDelay(10);
     }
-    /* USER CODE END MotorControl */
+  /* USER CODE END MotorControl */
 }
 
 /* USER CODE BEGIN Header_RobotState */
@@ -229,7 +229,7 @@ void MotorControl(void *argument)
 /* USER CODE END Header_RobotState */
 void RobotState(void *argument)
 {
-    /* USER CODE BEGIN RobotState */
+  /* USER CODE BEGIN RobotState */
     /* Infinite loop */
     for (;;)
     {
@@ -256,7 +256,7 @@ void RobotState(void *argument)
         //	ZONE2_FSM();
         vTaskDelay(5);
     }
-    /* USER CODE END RobotState */
+  /* USER CODE END RobotState */
 }
 
 /* USER CODE BEGIN Header_RobotMove */
@@ -268,7 +268,7 @@ void RobotState(void *argument)
 /* USER CODE END Header_RobotMove */
 void RobotMove(void *argument)
 {
-    /* USER CODE BEGIN RobotMove */
+  /* USER CODE BEGIN RobotMove */
     //	static portTickType move_xLastWakeTime;
     //	const portTickType move_xFrequency = pdMS_TO_TICKS(10); // ùù?10ms
     /* Infinite loop */
@@ -291,10 +291,11 @@ void RobotMove(void *argument)
         vTaskDelay(1);
         // vTaskDelayUntil(&move_xLastWakeTime, move_xFrequency); // ùùùùùù?
     }
-    /* USER CODE END RobotMove */
+  /* USER CODE END RobotMove */
 }
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
+
