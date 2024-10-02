@@ -1,7 +1,7 @@
 Dependencies for Project 'm3508_test', Target 'm3508_test': (DO NOT MODIFY !)
 CompilerVersion: 6210000::V6.21::ARMCLANG
 F (startup_stm32f407xx.s)(0x66FCCAF7)(--cpu Cortex-M4.fp.sp -g --diag_suppress=A1950W -I ../Core/Inc-I.\RTE\_m3508_test-IG:\Keil_v5\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IG:\Keil_v5\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 539"--pd "_RTE_ SETA 1"--pd "STM32F407xx SETA 1"--pd "_RTE_ SETA 1"--list startup_stm32f407xx.lst--xref -o m3508_test\startup_stm32f407xx.o--depend m3508_test\startup_stm32f407xx.d)
-F (../Core/Src/main.c)(0x66FCCB28)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/main.o -MD)
+F (../Core/Src/main.c)(0x66FCCF9A)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/main.o -MD)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x6678AA10)
 I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x66D9DA36)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x6678AA10)
@@ -39,7 +39,7 @@ I (..\Core\Inc\FreeRTOSConfig.h)(0x66D9DA36)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
@@ -48,17 +48,17 @@ I (..\Core\Inc\can.hi.\Core\Inc\dma.hS.\Core\Inc\tim.h)(0x00000000)
 I (..\Core\Inc\usart.h\.\Core\Inc\gpio.h)(0x00000000)
 I (G:\Keil_v5\ARM\ARMCLANG\include\string.he\GDUT_ROBOCON\SIMPLE_TASK.h)(0x00000000)
 I (..\GDUT_ROBOCON\HARDWARE\RC9Protocol.h..\robocon_robot\crc_util.h)(0x00000000)
-I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66F6C05E)
-I (..\GDUT_ROBOCON\HARDWARE\Serial_device.h)(0x66F95EEE)
+I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66FCCDDC)
+I (..\GDUT_ROBOCON\HARDWARE\Serial_device.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6569B012)
-I (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FA1B46)
+I (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FCCDDC)
 I (G:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x6569B012)
-I (..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h)(0x66FCC233)
+I (..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h)(0x66FCCDDC)
 I (..\GDUT_ROBOCON\HARDWARE\can_device.hh.\GDUT_ROBOCON\CONTROL\pid.h)(0x00000000)
-I (..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h)(0x66F8E493)
-I (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h)(0x66FCC7AE)
-I (..\GDUT_ROBOCON\CONTROL\xbox.h)(0x66FA358B)
+I (..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h)(0x66FCCDDC)
+I (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h)(0x66FCCDDC)
+I (..\GDUT_ROBOCON\CONTROL\xbox.h)(0x66FCCDDC)
 F (../Core/Src/gpio.c)(0x66E83AAA)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/gpio.o -MD)
 I (..\Core\Inc\main.hN.\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x00000000)
 I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x66D9DA36)
@@ -91,7 +91,7 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x6678AA10)
-F (../Core/Src/can.c)(0x66FA734A)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/can.o -MD)
+F (../Core/Src/can.c)(0x66FCCDDC)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/can.o -MD)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x6678AA10)
 I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x66D9DA36)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x6678AA10)
@@ -187,7 +187,7 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x6678AA10)
-F (../Core/Src/usart.c)(0x66FCCAF5)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/usart.o -MD)
+F (../Core/Src/usart.c)(0x66FCD16B)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/usart.o -MD)
 I (..\Core\Inc\main.hc.\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x00000000)
 I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x66D9DA36)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x6678AA10)
@@ -219,7 +219,7 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x6678AA10)
-F (../Core/Src/stm32f4xx_it.c)(0x66FCCAF5)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/stm32f4xx_it.o -MD)
+F (../Core/Src/stm32f4xx_it.c)(0x66FCCDDC)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/stm32f4xx_it.o -MD)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x6678AA10)
 I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x66D9DA36)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x6678AA10)
@@ -903,7 +903,7 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
@@ -916,7 +916,7 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
@@ -930,7 +930,7 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
 F (../Middlewares/Third_Party/FreeRTOS/Source/queue.c)(0x6678AA12)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/queue.o -MD)
@@ -942,7 +942,7 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
@@ -955,7 +955,7 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stddef.hc\Core\Inc\FreeRTOSConfig.h)(0x000000
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
@@ -969,7 +969,7 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
@@ -983,7 +983,7 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
@@ -1001,7 +1001,7 @@ I (..\Core\Inc\FreeRTOSConfig.h)(0x66D9DA36)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
@@ -1047,23 +1047,23 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
-F (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/port.c)(0x6678AA12)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/port.o -MD)
+F (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/port.c)(0x66FCCDDC)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -Ofast -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/port.o -MD)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stddef.h)(0x6569B012)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
-F (..\GDUT_ROBOCON\HARDWARE\TaskManager.cpp)(0x66F918E1)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/taskmanager.o -MD)
-I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66F6C05E)
+F (..\GDUT_ROBOCON\HARDWARE\TaskManager.cpp)(0x66FCCDDC)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/taskmanager.o -MD)
+I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stddef.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config)(0x6569B00C)
@@ -1073,7 +1073,7 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.ht\Core\Inc\FreeRTOSConfig.h)(0x000000
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
@@ -1113,20 +1113,20 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x6678AA10)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6569B012)
-F (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66F6C05E)()
-F (..\GDUT_ROBOCON\HARDWARE\RC9Protocol.cpp)(0x66F9698E)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/rc9protocol.o -MD)
+F (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66FCCDDC)()
+F (..\GDUT_ROBOCON\HARDWARE\RC9Protocol.cpp)(0x66FCCDDC)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/rc9protocol.o -MD)
 I (..\GDUT_ROBOCON\HARDWARE\RC9Protocol.hp.\robocon_robot\crc_util.h)(0x00000000)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdint.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config)(0x6569B00C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
-I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66F6C05E)
+I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stddef.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stddef.ht\Core\Inc\FreeRTOSConfig.h)(0x00000000)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
@@ -1165,9 +1165,9 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x6678AA10)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6569B012)
-F (..\GDUT_ROBOCON\HARDWARE\RC9Protocol.h)(0x66F968A0)()
-F (..\GDUT_ROBOCON\HARDWARE\Serial_device.cpp)(0x66F6AEFB)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/serial_device.o -MD)
-I (..\GDUT_ROBOCON\HARDWARE\Serial_device.h)(0x66F95EEE)
+F (..\GDUT_ROBOCON\HARDWARE\RC9Protocol.h)(0x66FCCDDC)()
+F (..\GDUT_ROBOCON\HARDWARE\Serial_device.cpp)(0x66FCCDDC)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/serial_device.o -MD)
+I (..\GDUT_ROBOCON\HARDWARE\Serial_device.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stddef.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config)(0x6569B00C)
@@ -1177,7 +1177,7 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.ht\Core\Inc\FreeRTOSConfig.h)(0x000000
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Core\Inc\usart.hd.\Core\Inc\main.h)(0x00000000)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x6678AA10)
@@ -1216,9 +1216,9 @@ I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os.h)(0x6678AA
 I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdbool.hd\robocon_robot\crc_util.h)(0x00000000)
-F (..\GDUT_ROBOCON\HARDWARE\Serial_device.h)(0x66F95EEE)()
-F (..\GDUT_ROBOCON\SIMPLE_TASK.cpp)(0x66FCCB7E)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/simple_task.o -MD)
-I (..\GDUT_ROBOCON\SIMPLE_TASK.h)(0x66FA3701)
+F (..\GDUT_ROBOCON\HARDWARE\Serial_device.h)(0x66FCCDDC)()
+F (..\GDUT_ROBOCON\SIMPLE_TASK.cpp)(0x66FCD1BC)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/simple_task.o -MD)
+I (..\GDUT_ROBOCON\SIMPLE_TASK.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stddef.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config)(0x6569B00C)
@@ -1228,14 +1228,14 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.ht\Core\Inc\FreeRTOSConfig.h)(0x000000
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.h)(0x6678AA12)
 I (..\GDUT_ROBOCON\HARDWARE\RC9Protocol.hu.\robocon_robot\crc_util.h)(0x00000000)
-I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66F6C05E)
+I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66FCCDDC)
 I (..\GDUT_ROBOCON\HARDWARE\Serial_device.h\.\Core\Inc\usart.h)(0x00000000)
 I (..\Core\Inc\main.hR.\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x00000000)
 I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x66D9DA36)
@@ -1269,7 +1269,7 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x6678AA10)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6569B012)
-I (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FA1B46)
+I (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FCCDDC)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\math.h)(0x6569B010)
 I (G:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x6569B012)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\abs.h)(0x6569B004)
@@ -1430,16 +1430,16 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\traits.h)(0x6569B004)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\trigonometric_functions.h)(0x6569B004)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdlib.h)(0x6569B010)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x6569B012)
-I (..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h)(0x66FCC233)
+I (..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h)(0x66FCCDDC)
 I (..\GDUT_ROBOCON\HARDWARE\can_device.hh.\Core\Inc\can.h)(0x00000000)
 I (..\GDUT_ROBOCON\CONTROL\pid.hd.\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h)(0x00000000)
-I (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h)(0x66FCC7AE)
-I (..\GDUT_ROBOCON\CONTROL\xbox.h)(0x66FA358B)
-F (..\GDUT_ROBOCON\SIMPLE_TASK.h)(0x66FA3701)()
-F (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FA1B46)()
-F (..\GDUT_ROBOCON\HARDWARE\Acton.cpp)(0x66FA1BD3)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/acton.o -MD)
-I (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FA1B46)
-I (..\GDUT_ROBOCON\HARDWARE\Serial_device.h)(0x66F95EEE)
+I (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h)(0x66FCCDDC)
+I (..\GDUT_ROBOCON\CONTROL\xbox.h)(0x66FCCDDC)
+F (..\GDUT_ROBOCON\SIMPLE_TASK.h)(0x66FCCDDC)()
+F (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FCCDDC)()
+F (..\GDUT_ROBOCON\HARDWARE\Acton.cpp)(0x66FCCDDC)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/acton.o -MD)
+I (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FCCDDC)
+I (..\GDUT_ROBOCON\HARDWARE\Serial_device.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stddef.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config)(0x6569B00C)
@@ -1449,7 +1449,7 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.ht\Core\Inc\FreeRTOSConfig.h)(0x000000
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Core\Inc\usart.hd.\Core\Inc\main.h)(0x00000000)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x6678AA10)
@@ -1648,8 +1648,8 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\traits.h)(0x6569B004)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\trigonometric_functions.h)(0x6569B004)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdlib.h)(0x6569B010)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x6569B012)
-F (..\GDUT_ROBOCON\HARDWARE\can_device.cpp)(0x66F90774)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/can_device.o -MD)
-I (..\GDUT_ROBOCON\HARDWARE\can_device.h)(0x66F95EF5)
+F (..\GDUT_ROBOCON\HARDWARE\can_device.cpp)(0x66FCCDDC)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/can_device.o -MD)
+I (..\GDUT_ROBOCON\HARDWARE\can_device.h)(0x66FCCDDC)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config)(0x6569B00C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdbool.hc\Core\Inc\can.h)(0x00000000)
@@ -1686,22 +1686,22 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x6678AA10)
-I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66F6C05E)
+I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x6678AA12)
 I (..\Core\Inc\FreeRTOSConfig.h)(0x66D9DA36)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.h)(0x6678AA12)
-F (..\GDUT_ROBOCON\HARDWARE\can_device.h)(0x66F95EF5)()
-F (..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.cpp)(0x66F81B56)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/m3508.o -MD)
-I (..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h)(0x66FCC233)
-I (..\GDUT_ROBOCON\HARDWARE\can_device.h)(0x66F95EF5)
+F (..\GDUT_ROBOCON\HARDWARE\can_device.h)(0x66FCCDDC)()
+F (..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.cpp)(0x66FCCDDC)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/m3508.o -MD)
+I (..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h)(0x66FCCDDC)
+I (..\GDUT_ROBOCON\HARDWARE\can_device.h)(0x66FCCDDC)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config)(0x6569B00C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdbool.hc\Core\Inc\can.h)(0x00000000)
@@ -1738,29 +1738,29 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x6678AA10)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x6678AA10)
-I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66F6C05E)
+I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x6678AA12)
 I (..\Core\Inc\FreeRTOSConfig.h)(0x66D9DA36)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.h)(0x6678AA12)
 I (..\GDUT_ROBOCON\CONTROL\pid.he.\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h)(0x00000000)
-F (..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h)(0x66FCC233)()
-F (..\GDUT_ROBOCON\CONTROL\PID.cpp)(0x66F7EB3F)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/pid.o -MD)
-I (..\GDUT_ROBOCON\CONTROL\pid.h)(0x66F7E508)
+F (..\GDUT_ROBOCON\HARDWARE\MOTOR\M3508.h)(0x66FCCDDC)()
+F (..\GDUT_ROBOCON\CONTROL\PID.cpp)(0x66FCCDDC)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/pid.o -MD)
+I (..\GDUT_ROBOCON\CONTROL\pid.h)(0x66FCCDDC)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config)(0x6569B00C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6569B012)
-F (..\GDUT_ROBOCON\CONTROL\PID.h)(0x66F7E508)()
-F (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.cpp)(0x66FCC7FE)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/chassis.o -MD)
-I (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h)(0x66FCC7AE)
-I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66F6C05E)
+F (..\GDUT_ROBOCON\CONTROL\PID.h)(0x66FCCDDC)()
+F (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.cpp)(0x66FCCDDC)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/chassis.o -MD)
+I (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h)(0x66FCCDDC)
+I (..\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stddef.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config)(0x6569B00C)
@@ -1770,16 +1770,16 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.ht\Core\Inc\FreeRTOSConfig.h)(0x000000
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.h)(0x6678AA12)
-I (..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h)(0x66F8E493)
+I (..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h)(0x66FCCDDC)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6569B012)
-I (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FA1B46)
+I (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FCCDDC)
 I (..\GDUT_ROBOCON\HARDWARE\Serial_device.hh.\Core\Inc\usart.h)(0x00000000)
 I (..\Core\Inc\main.hR.\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x00000000)
 I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x66D9DA36)
@@ -1972,8 +1972,8 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\traits.h)(0x6569B004)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\trigonometric_functions.h)(0x6569B004)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdlib.h)(0x6569B010)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdlib.ht\GDUT_ROBOCON\CONTROL\pid.h)(0x00000000)
-F (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h)(0x66FCC7AE)()
-F (..\GDUT_ROBOCON\CONTROL\xbox.cpp)(0x66FCC773)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/xbox.o -MD)
+F (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h)(0x66FCCDDC)()
+F (..\GDUT_ROBOCON\CONTROL\xbox.cpp)(0x66FCDD1C)(-xc++ -std=gnu++17 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar -fno-exceptions-gdwarf-4 -Ofast -ffunction-sections -w -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../robocon_robot -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../GDUT_ROBOCON -I ../GDUT_ROBOCON/HARDWARE -I ../GDUT_ROBOCON/HARDWARE/MOTOR -I ../GDUT_ROBOCON/CONTROL -I ../GDUT_ROBOCON/CONTROL/STRUCTURE-I./RTE/_m3508_test-IG:/Keil_v5/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IG:/Keil_v5/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DUSE_STDPERIPH_DRIVER-o m3508_test/xbox.o -MD)
 I (..\GDUT_ROBOCON\CONTROL\xbox.hp.\GDUT_ROBOCON\HARDWARE\TaskManager.h)(0x00000000)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stddef.h)(0x64F9642C)
@@ -1984,7 +1984,7 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\stdint.ht\Core\Inc\FreeRTOSConfig.h)(0x000000
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h)(0x6678AA12)
-I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x6678AA12)
+I (..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x66FCCDDC)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h)(0x6678AA12)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h)(0x6678AA12)
@@ -2024,9 +2024,9 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x6678AA10)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h)(0x6678AA12)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h)(0x64F9642C)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6569B012)
-I (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h)(0x66FCC7AE)
-I (..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h)(0x66F8E493)
-I (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FA1B46)
+I (..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h)(0x66FCCDDC)
+I (..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h)(0x66FCCDDC)
+I (..\GDUT_ROBOCON\HARDWARE\Action.h)(0x66FCCDDC)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\math.h)(0x6569B010)
 I (G:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x6569B012)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\abs.h)(0x6569B004)
@@ -2187,4 +2187,4 @@ I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\traits.h)(0x6569B004)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\trigonometric_functions.h)(0x6569B004)
 I (G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdlib.h)(0x6569B010)
 I (G:\Keil_v5\ARM\ARMCLANG\include\stdlib.ht\GDUT_ROBOCON\CONTROL\pid.h)(0x00000000)
-F (..\GDUT_ROBOCON\CONTROL\xbox.h)(0x66FA358B)()
+F (..\GDUT_ROBOCON\CONTROL\xbox.h)(0x66FCCDDC)()

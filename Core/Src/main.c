@@ -136,8 +136,9 @@ int main(void)
   osKernelInitialize();
 
   /* Call init function for freertos objects (in freertos.c) */
-
+  /* USER CODE BEGIN 3 */
   create_tasks();
+  /* USER CODE END 3 */
   /* Start scheduler */
   // osKernelStart();
 

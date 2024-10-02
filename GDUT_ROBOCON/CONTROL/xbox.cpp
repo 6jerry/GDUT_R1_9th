@@ -165,7 +165,7 @@ void xbox::chassis_control()
     if (world_robot_flag == 1 && robot_stop_flag == 0)
     {
         control_chassis->switch_chassis_mode(remote_worldv);
-        control_chassis->setworldv(MAX_ROBOT_SPEED_X * xbox_msgs.joyLHori_map, MAX_ROBOT_SPEED_X * xbox_msgs.joyLHori_map, -MAX_ROBOT_SPEED_W * xbox_msgs.joyRHori_map);
+        control_chassis->setworldv(MAX_ROBOT_SPEED_X * xbox_msgs.joyLHori_map, MAX_ROBOT_SPEED_Y * xbox_msgs.joyLVert_map, -MAX_ROBOT_SPEED_W * xbox_msgs.joyRHori_map);
     }
     if (robot_stop_flag == 1)
     {
