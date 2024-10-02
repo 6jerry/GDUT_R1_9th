@@ -24,7 +24,7 @@ private:
     float vangle_to_rangle(uint32_t va);
 
 public:
-    m3508(uint8_t can_id, CAN_HandleTypeDef *hcan_, uint8_t gear_ratio = 1, float kp_ = 16.5f, float ki_ = 0.19f, float kd_ = 2.6f);
+    m3508(uint8_t can_id, CAN_HandleTypeDef *hcan_, uint8_t gear_ratio = 19, float kp_ = 16.5f, float ki_ = 0.19f, float kd_ = 2.6f);
     void can_update(uint8_t can_RxData[8]);
     int16_t m3508_process() override;
     float rangle = 0;

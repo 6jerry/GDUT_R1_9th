@@ -41,6 +41,7 @@ public:
     Chassis_mode chassis_mode = chassis_standby;
     virtual float v_to_rpm(float v) = 0;
     float input_rvx = 0.0f, input_rvy = 0.0f, input_wvx = 0.0f, input_wvy = 0.0f, input_w = 0.0f, target_heading_rad = 0.0f, target_wx = 0.0f, target_wy = 0.0f, target_rvx = 0.0f, target_rvy = 0.0f, target_w = 0.0f;
+    uint8_t if_first_lock = 0;
     pid heading_pid;
     action *ACTION = nullptr;
     bool if_lock_heading = false; // 是否锁死朝向
@@ -58,8 +59,8 @@ public:
     chassis(ChassisType chassistype_, action *ACTION_, float headingkp, float headingki, float headingkd);
     void worldv_to_robotv();
 };
-
-class omni3_unusual : public ITaskProcessor, public chassis // 九期r1异形三轮全向轮底盘，需要三个动力电机和一个定位器
+// 钻石三轮全向轮底盘，通常以钻石那个尖角为车头,典型车体:九期r1
+class omni3_unusual : public ITaskProcessor, public chassis
 {
 private:
     power_motor *motors[3] = {nullptr};
@@ -70,6 +71,20 @@ private:
 public:
     omni3_unusual(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, action *ACTION_, float headingkp, float headingki, float headingkd);
 
+    void process_data();
+};
+
+// 常规三轮全向轮底盘，通常以一个电机为车头的朝向，典型车体：九期r2
+class omni3 : public ITaskProcessor, public chassis
+{
+private:
+    power_motor *motors[3] = {nullptr};
+
+    float v_to_rpm(float v);
+    float Rwheel = 0.0719;
+
+public:
+    omni3(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, action *ACTION_, float headingkp, float headingki, float headingkd);
     void process_data();
 };
 

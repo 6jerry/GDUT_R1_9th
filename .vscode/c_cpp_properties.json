@@ -14,7 +14,8 @@
                 "${workspaceFolder}/Drivers/STM32F4xx_HAL_Driver/Inc/legacy",
                 "G:/Keil_v5/ARM/ARMCC/include",
                 "G:/STM32_PROJECT/R1_No2 - 改动/Drivers/STM32F4xx_HAL_Driver/Inc/",
-                "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F"
+                "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F",
+                "${workspaceFolder}/robocon_robot"
             ],
             "compilerPath": "D:/program/mingw/bin/gcc.exe",
             "cStandard": "${default}",

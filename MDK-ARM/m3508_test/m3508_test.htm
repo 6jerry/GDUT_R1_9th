@@ -3,7 +3,7 @@
 <title>Static Call Graph - [m3508_test\m3508_test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image m3508_test\m3508_test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Mon Sep 30 17:47:30 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Wed Oct  2 12:26:55 2024
 <BR><P>
 <H3>Maximum Stack Usage =        188 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -113,7 +113,7 @@ Function Pointers
  <LI><a href="#[38]">TIM8_CC_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[37]">TIM8_TRG_COM_TIM14_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[36]">TIM8_UP_TIM13_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
- <LI><a href="#[3e]">UART4_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
+ <LI><a href="#[3e]">UART4_IRQHandler</a> from stm32f4xx_it.o(.text.UART4_IRQHandler) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[3f]">UART5_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[5d]">UART_DMAAbortOnError</a> from stm32f4xx_hal_uart.o(.text.UART_DMAAbortOnError) referenced 2 times from stm32f4xx_hal_uart.o(.text.HAL_UART_IRQHandler)
  <LI><a href="#[2f]">USART1_IRQHandler</a> from stm32f4xx_it.o(.text.USART1_IRQHandler) referenced from startup_stm32f407xx.o(RESET)
@@ -523,9 +523,6 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
 <P><STRONG><a name="[36]"></a>TIM8_UP_TIM13_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f407xx.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
-</UL>
-<P><STRONG><a name="[3e]"></a>UART4_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f407xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
 <P><STRONG><a name="[3f]"></a>UART5_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f407xx.o(.text))
@@ -1218,7 +1215,8 @@ Global Symbols
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_TxCpltCallback
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Receive_IT
 </UL>
-<BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART3_IRQHandler
+<BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART4_IRQHandler
+<LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART3_IRQHandler
 <LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
 </UL>
 
@@ -1235,7 +1233,7 @@ Global Symbols
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
 </UL>
 
-<P><STRONG><a name="[e3]"></a>HAL_UART_MspInit</STRONG> (Thumb, 736 bytes, Stack size 56 bytes, usart.o(.text.HAL_UART_MspInit))
+<P><STRONG><a name="[e3]"></a>HAL_UART_MspInit</STRONG> (Thumb, 752 bytes, Stack size 56 bytes, usart.o(.text.HAL_UART_MspInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = HAL_UART_MspInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
@@ -1438,6 +1436,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Init
 </UL>
 
+<P><STRONG><a name="[3e]"></a>UART4_IRQHandler</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_it.o(.text.UART4_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = UART4_IRQHandler &rArr; HAL_UART_IRQHandler &rArr; HAL_UART_ErrorCallback &rArr; HAL_UART_AbortReceive &rArr; HAL_DMA_Abort
+</UL>
+<BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_IRQHandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
+</UL>
 <P><STRONG><a name="[2f]"></a>USART1_IRQHandler</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_it.o(.text.USART1_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = USART1_IRQHandler &rArr; HAL_UART_IRQHandler &rArr; HAL_UART_ErrorCallback &rArr; HAL_UART_AbortReceive &rArr; HAL_DMA_Abort
 </UL>
@@ -1591,9 +1596,9 @@ Global Symbols
 <P><STRONG><a name="[6d]"></a>omni3_unusual::process_data()</STRONG> (Thumb, 312 bytes, Stack size 56 bytes, chassis.o(.text._ZN13omni3_unusual12process_dataEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 92<LI>Call Chain = omni3_unusual::process_data() &rArr; __hardfp_sinf &rArr; __mathlib_rredf2
 </UL>
-<BR>[Calls]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid::PID_Compute(float)
-<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sinf
+<BR>[Calls]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sinf
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cosf
+<LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid::PID_Compute(float)
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> chassis.o(.rodata._ZTV13omni3_unusual)
 </UL>
@@ -1708,11 +1713,11 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xbox::chassis_control()
 </UL>
 
-<P><STRONG><a name="[116]"></a>chassis::lock()</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, chassis.o(.text._ZN7chassis4lockEv))
+<P><STRONG><a name="[116]"></a>chassis::lock()</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, chassis.o(.text._ZN7chassis4lockEv))
 <BR><BR>[Called By]<UL><LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xbox::chassis_control()
 </UL>
 
-<P><STRONG><a name="[118]"></a>chassis::unlock()</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, chassis.o(.text._ZN7chassis6unlockEv))
+<P><STRONG><a name="[118]"></a>chassis::unlock()</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, chassis.o(.text._ZN7chassis6unlockEv))
 <BR><BR>[Called By]<UL><LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xbox::chassis_control()
 </UL>
 
@@ -1748,8 +1753,8 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> xbox.o(.rodata._ZTV8xbox_r1n)
 </UL>
 <P><STRONG><a name="[73]"></a>CanDevice::m2006_process()</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, can_device.o(.text._ZN9CanDevice13m2006_processEv))
-<BR>[Address Reference Count : 2]<UL><LI> m3508.o(.rodata._ZTV5m3508)
-<LI> can_device.o(.rodata._ZTV9CanDevice)
+<BR>[Address Reference Count : 2]<UL><LI> can_device.o(.rodata._ZTV9CanDevice)
+<LI> m3508.o(.rodata._ZTV5m3508)
 </UL>
 <P><STRONG><a name="[81]"></a>CanDevice::m3508_process()</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, can_device.o(.text._ZN9CanDevice13m3508_processEv))
 <BR>[Address Reference Count : 1]<UL><LI> can_device.o(.rodata._ZTV9CanDevice)

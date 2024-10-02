@@ -58,11 +58,16 @@ void chassis::lock_to(float heading)
 void chassis::lock()
 {
     if_lock_heading = true;
-    target_heading_rad = ACTION->pose_data.yaw_rad;
+    if (if_first_lock == 0)
+    {
+        target_heading_rad = ACTION->pose_data.yaw_rad;
+        if_first_lock = 1;
+    }
 }
 void chassis::unlock()
 {
     if_lock_heading = false;
+    if_first_lock = 0;
 }
 float chassis::get_track_state()
 {
@@ -98,7 +103,7 @@ void omni3_unusual::process_data()
     case chassis_standby:
         target_rvx = 0.0f;
         target_rvy = 0.0f;
-        
+
         break;
     case remote_robotv:
         target_rvx = input_rvx;
@@ -130,4 +135,58 @@ void omni3_unusual::process_data()
     motors[0]->set_rpm(-v_to_rpm(-target_rvx + 0.20024f * target_w));
     motors[1]->set_rpm(v_to_rpm(target_w * 0.3149f + 0.6712f * target_rvx - target_rvy * 0.7412f));
     motors[2]->set_rpm(v_to_rpm(target_w * 0.3149f + 0.6712f * target_rvx + target_rvy * 0.7412f));
+}
+
+float omni3::v_to_rpm(float v)
+{
+    float rpm = v / Rwheel / (2 * PI) * 60;
+    return rpm;
+}
+omni3::omni3(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, action *ACTION_, float headingkp, float headingki, float headingkd) : chassis(omni3_unusual_, ACTION_, headingkp, headingki, headingkd)
+{
+    motors[0] = front_motor;
+    motors[1] = right_motor;
+    motors[2] = left_motor; // 顺时针安装
+}
+void omni3::process_data()
+{
+    // 底盘内置小型状态机
+
+    switch (chassis_mode)
+    {
+    case chassis_standby:
+        target_rvx = 0.0f;
+        target_rvy = 0.0f;
+
+        break;
+    case remote_robotv:
+        target_rvx = input_rvx;
+        target_rvy = input_rvy;
+        break;
+    case remote_worldv:
+        worldv_to_robotv();
+        break;
+    case point_track_standby:
+
+        break;
+    case point_tracking:
+
+        break;
+    default:
+
+        break;
+    }
+    if (if_lock_heading)
+    {
+        heading_pid.setpoint = target_heading_rad;
+        target_w = heading_pid.PID_Compute(ACTION->pose_data.yaw_rad);
+    }
+    else
+    {
+        target_w = input_w;
+    }
+
+    motors[0]->set_rpm(v_to_rpm(-target_rvx + 0.17305f * target_w));
+    motors[1]->set_rpm(v_to_rpm(target_w * 0.17305f + 0.5f * target_rvx - target_rvy * 0.866f));
+    motors[2]->set_rpm(v_to_rpm(target_w * 0.17305f + 0.5f * target_rvx + target_rvy * 0.866f));
 }

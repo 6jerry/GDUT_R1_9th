@@ -40,6 +40,7 @@ void xbox::detectButtonEdge(bool currentBtnState, bool *lastBtnState, uint8_t *t
     if (currentBtnState && !(*lastBtnState))
     { // 检测到上升沿
         *toggleState = (*toggleState + 1) % (maxState + 1);
+
         // locking_heading = ROBOT_REAL_POS_DATA.POS_YAW_RAD;
     }
     *lastBtnState = currentBtnState;
