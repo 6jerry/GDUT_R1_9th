@@ -78,17 +78,17 @@ void chassis::worldv_to_robotv()
     target_rvx = cos(ACTION->pose_data.yaw_rad) * input_wvx + sin(ACTION->pose_data.yaw_rad) * input_wvy;
     target_rvy = cos(ACTION->pose_data.yaw_rad) * input_wvy - sin(ACTION->pose_data.yaw_rad) * input_wvx;
 }
-chassis::chassis(ChassisType chassistype_, action *ACTION_, float headingkp, float headingki, float headingkd) : chassistype(chassistype_), heading_pid(headingkp, headingki, headingkd, 100000.0f, 5.0f, 0.01f, 0.5f), ACTION(ACTION_)
+chassis::chassis(ChassisType chassistype_, float Rwheel_, action *ACTION_, float headingkp, float headingki, float headingkd) : chassistype(chassistype_), heading_pid(headingkp, headingki, headingkd, 100000.0f, 5.0f, 0.01f, 0.5f), ACTION(ACTION_), Rwheel(Rwheel_)
 {
 }
 
-float omni3_unusual ::v_to_rpm(float v)
+float chassis ::v_to_rpm(float v)
 {
     float rpm = v / Rwheel / (2 * PI) * 60;
     return rpm;
 }
 
-omni3_unusual::omni3_unusual(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, action *ACTION_, float headingkp, float headingki, float headingkd) : chassis(omni3_unusual_, ACTION_, headingkp, headingki, headingkd)
+omni3_unusual::omni3_unusual(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, float Rwheel_, action *ACTION_, float headingkp, float headingki, float headingkd) : chassis(omni3_unusual_, Rwheel_, ACTION_, headingkp, headingki, headingkd)
 {
     motors[0] = front_motor;
     motors[1] = right_motor;
@@ -137,16 +137,13 @@ void omni3_unusual::process_data()
     motors[2]->set_rpm(v_to_rpm(target_w * 0.3149f + 0.6712f * target_rvx + target_rvy * 0.7412f));
 }
 
-float omni3::v_to_rpm(float v)
-{
-    float rpm = v / Rwheel / (2 * PI) * 60;
-    return rpm;
-}
-omni3::omni3(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, action *ACTION_, float headingkp, float headingki, float headingkd) : chassis(omni3_unusual_, ACTION_, headingkp, headingki, headingkd)
+omni3::omni3(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, float Rwheel_, float CHASSIS_R_, action *ACTION_, float headingkp, float headingki, float headingkd) : chassis(omni3_unusual_, Rwheel_, ACTION_, headingkp, headingki, headingkd)
 {
     motors[0] = front_motor;
     motors[1] = right_motor;
     motors[2] = left_motor; // 顺时针安装
+
+    CHASSIS_R = CHASSIS_R_;
 }
 void omni3::process_data()
 {
@@ -186,7 +183,59 @@ void omni3::process_data()
         target_w = input_w;
     }
 
-    motors[0]->set_rpm(v_to_rpm(-target_rvx + 0.17305f * target_w));
-    motors[1]->set_rpm(v_to_rpm(target_w * 0.17305f + 0.5f * target_rvx - target_rvy * 0.866f));
-    motors[2]->set_rpm(v_to_rpm(target_w * 0.17305f + 0.5f * target_rvx + target_rvy * 0.866f));
+    motors[0]->set_rpm(v_to_rpm(-target_rvx + CHASSIS_R * target_w));
+    motors[1]->set_rpm(v_to_rpm(target_w * CHASSIS_R + 0.5f * target_rvx - target_rvy * 0.866f));
+    motors[2]->set_rpm(v_to_rpm(target_w * CHASSIS_R + 0.5f * target_rvx + target_rvy * 0.866f));
+}
+omni4::omni4(power_motor *right_front_motor, power_motor *right_back_motor, power_motor *left_back_motor, power_motor *left_front_motor, float Rwheel_, float CHASSIS_R_, action *ACTION_, float headingkp, float headingki, float headingkd) : chassis(omni4_, Rwheel_, ACTION_, headingkp, headingki, headingkd)
+{
+    motors[0] = right_front_motor;
+    motors[1] = right_back_motor;
+    motors[2] = left_back_motor;
+    motors[3] = left_front_motor;
+
+    CHASSIS_R = CHASSIS_R_;
+}
+void omni4::process_data()
+{
+    // 底盘内置小型状态机
+
+    switch (chassis_mode)
+    {
+    case chassis_standby:
+        target_rvx = 0.0f;
+        target_rvy = 0.0f;
+
+        break;
+    case remote_robotv:
+        target_rvx = input_rvx;
+        target_rvy = input_rvy;
+        break;
+    case remote_worldv:
+        worldv_to_robotv();
+        break;
+    case point_track_standby:
+
+        break;
+    case point_tracking:
+
+        break;
+    default:
+
+        break;
+    }
+    if (if_lock_heading)
+    {
+        heading_pid.setpoint = target_heading_rad;
+        target_w = heading_pid.PID_Compute(ACTION->pose_data.yaw_rad);
+    }
+    else
+    {
+        target_w = input_w;
+    }
+
+    motors[0]->set_rpm(v_to_rpm(-target_rvx * 0.70710678f - target_rvy * 0.70710678f + CHASSIS_R * target_w));
+    motors[1]->set_rpm(v_to_rpm(target_w * CHASSIS_R + 0.70710678f * target_rvx - target_rvy * 0.70710678f));
+    motors[2]->set_rpm(v_to_rpm(target_w * CHASSIS_R + 0.70710678f * target_rvx + target_rvy * 0.70710678f));
+    motors[3]->set_rpm(v_to_rpm(target_w * CHASSIS_R - 0.70710678f * target_rvx + target_rvy * 0.70710678f));
 }

@@ -39,7 +39,6 @@ class chassis // 基类，也是底盘的通用控制接口
 public:
     ChassisType chassistype;
     Chassis_mode chassis_mode = chassis_standby;
-    virtual float v_to_rpm(float v) = 0;
     float input_rvx = 0.0f, input_rvy = 0.0f, input_wvx = 0.0f, input_wvy = 0.0f, input_w = 0.0f, target_heading_rad = 0.0f, target_wx = 0.0f, target_wy = 0.0f, target_rvx = 0.0f, target_rvy = 0.0f, target_w = 0.0f;
     uint8_t if_first_lock = 0;
     pid heading_pid;
@@ -48,16 +47,20 @@ public:
     void unlock();
     void lock();
     void lock_to(float heading);
+    float Rwheel = 0.0719f;
+    float CHASSIS_R = 0.0f;
 
 public:
-    void switch_chassis_mode(Chassis_mode target_mode);
+    void
+    switch_chassis_mode(Chassis_mode target_mode);
     Chassis_mode get_mode();
     bool setrobotv(float rx, float ry, float w); // 机器人坐标遥控函数,只有当前底盘处于机器人坐标遥控模式才有效
     bool setworldv(float wx, float wy, float w);
     bool setpoint(float x, float y);
     float get_track_state();
-    chassis(ChassisType chassistype_, action *ACTION_, float headingkp, float headingki, float headingkd);
+    chassis(ChassisType chassistype_, float Rwheel_, action *ACTION_, float headingkp, float headingki, float headingkd);
     void worldv_to_robotv();
+    float v_to_rpm(float v);
 };
 // 钻石三轮全向轮底盘，通常以钻石那个尖角为车头,典型车体:九期r1
 class omni3_unusual : public ITaskProcessor, public chassis
@@ -65,12 +68,10 @@ class omni3_unusual : public ITaskProcessor, public chassis
 private:
     power_motor *motors[3] = {nullptr};
 
-    float v_to_rpm(float v);
-    float Rwheel = 0.0719;
+    // float Rwheel = 0.0719;
 
 public:
-    omni3_unusual(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, action *ACTION_, float headingkp, float headingki, float headingkd);
-
+    omni3_unusual(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, float Rwheel_, action *ACTION_, float headingkp = 7.0f, float headingki = 0.0f, float headingkd = 0.7f);
     void process_data();
 };
 
@@ -80,11 +81,23 @@ class omni3 : public ITaskProcessor, public chassis
 private:
     power_motor *motors[3] = {nullptr};
 
-    float v_to_rpm(float v);
-    float Rwheel = 0.0719;
+    // float v_to_rpm(float v);
+    // float Rwheel = 0.0719;
 
 public:
-    omni3(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, action *ACTION_, float headingkp, float headingki, float headingkd);
+    omni3(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, float Rwheel_, float CHASSIS_R_, action *ACTION_, float headingkp, float headingki, float headingkd);
+    void process_data();
+};
+
+// 常规四轮全向轮底盘，典型车体：八期r2
+
+class omni4 : public ITaskProcessor, public chassis
+{
+private:
+    power_motor *motors[4] = {nullptr};
+
+public:
+    omni4(power_motor *right_front_motor, power_motor *right_back_motor, power_motor *left_back_motor, power_motor *left_front_motor, float Rwheel_, float CHASSIS_R_, action *ACTION_, float headingkp, float headingki, float headingkd);
     void process_data();
 };
 
