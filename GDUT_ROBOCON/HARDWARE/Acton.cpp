@@ -1,6 +1,6 @@
 #include "Action.h"
 
-action::action(UART_HandleTypeDef *huart, float install_delta_x, float install_delta_y) : SerialDevice(huart), state_(WAITING_FOR_HEADER_0), rxIndex_(0)
+action::action(UART_HandleTypeDef *huart, float install_delta_x, float install_delta_y, bool if_inverse_install_) : SerialDevice(huart), state_(WAITING_FOR_HEADER_0), rxIndex_(0), if_inverse_install(if_inverse_install_)
 {
     action_install_pos.delta_x = install_delta_x;
     action_install_pos.delta_y = install_delta_y;
@@ -82,7 +82,9 @@ void action::Update_Action_gl_position(float value[6])
     action_info.delta_pos_z = action_info.now_pos_z - action_info.last_pos_z;
 
     action_info.pos_z_sum += action_info.delta_pos_z;
+
     pose_data.yaw_angle = -action_info.pos_z_sum;
+
     pose_data.yaw_rad = pose_data.yaw_angle * 0.01745f;
     action_info.pos_x_sum += action_info.delta_pos_x;
     action_info.pos_y_sum += action_info.delta_pos_y;
@@ -96,5 +98,4 @@ void action::restart()
 }
 void relocate(float x, float y)
 {
-    
 }

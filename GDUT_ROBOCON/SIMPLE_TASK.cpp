@@ -15,21 +15,25 @@ xbox_r1n r1_remote(&Action, &r1_chassis);
 */
 
 /*九期r2
-m3508 m3508_front(1, &hcan1), m3508_left(3, &hcan1), m3508_right(2, &hcan1);//九期r2，硬件连接：三只m3508作为底盘动力电机位于can1
+RC9Protocol esp32_serial(&huart1, false);
+m3508 m3508_front(1, &hcan1), m3508_left(3, &hcan1), m3508_right(2, &hcan1); // 九期r2，硬件连接：三只m3508作为底盘动力电机位于can1
 TaskManager task_core;
 CanManager can_core;
-action Action(&huart3, 0, 0);
-omni3 r2n_chassis(&m3508_front, &m3508_right, &m3508_left, &Action, 7.0f, 0.0f, 0.7f);
+action Action(&huart3, 0, 0, true);
+omni3 r2n_chassis(&m3508_front, &m3508_right, &m3508_left, 0.0719f, 0.406f, &Action, 7.0f, 0.0f, 0.7f);
+xbox_r1n r2_remote(&Action, &r2n_chassis);
 */
 
+/*八期r1
 RC9Protocol esp32_serial(&huart1, false);
 m3508 m3508_right_front(2, &hcan1), m3508_right_back(1, &hcan1), m3508_left_front(3, &hcan1), m3508_left_back(4, &hcan1);
-action Action(&huart4, 0, 0);
+action Action(&huart4, 0, 0, false);
 TaskManager task_core;
 CanManager can_core;
 
 omni4 r1e_chassis(&m3508_right_front, &m3508_right_back, &m3508_left_back, &m3508_left_front, 0.076f, 0.40f, &Action, 6.0f, 0.0f, 0.7f);
 xbox_r1n r1_remote(&Action, &r1e_chassis);
+*/
 
 extern "C" void create_tasks(void)
 {
@@ -47,14 +51,17 @@ extern "C" void create_tasks(void)
     */
 
     /*九期r2
-     can_core.init();
-     r2n_chassis.switch_chassis_mode(remote_robotv);
-     r2n_chassis.unlock();
-     r2n_chassis.setrobotv(0, 0, 0.5);
-     task_core.registerTask(0, &can_core);
-     task_core.registerTask(3, &r2n_chassis);
-     */
+    can_core.init();
+    Action.startUartReceiveIT();
+    esp32_serial.startUartReceiveIT();
+    esp32_serial.addsubscriber(&r2_remote);
+    r2n_chassis.setrobotv(0, 0, 0.5);
+    task_core.registerTask(0, &can_core);
+    task_core.registerTask(3, &r2n_chassis);
+    task_core.registerTask(2, &r2_remote);
+    */
 
+    /*八期r1
     can_core.init();
     Action.startUartReceiveIT();
     esp32_serial.startUartReceiveIT();
@@ -63,6 +70,7 @@ extern "C" void create_tasks(void)
     task_core.registerTask(0, &can_core);
     task_core.registerTask(3, &r1e_chassis);
     task_core.registerTask(2, &r1_remote);
+    */
 
     osKernelStart();
 }

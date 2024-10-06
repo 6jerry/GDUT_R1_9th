@@ -99,11 +99,12 @@ private:
     uint8_t rxIndex_; // 当前数据字节索引
     action_info_ action_info;
     action_install_pos_ action_install_pos;
+    bool if_inverse_install = false; // action是不是反着装的，专门给九期r2打的补丁，服了
 
 public:
     void Update_Action_gl_position(float value[6]);
     void handleReceiveData(uint8_t byte);
-    action(UART_HandleTypeDef *huart, float install_delta_x, float install_delta_y);
+    action(UART_HandleTypeDef *huart, float install_delta_x, float install_delta_y, bool if_inverse_install_);
     action_frame rx_action_frame;
     pose_data_ pose_data;
     void restart();

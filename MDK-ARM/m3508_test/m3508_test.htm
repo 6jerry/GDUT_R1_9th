@@ -3,7 +3,7 @@
 <title>Static Call Graph - [m3508_test\m3508_test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image m3508_test\m3508_test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Thu Oct  3 14:30:52 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Sun Oct  6 21:52:22 2024
 <BR><P>
 <H3>Maximum Stack Usage =        188 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -133,14 +133,14 @@ Function Pointers
  <LI><a href="#[6d]">ITaskProcessor::~ITaskProcessor__deallocating()</a> from chassis.o(.text._ZN14ITaskProcessorD0Ev) referenced from chassis.o(.rodata._ZTV14ITaskProcessor)
  <LI><a href="#[63]">ITaskProcessor::~ITaskProcessor__sub_object()</a> from can_device.o(.text._ZN14ITaskProcessorD2Ev) referenced from can_device.o(.rodata._ZTV10CanManager)
  <LI><a href="#[63]">ITaskProcessor::~ITaskProcessor__sub_object()</a> from can_device.o(.text._ZN14ITaskProcessorD2Ev) referenced from chassis.o(.rodata._ZTV14ITaskProcessor)
- <LI><a href="#[63]">ITaskProcessor::~ITaskProcessor__sub_object()</a> from can_device.o(.text._ZN14ITaskProcessorD2Ev) referenced from chassis.o(.rodata._ZTV5omni4)
+ <LI><a href="#[63]">ITaskProcessor::~ITaskProcessor__sub_object()</a> from can_device.o(.text._ZN14ITaskProcessorD2Ev) referenced from chassis.o(.rodata._ZTV5omni3)
  <LI><a href="#[7a]">xbox::update(unsigned char, unsigned char, unsigned char const*, float const*)</a> from xbox.o(.text._ZN4xbox6updateEhhPKhPKf) referenced from xbox.o(.rodata._ZTV8xbox_r1n)
  <LI><a href="#[70]">m3508::can_update(unsigned char*)</a> from m3508.o(.text._ZN5m350810can_updateEPh) referenced from m3508.o(.rodata._ZTV5m3508)
  <LI><a href="#[6e]">m3508::m3508_process()</a> from m3508.o(.text._ZN5m350813m3508_processEv) referenced from m3508.o(.rodata._ZTV5m3508)
  <LI><a href="#[71]">m3508::get_rpm()</a> from m3508.o(.text._ZN5m35087get_rpmEv) referenced from m3508.o(.rodata._ZTV5m3508)
  <LI><a href="#[72]">m3508::set_rpm(float)</a> from m3508.o(.text._ZN5m35087set_rpmEf) referenced from m3508.o(.rodata._ZTV5m3508)
- <LI><a href="#[75]">omni4::process_data()</a> from chassis.o(.text._ZN5omni412process_dataEv) referenced from chassis.o(.rodata._ZTV5omni4)
- <LI><a href="#[76]">omni4::~omni4__deallocating()</a> from chassis.o(.text._ZN5omni4D0Ev) referenced from chassis.o(.rodata._ZTV5omni4)
+ <LI><a href="#[75]">omni3::process_data()</a> from chassis.o(.text._ZN5omni312process_dataEv) referenced from chassis.o(.rodata._ZTV5omni3)
+ <LI><a href="#[76]">omni3::~omni3__deallocating()</a> from chassis.o(.text._ZN5omni3D0Ev) referenced from chassis.o(.rodata._ZTV5omni3)
  <LI><a href="#[77]">action::handleReceiveData(unsigned char)</a> from acton.o(.text._ZN6action17handleReceiveDataEh) referenced from acton.o(.rodata._ZTV6action)
  <LI><a href="#[7b]">xbox_r1n::process_data()</a> from xbox.o(.text._ZN8xbox_r1n12process_dataEv) referenced from xbox.o(.rodata._ZTV8xbox_r1n)
  <LI><a href="#[79]">xbox_r1n::~xbox_r1n__deallocating()</a> from xbox.o(.text._ZN8xbox_r1nD0Ev) referenced from xbox.o(.rodata._ZTV8xbox_r1n)
@@ -569,7 +569,7 @@ Global Symbols
 <P><STRONG><a name="[176]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, aeabi_memset4.o(.text), UNUSED)
 
 <P><STRONG><a name="[11b]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;action::action(__UART_HandleTypeDef*, float, float)
+<BR><BR>[Called By]<UL><LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;action::action(__UART_HandleTypeDef*, float, float, bool)
 </UL>
 
 <P><STRONG><a name="[177]"></a>__rt_memclr</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr.o(.text), UNUSED)
@@ -579,8 +579,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[109]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr_w.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni4::omni4(power_motor*, power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;action::action(__UART_HandleTypeDef*, float, float)
+<BR><BR>[Called By]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni3::omni3(power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)
+<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;action::action(__UART_HandleTypeDef*, float, float, bool)
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RC9Protocol::RC9Protocol(__UART_HandleTypeDef*, bool)
 </UL>
 
@@ -1500,7 +1500,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_tasks
 </UL>
 
-<P><STRONG><a name="[fd]"></a>CanManager::CanManager()</STRONG> (Thumb, 76 bytes, Stack size 0 bytes, can_device.o(.text._ZN10CanManagerC2Ev))
+<P><STRONG><a name="[fc]"></a>CanManager::CanManager()</STRONG> (Thumb, 76 bytes, Stack size 0 bytes, can_device.o(.text._ZN10CanManagerC2Ev))
 <BR><BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_GLOBAL__sub_I_SIMPLE_TASK.cpp
 </UL>
 
@@ -1569,7 +1569,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_tasks
 </UL>
 
-<P><STRONG><a name="[fc]"></a>TaskManager::TaskManager()</STRONG> (Thumb, 272 bytes, Stack size 8 bytes, taskmanager.o(.text._ZN11TaskManagerC2Ev))
+<P><STRONG><a name="[fb]"></a>TaskManager::TaskManager()</STRONG> (Thumb, 272 bytes, Stack size 8 bytes, taskmanager.o(.text._ZN11TaskManagerC2Ev))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TaskManager::TaskManager()
 </UL>
 <BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_GLOBAL__sub_I_SIMPLE_TASK.cpp
@@ -1586,7 +1586,7 @@ Global Symbols
 <P><STRONG><a name="[108]"></a>SerialDevice::SerialDevice__sub_object(__UART_HandleTypeDef*)</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, serial_device.o(.text._ZN12SerialDeviceC2EP20__UART_HandleTypeDef))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SerialDevice::SerialDevice__sub_object(__UART_HandleTypeDef*)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;action::action(__UART_HandleTypeDef*, float, float)
+<BR>[Called By]<UL><LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;action::action(__UART_HandleTypeDef*, float, float, bool)
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RC9Protocol::RC9Protocol(__UART_HandleTypeDef*, bool)
 </UL>
 
@@ -1595,16 +1595,16 @@ Global Symbols
 </UL>
 <P><STRONG><a name="[63]"></a>ITaskProcessor::~ITaskProcessor__sub_object()</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, can_device.o(.text._ZN14ITaskProcessorD2Ev))
 <BR>[Address Reference Count : 3]<UL><LI> can_device.o(.rodata._ZTV10CanManager)
-<LI> chassis.o(.rodata._ZTV5omni4)
+<LI> chassis.o(.rodata._ZTV5omni3)
 <LI> chassis.o(.rodata._ZTV14ITaskProcessor)
 </UL>
 <P><STRONG><a name="[115]"></a>pid::PID_Compute(float)</STRONG> (Thumb, 312 bytes, Stack size 0 bytes, pid.o(.text._ZN3pid11PID_ComputeEf))
 <BR><BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;m3508::m3508_process()
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni4::process_data()
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni3::process_data()
 </UL>
 
 <P><STRONG><a name="[11a]"></a>pid::pid(float, float, float, float, float, float, float)</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, pid.o(.text._ZN3pidC2Efffffff))
-<BR><BR>[Called By]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni4::omni4(power_motor*, power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)
+<BR><BR>[Called By]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni3::omni3(power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)
 </UL>
 
 <P><STRONG><a name="[117]"></a>pid::pid__sub_object(float, float, float, float, float, float, float)</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, pid.o(.text._ZN3pidC2Efffffff))
@@ -1615,10 +1615,10 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = xbox::chassis_control()
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;action::restart()
+<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassis::setrobotv(float, float, float)
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassis::unlock()
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassis::lock()
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassis::setworldv(float, float, float)
-<LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassis::setrobotv(float, float, float)
 <LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassis::switch_chassis_mode(Chassis_mode)
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;non-virtual thunk to xbox_r1n::process_data()
@@ -1655,18 +1655,18 @@ Global Symbols
 
 <P><STRONG><a name="[18a]"></a>m3508::m3508__sub_object(unsigned char, CAN_HandleTypeDef*, unsigned char, float, float, float)</STRONG> (Thumb, 112 bytes, Stack size 40 bytes, m3508.o(.text._ZN5m3508C2EhP17CAN_HandleTypeDefhfff), UNUSED)
 
-<P><STRONG><a name="[75]"></a>omni4::process_data()</STRONG> (Thumb, 380 bytes, Stack size 48 bytes, chassis.o(.text._ZN5omni412process_dataEv))
-<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = omni4::process_data() &rArr; __hardfp_sinf &rArr; __mathlib_rredf2
+<P><STRONG><a name="[75]"></a>omni3::process_data()</STRONG> (Thumb, 328 bytes, Stack size 48 bytes, chassis.o(.text._ZN5omni312process_dataEv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = omni3::process_data() &rArr; __hardfp_sinf &rArr; __mathlib_rredf2
 </UL>
 <BR>[Calls]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sinf
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cosf
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid::PID_Compute(float)
 </UL>
-<BR>[Address Reference Count : 1]<UL><LI> chassis.o(.rodata._ZTV5omni4)
+<BR>[Address Reference Count : 1]<UL><LI> chassis.o(.rodata._ZTV5omni3)
 </UL>
-<P><STRONG><a name="[fe]"></a>omni4::omni4(power_motor*, power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)</STRONG> (Thumb, 176 bytes, Stack size 80 bytes, chassis.o(.text._ZN5omni4C2EP11power_motorS1_S1_S1_ffP6actionfff))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80 + Unknown Stack Size
-<LI>Call Chain = omni4::omni4(power_motor*, power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)
+<P><STRONG><a name="[fe]"></a>omni3::omni3(power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)</STRONG> (Thumb, 172 bytes, Stack size 72 bytes, chassis.o(.text._ZN5omni3C2EP11power_motorS1_S1_ffP6actionfff))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72 + Unknown Stack Size
+<LI>Call Chain = omni3::omni3(power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid::pid(float, float, float, float, float, float, float)
@@ -1674,14 +1674,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_GLOBAL__sub_I_SIMPLE_TASK.cpp
 </UL>
 
-<P><STRONG><a name="[18b]"></a>omni4::omni4__sub_object(power_motor*, power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)</STRONG> (Thumb, 176 bytes, Stack size 80 bytes, chassis.o(.text._ZN5omni4C2EP11power_motorS1_S1_S1_ffP6actionfff), UNUSED)
+<P><STRONG><a name="[18b]"></a>omni3::omni3__sub_object(power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)</STRONG> (Thumb, 172 bytes, Stack size 72 bytes, chassis.o(.text._ZN5omni3C2EP11power_motorS1_S1_ffP6actionfff), UNUSED)
 
-<P><STRONG><a name="[76]"></a>omni4::~omni4__deallocating()</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, chassis.o(.text._ZN5omni4D0Ev))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = omni4::~omni4__deallocating() &rArr; operator delete(void*, unsigned int) &rArr; operator delete(void*) &rArr; free
+<P><STRONG><a name="[76]"></a>omni3::~omni3__deallocating()</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, chassis.o(.text._ZN5omni3D0Ev))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = omni3::~omni3__deallocating() &rArr; operator delete(void*, unsigned int) &rArr; operator delete(void*) &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;operator delete(void*, unsigned int)
 </UL>
-<BR>[Address Reference Count : 1]<UL><LI> chassis.o(.rodata._ZTV5omni4)
+<BR>[Address Reference Count : 1]<UL><LI> chassis.o(.rodata._ZTV5omni3)
 </UL>
 <P><STRONG><a name="[77]"></a>action::handleReceiveData(unsigned char)</STRONG> (Thumb, 284 bytes, Stack size 0 bytes, acton.o(.text._ZN6action17handleReceiveDataEh))
 <BR>[Address Reference Count : 1]<UL><LI> acton.o(.rodata._ZTV6action)
@@ -1690,9 +1690,9 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xbox::chassis_control()
 </UL>
 
-<P><STRONG><a name="[fb]"></a>action::action(__UART_HandleTypeDef*, float, float)</STRONG> (Thumb, 88 bytes, Stack size 32 bytes, acton.o(.text._ZN6actionC2EP20__UART_HandleTypeDefff))
+<P><STRONG><a name="[fd]"></a>action::action(__UART_HandleTypeDef*, float, float, bool)</STRONG> (Thumb, 108 bytes, Stack size 32 bytes, acton.o(.text._ZN6actionC2EP20__UART_HandleTypeDefffb))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40 + Unknown Stack Size
-<LI>Call Chain = action::action(__UART_HandleTypeDef*, float, float) &rArr; SerialDevice::SerialDevice__sub_object(__UART_HandleTypeDef*)
+<LI>Call Chain = action::action(__UART_HandleTypeDef*, float, float, bool) &rArr; SerialDevice::SerialDevice__sub_object(__UART_HandleTypeDef*)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialDevice::SerialDevice__sub_object(__UART_HandleTypeDef*)
 <LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
@@ -1701,7 +1701,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_GLOBAL__sub_I_SIMPLE_TASK.cpp
 </UL>
 
-<P><STRONG><a name="[18c]"></a>action::action__sub_object(__UART_HandleTypeDef*, float, float)</STRONG> (Thumb, 88 bytes, Stack size 32 bytes, acton.o(.text._ZN6actionC2EP20__UART_HandleTypeDefff), UNUSED)
+<P><STRONG><a name="[18c]"></a>action::action__sub_object(__UART_HandleTypeDef*, float, float, bool)</STRONG> (Thumb, 108 bytes, Stack size 32 bytes, acton.o(.text._ZN6actionC2EP20__UART_HandleTypeDefffb), UNUSED)
 
 <P><STRONG><a name="[111]"></a>chassis::switch_chassis_mode(Chassis_mode)</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, chassis.o(.text._ZN7chassis19switch_chassis_modeE12Chassis_mode))
 <BR><BR>[Called By]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xbox::chassis_control()
@@ -1716,7 +1716,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[113]"></a>chassis::setrobotv(float, float, float)</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, chassis.o(.text._ZN7chassis9setrobotvEfff))
-<BR><BR>[Called By]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xbox::chassis_control()
+<BR><BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_tasks
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xbox::chassis_control()
 </UL>
 
 <P><STRONG><a name="[114]"></a>chassis::setworldv(float, float, float)</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, chassis.o(.text._ZN7chassis9setworldvEfff))
@@ -1818,7 +1819,7 @@ Global Symbols
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RC9Protocol::~RC9Protocol__deallocating()
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;non-virtual thunk to xbox_r1n::~xbox_r1n__deallocating()
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xbox_r1n::~xbox_r1n__deallocating()
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni4::~omni4__deallocating()
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni3::~omni3__deallocating()
 </UL>
 
 <P><STRONG><a name="[6c]"></a>__cxa_pure_virtual</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, cxa_virtual.cpp.o(.text.__cxa_pure_virtual))
@@ -1840,10 +1841,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__cxa_pure_virtual
 </UL>
 
-<P><STRONG><a name="[11e]"></a>create_tasks</STRONG> (Thumb, 110 bytes, Stack size 24 bytes, simple_task.o(.text.create_tasks))
+<P><STRONG><a name="[11e]"></a>create_tasks</STRONG> (Thumb, 132 bytes, Stack size 24 bytes, simple_task.o(.text.create_tasks))
 <BR><BR>[Stack]<UL><LI>Max Depth = 188<LI>Call Chain = create_tasks &rArr; osKernelStart &rArr; vTaskStartScheduler &rArr; xTimerCreateTimerTask &rArr; xTaskCreateStatic &rArr; prvInitialiseNewTask &rArr; __aeabi_memset4 &rArr; _memset_w
 </UL>
-<BR>[Calls]<UL><LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CanManager::init()
+<BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassis::setrobotv(float, float, float)
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CanManager::init()
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SerialDevice::startUartReceiveIT()
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RC9Protocol::addsubscriber(RC9Protocol_subscriber*)
 <LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TaskManager::registerTask(int, ITaskProcessor*)
@@ -2251,7 +2253,7 @@ Global Symbols
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_infnan
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 </UL>
-<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni4::process_data()
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni3::process_data()
 </UL>
 
 <P><STRONG><a name="[119]"></a>__hardfp_sinf</STRONG> (Thumb, 344 bytes, Stack size 16 bytes, sinf.o(i.__hardfp_sinf))
@@ -2264,7 +2266,7 @@ Global Symbols
 <LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassifyf
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 </UL>
-<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni4::process_data()
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni3::process_data()
 </UL>
 
 <P><STRONG><a name="[14b]"></a>__mathlib_flt_infnan</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, funder.o(i.__mathlib_flt_infnan))
@@ -2402,17 +2404,17 @@ Local Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xPortStartScheduler
 </UL>
 
-<P><STRONG><a name="[80]"></a>_GLOBAL__sub_I_SIMPLE_TASK.cpp</STRONG> (Thumb, 324 bytes, Stack size 56 bytes, simple_task.o(.text._GLOBAL__sub_I_SIMPLE_TASK.cpp))
-<BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
-<LI>Call Chain = _GLOBAL__sub_I_SIMPLE_TASK.cpp &rArr; omni4::omni4(power_motor*, power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)
+<P><STRONG><a name="[80]"></a>_GLOBAL__sub_I_SIMPLE_TASK.cpp</STRONG> (Thumb, 292 bytes, Stack size 56 bytes, simple_task.o(.text._GLOBAL__sub_I_SIMPLE_TASK.cpp))
+<BR><BR>[Stack]<UL><LI>Max Depth = 132 + Unknown Stack Size
+<LI>Call Chain = _GLOBAL__sub_I_SIMPLE_TASK.cpp &rArr; m3508::m3508(unsigned char, CAN_HandleTypeDef*, unsigned char, float, float, float) &rArr; CanDevice::CanDevice__sub_object(CanDeviceType, CAN_HandleTypeDef*, unsigned char)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xbox_r1n::xbox_r1n(action*, chassis*, float, float, float)
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni4::omni4(power_motor*, power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)
-<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CanManager::CanManager()
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;action::action(__UART_HandleTypeDef*, float, float)
+<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;omni3::omni3(power_motor*, power_motor*, power_motor*, float, float, action*, float, float, float)
+<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;action::action(__UART_HandleTypeDef*, float, float, bool)
+<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CanManager::CanManager()
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;m3508::m3508(unsigned char, CAN_HandleTypeDef*, unsigned char, float, float, float)
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RC9Protocol::RC9Protocol(__UART_HandleTypeDef*, bool)
-<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TaskManager::TaskManager()
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TaskManager::TaskManager()
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> simple_task.o(.init_array)
 </UL><P>
