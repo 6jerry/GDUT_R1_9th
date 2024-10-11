@@ -1,11 +1,17 @@
-m3508_test/motor.o: ..\robocon_robot\motor.c ..\robocon_robot\motor.h \
-  ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
+m3508_test/motor.o: ..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.cpp \
+  ..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h \
+  ..\GDUT_ROBOCON\HARDWARE\can_device.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__config \
+  G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h ..\Core\Inc\can.h \
+  ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h \
   ..\Drivers\CMSIS\Include\core_cm4.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdint.h \
   G:\Keil_v5\ARM\ARMCLANG\include\stdint.h \
   G:\STM32_PROJECT\R1_NEW\R1_No2\ -\ 改动\Drivers\CMSIS\Include\cmsis_version.h \
   G:\STM32_PROJECT\R1_NEW\R1_No2\ -\ 改动\Drivers\CMSIS\Include\cmsis_compiler.h \
@@ -13,6 +19,7 @@ m3508_test/motor.o: ..\robocon_robot\motor.c ..\robocon_robot\motor.h \
   G:\STM32_PROJECT\R1_NEW\R1_No2\ -\ 改动\Drivers\CMSIS\Include\mpu_armv7.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stddef.h \
   G:\Keil_v5\ARM\ARMCLANG\include\stddef.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h \
@@ -30,6 +37,15 @@ m3508_test/motor.o: ..\robocon_robot\motor.c ..\robocon_robot\motor.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
-  ..\robocon_robot\pid.h ..\robocon_robot\new_pid.h \
-  ..\robocon_robot\MoveBase.h ..\robocon_robot\hardware.h \
-  ..\Core\Inc\main.h ..\Core\Inc\can.h ..\robocon_robot\pid_adjust.h
+  ..\GDUT_ROBOCON\HARDWARE\TaskManager.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h \
+  ..\Core\Inc\FreeRTOSConfig.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.h

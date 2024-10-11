@@ -17,10 +17,9 @@ m3508_test/chassis.o: ..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.cpp \
   ..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.h \
   ..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h \
+  ..\GDUT_ROBOCON\HARDWARE\can_device.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdbool.h \
-  G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h \
-  ..\GDUT_ROBOCON\HARDWARE\Action.h \
-  ..\GDUT_ROBOCON\HARDWARE\Serial_device.h ..\Core\Inc\usart.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h ..\Core\Inc\can.h \
   ..\Core\Inc\main.h ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
@@ -50,6 +49,8 @@ m3508_test/chassis.o: ..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.cpp \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
+  ..\GDUT_ROBOCON\HARDWARE\Action.h \
+  ..\GDUT_ROBOCON\HARDWARE\Serial_device.h ..\Core\Inc\usart.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h \
   ..\robocon_robot\crc_util.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\math.h \

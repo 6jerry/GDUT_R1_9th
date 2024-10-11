@@ -51,6 +51,7 @@ m3508_test/xbox.o: ..\GDUT_ROBOCON\CONTROL\xbox.cpp \
   G:\Keil_v5\ARM\ARMCLANG\include\stdbool.h \
   ..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h \
   ..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h \
+  ..\GDUT_ROBOCON\HARDWARE\can_device.h ..\Core\Inc\can.h \
   ..\GDUT_ROBOCON\HARDWARE\Action.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\math.h \
   G:\Keil_v5\ARM\ARMCLANG\include\math.h \

@@ -17,12 +17,20 @@ extern "C"
 #include "M3508.h"
 #include "chassis.h"
 #include "xbox.h"
-void create_tasks(void);
+#include "m6020.h"
+    void create_tasks(void);
 #ifdef __cplusplus
 }
 #endif
 #ifdef __cplusplus
 // C 的接口函数，用于在 main.c 中调用
+class demo : public ITaskProcessor
+{
+private:
+    /* data */
+public:
+    void process_data();
+};
 
 #endif
 #endif // SIMPLE_TASK_H

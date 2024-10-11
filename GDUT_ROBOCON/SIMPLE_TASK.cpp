@@ -1,15 +1,14 @@
 #include "SIMPLE_TASK.h"
-
-/*九期r1
-RC9Protocol ros_serial(&huart2, true), esp32_serial(&huart1, false); // 九期的通用协议类，可用于ros调参，ros通讯,与esp32通讯等
-action Action(&huart3, 0, 0);
+/*
+RC9Protocol ros_serial(&huart2, false), esp32_serial(&huart1, false); // 九期的通用协议类，可用于ros调参，ros通讯,与esp32通讯等
+action Action(&huart3, 0, 0, false);
 TaskManager task_core; // 在这里初始化任务核心不会创建任何任务，只有后面首次注册指定的实例到指定的任务中才会创建任务
 CanManager can_core;
-m3508 m3508_right(1, &hcan1, 19, 16.7f, 0.21f, 2.4f), m3508_front(3, &hcan1, 19, 16.5f, 0.18f, 2.6f), m3508_left(2, &hcan1, 19, 16.2f, 0.17f, 2.87f); // 九期r1，硬件连接，三只m3508-19底盘动力电机位于can1，四只m3508-1作为机构动力电机位于can2
+m3508p m3508_right(1, &hcan1, 19, 16.7f, 0.21f, 2.4f), m3508_front(3, &hcan1, 19, 16.5f, 0.18f, 2.6f), m3508_left(2, &hcan1, 19, 16.2f, 0.17f, 2.87f), m3508_shoot1(1, &hcan2); // 九期r1，硬件连接，三只m3508-19底盘动力电机位于can1，四只m3508-1作为机构动力电机位于can2
 // 以上是基本模块，相当于乐高积木中的最小零件
 // 以下为较大的模块，由基本模块拼接而成，开始拼乐高制作整车！你只需了解一些模块的基本拼接规则即可！！
 // 库中提供一些常用的底盘，其中omni3_unusual是极为特殊的一款，只能九期r1用！
-omni3_unusual r1_chassis(&m3508_front, &m3508_right, &m3508_left, &Action, 7.0f, 0.0f, 0.7f); // 组装r1的底盘，只需简单将底盘和数个动力电机和一个定位模块拼接在一起，这里的动力电机可不止3508哦，只要派生自动力电机的接口就行，特别的，有些底盘比如说舵轮底盘还需要同时将动力电机和伺服电机组装起来，在库看来，所有电机都分为两类：动力电机和伺服电机，位置控制的3508属于伺服电机
+omni3_unusual r1_chassis(&m3508_front, &m3508_right, &m3508_left, 0.0719f, &Action, 7.0f, 0.0f, 0.7f); // 组装r1的底盘，只需简单将底盘和数个动力电机和一个定位模块拼接在一起，这里的动力电机可不止3508哦，只要派生自动力电机的接口就行，特别的，有些底盘比如说舵轮底盘还需要同时将动力电机和伺服电机组装起来，在库看来，所有电机都分为两类：动力电机和伺服电机，位置控制的3508属于伺服电机
 // 组装r1的远程遥控器
 xbox_r1n r1_remote(&Action, &r1_chassis);
 */
@@ -34,11 +33,17 @@ CanManager can_core;
 omni4 r1e_chassis(&m3508_right_front, &m3508_right_back, &m3508_left_back, &m3508_left_front, 0.076f, 0.40f, &Action, 6.0f, 0.0f, 0.7f);
 xbox_r1n r1_remote(&Action, &r1e_chassis);
 */
+RC9Protocol ros_serial(&huart1, false);
+m6020s m6020_back_right(1, &hcan1, 270.0f, 1.8f, 6.0f);
+
+TaskManager task_core;
+CanManager can_core;
+demo test1;
 
 extern "C" void create_tasks(void)
 {
 
-    /*九期r1
+    /*
     ros_serial.startUartReceiveIT();
     esp32_serial.startUartReceiveIT();
     esp32_serial.addsubscriber(&r1_remote);
@@ -72,5 +77,20 @@ extern "C" void create_tasks(void)
     task_core.registerTask(2, &r1_remote);
     */
 
+    can_core.init();
+    ros_serial.startUartReceiveIT();
+    task_core.registerTask(0, &can_core);
+    task_core.registerTask(4, &ros_serial);
+    task_core.registerTask(3, &test1);
+    ros_serial.tx_frame_mat.data_length = 8;
+    ros_serial.tx_frame_mat.frame_id = 0x01;
     osKernelStart();
+}
+
+void demo::process_data()
+{
+    // ros_serial.tx_frame_mat.data.msg_get[0] = m6020_1.rpm;
+    // m6020_1.target_rpm = ros_serial.rx_frame_mat.data.msg_get[0];
+
+    // m6020_1.rpm_pid.PID_SetParameters(ros_serial.rx_frame_mat.data.msg_get[1], ros_serial.rx_frame_mat.data.msg_get//[2], ros_serial.rx_frame_mat.data.msg_get[3]);
 }
