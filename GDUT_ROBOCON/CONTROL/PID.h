@@ -35,6 +35,8 @@ public:
     void PID_SetParameters(float kp, float ki, float kd);
 
     float PID_Compute(float input);
+
+    float PID_ComputeError(float error_); // 可以直接传入误差来进行计算
 };
 
 #endif

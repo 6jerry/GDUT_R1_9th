@@ -8,6 +8,7 @@ extern "C"
 #include "can_device.h"
 #include "pid.h"
 #include "motor.h"
+#include <math.h>
 
 #ifdef __cplusplus
 }
@@ -25,9 +26,12 @@ public:
 
     int16_t motor_process() override;
     void can_update(uint8_t can_RxData[8]);
-    float rtarget_angle = 0;
+    float target_angle = 0;
     float target_rpm = 0;
     int16_t target_v = 0;
+
+    float real_angle = 0.0f;
+    float angle_error = 0.0f;
 
     pid rpm_pid;
     pid pos_pid;
@@ -38,6 +42,8 @@ public:
     void set_absolute_pos_multi(float absolute_pos_multi_);
     void set_absolute_pos_single(float absolute_pos_single_);
     void relocate(float new_zero_point);
+
+    float convert_angle_to_signed(float current_angle);
 };
 
 #endif

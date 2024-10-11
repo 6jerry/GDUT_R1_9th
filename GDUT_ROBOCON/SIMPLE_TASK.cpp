@@ -34,7 +34,7 @@ omni4 r1e_chassis(&m3508_right_front, &m3508_right_back, &m3508_left_back, &m350
 xbox_r1n r1_remote(&Action, &r1e_chassis);
 */
 RC9Protocol ros_serial(&huart1, false);
-m6020s m6020_back_right(1, &hcan1, 270.0f, 1.8f, 6.0f);
+m6020s m6020_back_right(1, &hcan1, 270.0f, 1.8f, 6.0f, 6.0f, 0.0f, 2.0f), m6020_back_left(4, &hcan1, 275.0f, 1.8f, 5.6f, 5.0f, 0.0f, 2.0f), m6020_front_right(2, &hcan1, 272.5f, 1.8f, 5.8f, 5.0f, 0.0f, 2.0f), m6020_front_left(3, &hcan1, 272.5f, 1.8f, 5.8f, 5.0f, 0.0f, 2.0f);
 
 TaskManager task_core;
 CanManager can_core;
@@ -89,8 +89,8 @@ extern "C" void create_tasks(void)
 
 void demo::process_data()
 {
-    // ros_serial.tx_frame_mat.data.msg_get[0] = m6020_1.rpm;
-    // m6020_1.target_rpm = ros_serial.rx_frame_mat.data.msg_get[0];
+    //ros_serial.tx_frame_mat.data.msg_get[0] = m6020_back_right.real_angle;
+    //m6020_back_right.target_angle = ros_serial.rx_frame_mat.data.msg_get[0];
 
-    // m6020_1.rpm_pid.PID_SetParameters(ros_serial.rx_frame_mat.data.msg_get[1], ros_serial.rx_frame_mat.data.msg_get//[2], ros_serial.rx_frame_mat.data.msg_get[3]);
+    //m6020_back_right.pos_pid.PID_SetParameters(ros_serial.rx_frame_mat.data.msg_get[1], ros_serial.rx_frame_mat.data.msg_get[2], ros_serial.rx_frame_mat.data.msg_get[3]);
 }
