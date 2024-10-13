@@ -27,8 +27,11 @@ public:
     float integral_limit = 0.0f;
     float output_limit = 0.0f;
     float deadzone = 0.0f;
+    float deadzone_compensation = 0.0f; // 死区补偿
     float integral_separation_threshold = 0.0f;
     float error = 0.0f;
+
+    float last_output = 0.0f;
 
     pid(float kp, float ki, float kd, float integral_limit, float output_limit, float deadzone, float integral_separation_threshold);
 

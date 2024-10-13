@@ -305,6 +305,11 @@ void CanManager::process_data()
     {
         error_flag = 1;
     }
+    for (int i = 0; i <= 7; i++)
+    {
+        send_buf2[i] = 0;
+        send_buf1[i] = 0;
+    }
 }
 extern "C" void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {

@@ -51,6 +51,9 @@ typedef struct action_info_
     float pos_x_sum = 0.0f;
     float pos_y_sum = 0.0f; // mm
 
+    float Dx = 0.0f;
+    float Dy = 0.0f;
+
 } action_info_;
 typedef struct action_install_pos_
 {
@@ -86,8 +89,7 @@ typedef struct pose_data_
 class action : public SerialDevice
 {
 private:
-    bool reversal = false; // 是否要反着装
-                           // 内部状态机的状态
+    // 内部状态机的状态
     enum RxState
     {
         WAITING_FOR_HEADER_0,
@@ -100,6 +102,8 @@ private:
     action_info_ action_info;
     action_install_pos_ action_install_pos;
     bool if_inverse_install = false; // action是不是反着装的，专门给九期r2打的补丁，服了
+    bool if_init = true;
+    uint8_t init_count = 0;
 
 public:
     void Update_Action_gl_position(float value[6]);

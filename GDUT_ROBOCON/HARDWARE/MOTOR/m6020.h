@@ -22,7 +22,7 @@ private:
     uint8_t gear_ratio = 1;
 
 public:
-    m6020s(uint8_t can_id, CAN_HandleTypeDef *hcan_, float kp_r = 270.0f, float ki_r = 1.8f, float kd_r = 6.0f, float kp_p = 0.0f, float ki_p = 0.0f, float kd_p = 0.0f);
+    m6020s(uint8_t can_id, CAN_HandleTypeDef *hcan_, bool if_double_control_ = true, float kp_r = 270.0f, float ki_r = 1.8f, float kd_r = 6.0f, float kp_p = 0.0f, float ki_p = 0.0f, float kd_p = 0.0f);
 
     int16_t motor_process() override;
     void can_update(uint8_t can_RxData[8]);
@@ -34,6 +34,8 @@ public:
     float angle_error = 0.0f;
 
     pid rpm_pid;
+
+    bool if_double_control = true; // 是否使用双环控制，因为有些电机无法360度旋转导致无法调速度环
     pid pos_pid;
 
     float get_relative_pos();

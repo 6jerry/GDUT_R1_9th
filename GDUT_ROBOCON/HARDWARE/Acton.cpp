@@ -69,13 +69,31 @@ void action::handleReceiveData(uint8_t byte)
 
 void action::Update_Action_gl_position(float value[6])
 {
+    if (if_init)
+    {
+        init_count++;
+        if (init_count > 6)
+        {
+            restart();
+            if_init = false;
+        }
+    }
     action_info.last_pos_x = action_info.now_pos_x;
     action_info.last_pos_y = action_info.now_pos_y;
     action_info.last_pos_z = action_info.now_pos_z;
 
-    action_info.now_pos_z = value[0];
-    action_info.now_pos_x = value[3];
-    action_info.now_pos_y = value[4];
+    if (if_inverse_install)
+    {
+        action_info.now_pos_z = value[0];
+        action_info.now_pos_x = value[3];
+        action_info.now_pos_y = -value[4];
+    }
+    else
+    {
+        action_info.now_pos_z = value[0];
+        action_info.now_pos_x = -value[3];
+        action_info.now_pos_y = value[4];
+    }
 
     action_info.delta_pos_x = action_info.now_pos_x - action_info.last_pos_x;
     action_info.delta_pos_y = action_info.now_pos_y - action_info.last_pos_y;
@@ -88,14 +106,24 @@ void action::Update_Action_gl_position(float value[6])
     pose_data.yaw_rad = pose_data.yaw_angle * 0.01745f;
     action_info.pos_x_sum += action_info.delta_pos_x;
     action_info.pos_y_sum += action_info.delta_pos_y;
+
+    // 机器人坐标系下的静态安装偏移量转换到世界坐标
+    action_info.Dx = cos(pose_data.yaw_rad) * action_install_pos.delta_x - sin(pose_data.yaw_rad) * action_install_pos.delta_y;
+    action_info.Dy = sin(pose_data.yaw_rad) * action_install_pos.delta_x + cos(pose_data.yaw_rad) * action_install_pos.delta_y;
+    // 减去安装偏移量
+    pose_data.world_pos_x = action_info.pos_x_sum - action_info.Dx;
+    pose_data.world_pos_y = action_info.pos_y_sum - action_info.Dy;
 }
 
 void action::restart()
 {
+
     action_info.pos_z_sum = 0.0f;
-    action_info.pos_x_sum = 0.0f;
-    action_info.pos_y_sum = 0.0f;
+    action_info.pos_x_sum = action_install_pos.delta_x;
+    action_info.pos_y_sum = action_install_pos.delta_y;
 }
-void relocate(float x, float y)
+void action::relocate(float x, float y)
 {
+    action_info.pos_x_sum = x + action_info.Dx;
+    action_info.pos_y_sum = y + action_info.Dy;
 }

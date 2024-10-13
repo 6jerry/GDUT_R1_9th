@@ -71,7 +71,7 @@ uint8_t DataBuff_for4[200];
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-
+void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -136,13 +136,9 @@ int main(void)
   osKernelInitialize();
 
   /* Call init function for freertos objects (in freertos.c) */
-  /* USER CODE BEGIN 3 */
   create_tasks();
-  /* USER CODE END 3 */
-  /* Start scheduler */
-  // osKernelStart();
 
-  /* We should never get here as control is now taken by the scheduler */
+   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -151,6 +147,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
   }
+
   /* USER CODE END 3 */
 }
 
