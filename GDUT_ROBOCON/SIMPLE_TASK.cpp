@@ -1,5 +1,5 @@
 #include "SIMPLE_TASK.h"
-/*
+
 RC9Protocol ros_serial(&huart2, false), esp32_serial(&huart1, false), data_chain(&huart5, false); // 九期的通用协议类，可用于ros调参，ros通讯,与esp32通讯等
 action Action(&huart3, 225.2f, 179.54f, false);
 TaskManager task_core; // 在这里初始化任务核心不会创建任何任务，只有后面首次注册指定的实例到指定的任务中才会创建任务
@@ -12,16 +12,17 @@ omni3_unusual r1_chassis(&m3508_front, &m3508_right, &m3508_left, 0.0719f, &Acti
 // 组装r1的远程遥控器
 xbox_r1n r1_remote(&Action, &r1_chassis);
 demo test1;
-*/
 
+/*
 // RC9Protocol esp32_serial(&huart1, false), data_chain(&huart5, false), ros_serial(&huart2, false);
 m3508p m3508_front(1, &hcan1), m3508_left(3, &hcan1), m3508_right(2, &hcan1); // 九期r2，硬件连接：三只m3508作为底盘动力电机位于can1
-TaskManager task_core;
+//TaskManager task_core;
 CanManager can_core;
 action Action(&huart3, -45.0f, 120.0f, true);
 // omni3 r2n_chassis(&m3508_front, &m3508_right, &m3508_left, 0.0719f, 0.406f, &Action, 7.0f, 0.0f, 0.7f, 0.0f, 0.0f, 0.0f);
 // xbox_r2n r2_remote(&Action, &data_chain, &r2n_chassis);
 demo test1;
+*/
 
 /*八期r1
 RC9Protocol esp32_serial(&huart1, false);
@@ -51,7 +52,6 @@ demo test1;
 extern "C" void create_tasks(void)
 {
 
-    /*
     ros_serial.startUartReceiveIT();
     esp32_serial.startUartReceiveIT();
     esp32_serial.addsubscriber(&r1_remote);
@@ -67,22 +67,23 @@ extern "C" void create_tasks(void)
 
     data_chain.tx_frame_mat.data_length = 8;
     data_chain.tx_frame_mat.frame_id = 1;
-    */
 
-    can_core.init();
-    Action.startUartReceiveIT();
-    // esp32_serial.startUartReceiveIT();
-    // ros_serial.startUartReceiveIT();
-    // data_chain.startUartReceiveIT();
-    //  esp32_serial.addsubscriber(&r2_remote);
+    /*
+        can_core.init();
+        Action.startUartReceiveIT();
+        // esp32_serial.startUartReceiveIT();
+        // ros_serial.startUartReceiveIT();
+        // data_chain.startUartReceiveIT();
+        //  esp32_serial.addsubscriber(&r2_remote);
 
-    task_core.registerTask(0, &can_core);
-    // task_core.registerTask(3, &r2n_chassis);
-    // task_core.registerTask(2, &r2_remote);
-    // task_core.registerTask(4, &ros_serial);
-    task_core.registerTask(4, &test1);
-    //ros_serial.tx_frame_mat.data_length = 12;
-    //ros_serial.tx_frame_mat.frame_id = 0x01;
+        // task_core.registerTask(0, &can_core);
+        //  task_core.registerTask(3, &r2n_chassis);
+        //  task_core.registerTask(2, &r2_remote);
+        //  task_core.registerTask(4, &ros_serial);
+        // task_core.registerTask(4, &test1);
+        // ros_serial.tx_frame_mat.data_length = 12;
+        // ros_serial.tx_frame_mat.frame_id = 0x01;
+        */
 
     /*八期r1
      can_core.init();
