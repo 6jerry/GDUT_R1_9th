@@ -145,7 +145,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>CMSIS_AGDI</Key>
-          <Name>-X"ATK CMSIS-DAP-Debugger" -UATK-05022018 -O206 -S8 -C0 -P00000000 -N00("ARM CoreSight SW-DP") -D00(2BA01477) -L00(0) -TO65554 -TC10000000 -TT10000000 -TP20 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO15 -FD20000000 -FC1000 -FN1 -FF0STM32F4xx_1024.FLM -FS08000000 -FL0100000 -FP0($$Device:STM32F407ZGTx$CMSIS\Flash\STM32F4xx_1024.FLM)</Name>
+          <Name>-X"ATK-HSWL-CMSIS-DAP" -UATK 20190528 -O206 -S8 -C0 -P00000000 -N00("ARM CoreSight SW-DP") -D00(2BA01477) -L00(0) -TO65554 -TC10000000 -TT10000000 -TP20 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO15 -FD20000000 -FC1000 -FN1 -FF0STM32F4xx_1024.FLM -FS08000000 -FL0100000 -FP0($$Device:STM32F407ZGTx$CMSIS\Flash\STM32F4xx_1024.FLM)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -158,7 +158,56 @@
           <Name>-U-O142 -O2254 -S0 -C0 -N00("ARM CoreSight SW-DP") -D00(2BA01477) -L00(0) -TO18 -TC10000000 -TP21 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO7 -FD20000000 -FC800 -FN1 -FF0STM32F4xx_1024.FLM -FS08000000 -FL0100000 -FP0($$Device:STM32F407ZGTx$CMSIS\Flash\STM32F4xx_1024.FLM)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>0</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>178</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename></Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>0x000000B2</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>0</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>208</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename></Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>0x000000D0</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>958</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>../Middlewares/Third_Party/FreeRTOS/Source/queue.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+      </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -400,107 +449,87 @@
         <Ww>
           <count>27</count>
           <WinNumber>2</WinNumber>
-          <ItemText>ros_serial</ItemText>
+          <ItemText>r1_chassis</ItemText>
         </Ww>
         <Ww>
           <count>28</count>
           <WinNumber>2</WinNumber>
-          <ItemText>task_core</ItemText>
+          <ItemText>r1_remote</ItemText>
         </Ww>
         <Ww>
           <count>29</count>
           <WinNumber>2</WinNumber>
-          <ItemText>Action</ItemText>
+          <ItemText>m3508_shoot1</ItemText>
         </Ww>
         <Ww>
           <count>30</count>
           <WinNumber>2</WinNumber>
-          <ItemText>m3508_right</ItemText>
+          <ItemText>m6020_1</ItemText>
         </Ww>
         <Ww>
           <count>31</count>
           <WinNumber>2</WinNumber>
-          <ItemText>m3508_front</ItemText>
+          <ItemText>temp_vcurrent</ItemText>
         </Ww>
         <Ww>
           <count>32</count>
           <WinNumber>2</WinNumber>
-          <ItemText>m3508_left</ItemText>
+          <ItemText>m6020_back_left</ItemText>
         </Ww>
         <Ww>
           <count>33</count>
           <WinNumber>2</WinNumber>
-          <ItemText>m3508_right</ItemText>
+          <ItemText>m6020_back_right</ItemText>
         </Ww>
         <Ww>
           <count>34</count>
           <WinNumber>2</WinNumber>
-          <ItemText>m3508_front</ItemText>
+          <ItemText>m6020_shoot</ItemText>
         </Ww>
         <Ww>
           <count>35</count>
           <WinNumber>2</WinNumber>
-          <ItemText>m3508_left</ItemText>
+          <ItemText>dis_vector_x</ItemText>
         </Ww>
         <Ww>
           <count>36</count>
           <WinNumber>2</WinNumber>
-          <ItemText>r1_chassis</ItemText>
+          <ItemText>data_chain</ItemText>
         </Ww>
         <Ww>
           <count>37</count>
           <WinNumber>2</WinNumber>
-          <ItemText>esp32_serial</ItemText>
+          <ItemText>Action</ItemText>
         </Ww>
         <Ww>
           <count>38</count>
           <WinNumber>2</WinNumber>
-          <ItemText>r1_remote</ItemText>
+          <ItemText>r2n_chassis</ItemText>
         </Ww>
         <Ww>
           <count>39</count>
           <WinNumber>2</WinNumber>
-          <ItemText>m3508_shoot1</ItemText>
+          <ItemText>r2_remote</ItemText>
         </Ww>
         <Ww>
           <count>40</count>
           <WinNumber>2</WinNumber>
-          <ItemText>m6020_1</ItemText>
+          <ItemText>m3508_front</ItemText>
         </Ww>
         <Ww>
           <count>41</count>
           <WinNumber>2</WinNumber>
-          <ItemText>can_core</ItemText>
+          <ItemText>ros_serial</ItemText>
         </Ww>
         <Ww>
           <count>42</count>
           <WinNumber>2</WinNumber>
-          <ItemText>temp_vcurrent</ItemText>
+          <ItemText>r2n_chassis.distan_pid</ItemText>
         </Ww>
         <Ww>
           <count>43</count>
           <WinNumber>2</WinNumber>
-          <ItemText>ros_serial</ItemText>
-        </Ww>
-        <Ww>
-          <count>44</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>m6020_back_left</ItemText>
-        </Ww>
-        <Ww>
-          <count>45</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>m6020_back_right</ItemText>
-        </Ww>
-        <Ww>
-          <count>46</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>m6020_shoot</ItemText>
-        </Ww>
-        <Ww>
-          <count>47</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>data_chain</ItemText>
+          <ItemText>\\m3508_test\../GDUT_ROBOCON/SIMPLE_TASK.cpp\r2_remote.xbox.target_tracking_dis</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow1>
@@ -1382,6 +1411,30 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\GDUT_ROBOCON\HARDWARE\MOTOR\m6020.h</PathWithFileName>
       <FilenameWithoutPath>m6020.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>65</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\GDUT_ROBOCON\MATH_LIB\simple_math_tool.c</PathWithFileName>
+      <FilenameWithoutPath>simple_math_tool.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>66</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\GDUT_ROBOCON\MATH_LIB\simple_math_tool.h</PathWithFileName>
+      <FilenameWithoutPath>simple_math_tool.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

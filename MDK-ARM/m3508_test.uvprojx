@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../robocon_robot;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../GDUT_ROBOCON;../GDUT_ROBOCON/HARDWARE;../GDUT_ROBOCON/HARDWARE/MOTOR;../GDUT_ROBOCON/CONTROL;../GDUT_ROBOCON/CONTROL/STRUCTURE</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../robocon_robot;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../GDUT_ROBOCON;../GDUT_ROBOCON/HARDWARE;../GDUT_ROBOCON/HARDWARE/MOTOR;../GDUT_ROBOCON/CONTROL;../GDUT_ROBOCON/CONTROL/STRUCTURE;..\GDUT_ROBOCON\MATH_LIB</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2021,7 +2021,7 @@
                 <FileArmAds>
                   <Cads>
                     <interw>2</interw>
-                    <Optim>5</Optim>
+                    <Optim>3</Optim>
                     <oTime>2</oTime>
                     <SplitLS>2</SplitLS>
                     <OneElfS>2</OneElfS>
@@ -2179,6 +2179,16 @@
               <FileName>m6020.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\GDUT_ROBOCON\HARDWARE\MOTOR\m6020.h</FilePath>
+            </File>
+            <File>
+              <FileName>simple_math_tool.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GDUT_ROBOCON\MATH_LIB\simple_math_tool.c</FilePath>
+            </File>
+            <File>
+              <FileName>simple_math_tool.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\GDUT_ROBOCON\MATH_LIB\simple_math_tool.h</FilePath>
             </File>
           </Files>
         </Group>

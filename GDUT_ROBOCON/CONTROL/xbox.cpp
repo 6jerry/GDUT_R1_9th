@@ -89,6 +89,7 @@ void xbox::chassis_control()
     detectButtonEdge(xbox_msgs.btnLB, &xbox_msgs.btnLB_last, &catch_ball_flag, 1);
     detectButtonEdgeD(xbox_msgs.btnX, &xbox_msgs.btnX_last);
     detectButtonEdgeI(xbox_msgs.btnB, &xbox_msgs.btnB_last);
+    detectButtonEdge(xbox_msgs.btnA, &xbox_msgs.btnA_last, &if_point_track_flag, 1);
     if (speed_level == 1)
     {
         MAX_ROBOT_SPEED_X = 1.20f;
@@ -157,12 +158,12 @@ void xbox::chassis_control()
     {
         control_chassis->unlock();
     }
-    if (world_robot_flag == 0 && robot_stop_flag == 0)
+    if (world_robot_flag == 0 && robot_stop_flag == 0 && if_point_track_flag == 0)
     {
         control_chassis->switch_chassis_mode(remote_robotv);
         control_chassis->setrobotv(MAX_ROBOT_SPEED_X * xbox_msgs.joyLHori_map, MAX_ROBOT_SPEED_Y * xbox_msgs.joyLVert_map, -MAX_ROBOT_SPEED_W * xbox_msgs.joyRHori_map);
     }
-    if (world_robot_flag == 1 && robot_stop_flag == 0)
+    if (world_robot_flag == 1 && robot_stop_flag == 0 && if_point_track_flag == 0)
     {
         control_chassis->switch_chassis_mode(remote_worldv);
         control_chassis->setworldv(MAX_ROBOT_SPEED_X * xbox_msgs.joyLHori_map, MAX_ROBOT_SPEED_Y * xbox_msgs.joyLVert_map, -MAX_ROBOT_SPEED_W * xbox_msgs.joyRHori_map);
@@ -170,6 +171,12 @@ void xbox::chassis_control()
     if (robot_stop_flag == 1)
     {
         control_chassis->switch_chassis_mode(chassis_standby);
+    }
+    if (if_point_track_flag == 1 && robot_stop_flag == 0)
+    {
+        control_chassis->switch_chassis_mode(point_tracking);
+        control_chassis->point_track_info.target_x = 0.0f;
+        control_chassis->point_track_info.target_y = 0.0f;
     }
 }
 
@@ -179,5 +186,15 @@ xbox_r1n::xbox_r1n(action *ACTION_, chassis *control_chassis_, float MAX_ROBOT_S
 
 void xbox_r1n::process_data()
 {
+    chassis_control();
+}
+
+xbox_r2n::xbox_r2n(action *ACTION_, RC9Protocol *robot_data_chain_, chassis *control_chassis_, float MAX_ROBOT_SPEED_Y_, float MAX_ROBOT_SPEED_X_, float MAX_ROBOT_SPEED_W_) : xbox(ACTION_, control_chassis_, MAX_ROBOT_SPEED_Y_, MAX_ROBOT_SPEED_X_, MAX_ROBOT_SPEED_W_), robot_data_chain(robot_data_chain_)
+{
+}
+void xbox_r2n::process_data()
+{
+    target_trackpoint_x = robot_data_chain->rx_frame_mat.data.msg_get[0];
+    target_trackpoint_y = robot_data_chain->rx_frame_mat.data.msg_get[1];
     chassis_control();
 }

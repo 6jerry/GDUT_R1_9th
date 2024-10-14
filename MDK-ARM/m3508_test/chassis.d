@@ -212,4 +212,5 @@ m3508_test/chassis.o: ..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.cpp \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\traits.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\trigonometric_functions.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdlib.h \
-  G:\Keil_v5\ARM\ARMCLANG\include\stdlib.h ..\GDUT_ROBOCON\CONTROL\pid.h
+  G:\Keil_v5\ARM\ARMCLANG\include\stdlib.h ..\GDUT_ROBOCON\CONTROL\pid.h \
+  ..\GDUT_ROBOCON\MATH_LIB\simple_math_tool.h

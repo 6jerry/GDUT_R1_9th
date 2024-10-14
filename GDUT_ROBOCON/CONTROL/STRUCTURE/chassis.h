@@ -9,6 +9,7 @@ extern "C"
 #include "motor.h"
 #include "Action.h"
 #include "pid.h"
+#include "simple_math_tool.h"
 #ifdef __cplusplus
 }
 #endif
@@ -34,12 +35,25 @@ enum Chassis_mode
     point_track_standby,
     point_tracking
 };
+typedef struct point_track_info_
+{
+    float target_x = 0.0f;
+    float target_y = 0.0f;
+    float target_distan = 0.0f;
+    float target_speed_x = 0.0f;
+    float target_speed_y = 0.0f;
+
+    float distan_error = 0.0f;
+    float direct_vector_x = 0.0f;
+    float direct_vector_y = 0.0f;
+};
+
 class chassis // 基类，也是底盘的通用控制接口
 {
 public:
     ChassisType chassistype;
     Chassis_mode chassis_mode = chassis_standby;
-    float input_rvx = 0.0f, input_rvy = 0.0f, input_wvx = 0.0f, input_wvy = 0.0f, input_w = 0.0f, target_heading_rad = 0.0f, target_wx = 0.0f, target_wy = 0.0f, target_rvx = 0.0f, target_rvy = 0.0f, target_w = 0.0f;
+    float input_rvx = 0.0f, input_rvy = 0.0f, input_wvx = 0.0f, input_wvy = 0.0f, input_w = 0.0f, target_heading_rad = 0.0f, target_rvx = 0.0f, target_rvy = 0.0f, target_w = 0.0f;
     uint8_t if_first_lock = 0;
     pid heading_pid;
     action *ACTION = nullptr;
@@ -50,6 +64,10 @@ public:
     float Rwheel = 0.0719f;
     float CHASSIS_R = 0.0f;
 
+    point_track_info_ point_track_info;
+    pid distan_pid;
+    void point_track_compute();
+
 public:
     void
     switch_chassis_mode(Chassis_mode target_mode);
@@ -58,7 +76,7 @@ public:
     bool setworldv(float wx, float wy, float w);
     bool setpoint(float x, float y);
     float get_track_state();
-    chassis(ChassisType chassistype_, float Rwheel_, action *ACTION_, float headingkp, float headingki, float headingkd);
+    chassis(ChassisType chassistype_, float Rwheel_, action *ACTION_, float headingkp, float headingki, float headingkd, float kp_, float ki_, float kd_);
     void worldv_to_robotv();
     float v_to_rpm(float v);
 };
@@ -71,7 +89,7 @@ private:
     // float Rwheel = 0.0719;
 
 public:
-    omni3_unusual(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, float Rwheel_, action *ACTION_, float headingkp = 7.0f, float headingki = 0.0f, float headingkd = 0.7f);
+    omni3_unusual(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, float Rwheel_, action *ACTION_, float headingkp = 7.0f, float headingki = 0.0f, float headingkd = 0.7f, float point_kp = 0.0f, float point_ki = 0.0f, float point_kd = 0.0f);
     void process_data();
 };
 
@@ -85,11 +103,11 @@ private:
     // float Rwheel = 0.0719;
 
 public:
-    omni3(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, float Rwheel_, float CHASSIS_R_, action *ACTION_, float headingkp, float headingki, float headingkd);
+    omni3(power_motor *front_motor, power_motor *right_motor, power_motor *left_motor, float Rwheel_, float CHASSIS_R_, action *ACTION_, float headingkp, float headingki, float headingkd, float point_kp, float point_ki, float point_kd);
     void process_data();
 };
 
-// 常规四轮全向轮底盘，典型车体：八期r2
+// 常规四轮全向轮底盘，典型车体：八期r1
 
 class omni4 : public ITaskProcessor, public chassis
 {
@@ -97,7 +115,7 @@ private:
     power_motor *motors[4] = {nullptr};
 
 public:
-    omni4(power_motor *right_front_motor, power_motor *right_back_motor, power_motor *left_back_motor, power_motor *left_front_motor, float Rwheel_, float CHASSIS_R_, action *ACTION_, float headingkp, float headingki, float headingkd);
+    omni4(power_motor *right_front_motor, power_motor *right_back_motor, power_motor *left_back_motor, power_motor *left_front_motor, float Rwheel_, float CHASSIS_R_, action *ACTION_, float headingkp, float headingki, float headingkd, float point_kp, float point_ki, float point_kd);
     void process_data();
 };
 
