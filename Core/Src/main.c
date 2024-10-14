@@ -117,6 +117,7 @@ int main(void)
   MX_UART4_Init();
   MX_USART2_UART_Init();
   MX_USART6_UART_Init();
+  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
   // HAL_CAN_Start(&hcan1);
   // HAL_CAN_Start(&hcan2);
@@ -138,7 +139,9 @@ int main(void)
   /* Call init function for freertos objects (in freertos.c) */
   create_tasks();
 
-   /* We should never get here as control is now taken by the scheduler */
+  /* Start scheduler */
+
+  /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
