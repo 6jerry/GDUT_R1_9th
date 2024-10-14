@@ -136,7 +136,10 @@ void omni3_unusual::process_data()
 
         break;
     case point_tracking:
-
+        point_track_compute();
+        input_wvy = point_track_info.target_speed_y;
+        input_wvx = point_track_info.target_speed_x;
+        worldv_to_robotv();
         break;
     default:
 
@@ -192,7 +195,7 @@ void omni3::process_data()
         point_track_compute();
         input_wvx = point_track_info.target_speed_x;
         input_wvy = point_track_info.target_speed_y;
-        // worldv_to_robotv();
+         worldv_to_robotv();
 
         break;
     default:
