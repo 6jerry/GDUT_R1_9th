@@ -8,6 +8,7 @@ action::action(UART_HandleTypeDef *huart, float install_delta_x, float install_d
 
 void action::handleReceiveData(uint8_t byte)
 {
+    byte_get = byte;
     switch (state_)
     {
     case WAITING_FOR_HEADER_0:
@@ -22,6 +23,10 @@ void action::handleReceiveData(uint8_t byte)
         {
             state_ = RECEIVING_DATA;
             rxIndex_ = 0; // 重置接收索引
+        }
+        else if (byte == FRAME_HEAD_ACTION_0)
+        {
+            /* code */
         }
         else
         {

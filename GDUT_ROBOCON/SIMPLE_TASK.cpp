@@ -20,7 +20,7 @@ m3508p m3508_front(1, &hcan1), m3508_left(3, &hcan1), m3508_right(2, &hcan1); //
 TaskManager task_core;
 CanManager can_core;
 action Action(&huart3, -45.0f, 120.0f, true);
-omni3 r2n_chassis(&m3508_front, &m3508_right, &m3508_left, 0.0719f, 0.406f, &Action, 7.0f, 0.0f, 0.7f, 0.0f, 0.0f, 0.0f);
+omni3 r2n_chassis(&m3508_front, &m3508_right, &m3508_left, 0.0719f, 0.406f, &Action, 7.0f, 0.0f, 0.7f, 0.0076f, 0.0f, 0.036f);
 xbox_r2n r2_remote(&Action, &data_chain, &r2n_chassis);
 demo test1;
 
@@ -81,7 +81,7 @@ extern "C" void create_tasks(void)
     task_core.registerTask(3, &r2n_chassis);
     task_core.registerTask(2, &r2_remote);
     task_core.registerTask(4, &ros_serial);
-    task_core.registerTask(4, &test1);
+    task_core.registerTask(3, &test1);
     ros_serial.tx_frame_mat.data_length = 12;
     ros_serial.tx_frame_mat.frame_id = 0x01;
 
@@ -122,7 +122,10 @@ void demo::process_data()
     // data_chain.tx_frame_mat.data.msg_get[1] = Action.pose_data.world_pos_y;
     // m6020_shoot.rpm_pid.PID_SetParameters(ros_serial.rx_frame_mat.data.msg_get[1], ros_serial.rx_frame_mat.data.msg_get[2], ros_serial.rx_frame_mat.data.msg_get[3]);
     ros_serial.tx_frame_mat.data.msg_get[0] = r2n_chassis.point_track_info.distan_error;
-    r2n_chassis.point_track_info.target_distan = ros_serial.rx_frame_mat.data.msg_get[0];
+    r2n_chassis.point_track_info.target_distan = 1500.0f;
 
-    r2n_chassis.distan_pid.PID_SetParameters(ros_serial.rx_frame_mat.data.msg_get[1], ros_serial.rx_frame_mat.data.msg_get[2], ros_serial.rx_frame_mat.data.msg_get[3]);
+    r2n_chassis.point_track_info.target_x = data_chain.rx_frame_mat.data.msg_get[0];
+    r2n_chassis.point_track_info.target_y = data_chain.rx_frame_mat.data.msg_get[1];
+
+    // r2n_chassis.distan_pid.PID_SetParameters(ros_serial.rx_frame_mat.data.msg_get[1], ros_serial.rx_frame_mat.data.msg_get[2], ros_serial.rx_frame_mat.data.msg_get[3]);
 }

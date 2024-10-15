@@ -104,6 +104,7 @@ private:
     bool if_inverse_install = false; // action是不是反着装的，专门给九期r2打的补丁，服了
     bool if_init = true;
     uint8_t init_count = 0;
+    uint8_t byte_get = 0;
 
 public:
     void Update_Action_gl_position(float value[6]);

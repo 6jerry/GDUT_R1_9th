@@ -37,6 +37,7 @@ extern "C" void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     uint8_t rxByte;
     // 获取 UART 接收的字节
     for (int i = 0; i < SerialDevice::instanceCount_; i++)
+    
     {
         if (SerialDevice::instances_[i]->huart_ == huart)
         {
