@@ -42,7 +42,7 @@ bool chassis::setpoint(float x, float y)
     point_track_info.target_x = x;
     point_track_info.target_y = y;
 
-    chassis_mode = point_tracking;
+    // chassis_mode = point_tracking;
 }
 void chassis::lock_to(float heading)
 {
@@ -97,7 +97,30 @@ void chassis::point_track_compute()
         point_track_info.target_speed_y = 0.0f;
     }
 }
-chassis::chassis(ChassisType chassistype_, float Rwheel_, action *ACTION_, float headingkp, float headingki, float headingkd, float kp_, float ki_, float kd_) : chassistype(chassistype_), heading_pid(headingkp, headingki, headingkd, 100000.0f, 5.0f, 0.01f, 0.5f), ACTION(ACTION_), Rwheel(Rwheel_), distan_pid(kp_, ki_, kd_, 1000000.0f, 1.4f, 2.0f, 600.0f)
+void chassis::line_track_compute()
+{
+    // line_track_info.cur_to_target.X = ;
+    float target_line_dis = sqrt(line_track_info.target_line.X * line_track_info.target_line.X + line_track_info.target_line.Y * line_track_info.target_line.Y);
+    line_track_info.tangent_dis = (line_track_info.target_line.X * line_track_info.cur_to_target.X + line_track_info.target_line.Y * line_track_info.cur_to_target.Y) / target_line_dis;
+    float temp = line_track_info.tangent_dis / target_line_dis;
+
+    line_track_info.tangent_proj.X = temp * line_track_info.target_line.X;
+    line_track_info.tangent_proj.Y = temp * line_track_info.target_line.Y;
+
+    line_track_info.proj_point.X = line_track_info.tangent_proj.X + line_track_info.target_point.X;
+    line_track_info.proj_point.Y = line_track_info.tangent_proj.Y + line_track_info.target_point.Y;
+    float normal_vector_x = ACTION->pose_data.world_pos_x - line_track_info.proj_point.X;
+    float normal_vector_y = ACTION->pose_data.world_pos_y - line_track_info.proj_point.Y;
+    line_track_info.normal_dis = sqrt(normal_vector_x * normal_vector_x + normal_vector_y * normal_vector_y);
+
+    line_track_info.tangent_dir.X = line_track_info.target_line.X / target_line_dis;
+    line_track_info.tangent_dir.Y = line_track_info.target_line.Y / target_line_dis;
+
+    line_track_info.normal_dir.X = normal_vector_x / line_track_info.normal_dis;
+    line_track_info.normal_dir.Y = normal_vector_y / line_track_info.normal_dis;
+}
+
+chassis::chassis(ChassisType chassistype_, float Rwheel_, action *ACTION_, float headingkp, float headingki, float headingkd, float kp_, float ki_, float kd_) : chassistype(chassistype_), heading_pid(headingkp, headingki, headingkd, 100000.0f, 5.0f, 0.01f, 0.5f), ACTION(ACTION_), Rwheel(Rwheel_), distan_pid(kp_, ki_, kd_, 1000000.0f, 1.4f, 50.0f, 600.0f)
 {
 }
 
@@ -132,7 +155,7 @@ void omni3_unusual::process_data()
     case remote_worldv:
         worldv_to_robotv();
         break;
-    case point_track_standby:
+    case line_tracking:
 
         break;
     case point_tracking:
@@ -188,14 +211,14 @@ void omni3::process_data()
 
         worldv_to_robotv();
         break;
-    case point_track_standby:
+    case line_tracking:
 
         break;
     case point_tracking:
         point_track_compute();
         input_wvx = point_track_info.target_speed_x;
         input_wvy = point_track_info.target_speed_y;
-         worldv_to_robotv();
+        worldv_to_robotv();
 
         break;
     default:
@@ -243,7 +266,7 @@ void omni4::process_data()
     case remote_worldv:
         worldv_to_robotv();
         break;
-    case point_track_standby:
+    case line_tracking:
 
         break;
     case point_tracking:

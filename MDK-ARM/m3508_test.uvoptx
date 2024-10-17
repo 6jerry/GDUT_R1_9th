@@ -492,6 +492,21 @@
           <WinNumber>2</WinNumber>
           <ItemText>esp32_serial</ItemText>
         </Ww>
+        <Ww>
+          <count>46</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>data_chain</ItemText>
+        </Ww>
+        <Ww>
+          <count>47</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>r2n_chassis.point_track_info.target_x</ItemText>
+        </Ww>
+        <Ww>
+          <count>48</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>r2n_chassis.point_track_info.target_y</ItemText>
+        </Ww>
       </WatchWindow2>
       <MemoryWindow1>
         <Mm>

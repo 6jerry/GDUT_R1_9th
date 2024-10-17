@@ -32,8 +32,8 @@ enum Chassis_mode
     chassis_standby,
     remote_robotv,
     remote_worldv,
-    point_track_standby,
-    point_tracking
+    point_tracking,
+    line_tracking
 };
 typedef struct point_track_info_
 {
@@ -46,6 +46,29 @@ typedef struct point_track_info_
     float distan_error = 0.0f;
     float direct_vector_x = 0.0f;
     float direct_vector_y = 0.0f;
+};
+typedef struct vector
+{
+    float X = 0.0f;
+    float Y = 0.0f;
+};
+typedef struct line_track_info_
+{
+    vector cur_to_target;
+    vector target_line;
+    vector target_point; // target line的起点
+
+    vector tangent_dir;
+    vector tangent_proj; // 投影向量
+    vector proj_point;
+    vector normal_dir; // 法相方向向量
+    float normal_dis = 0.0f;
+    float tangent_dis = 0.0f; // 投影长度
+
+    vector tangent_target_speed;
+    vector normal_target_speed;
+
+    vector target_speed;
 };
 
 class chassis // 基类，也是底盘的通用控制接口
@@ -65,8 +88,11 @@ public:
     float CHASSIS_R = 0.0f;
 
     point_track_info_ point_track_info;
+    line_track_info_ line_track_info;
     pid distan_pid;
+   
     void point_track_compute();
+    void line_track_compute();
 
 public:
     void
