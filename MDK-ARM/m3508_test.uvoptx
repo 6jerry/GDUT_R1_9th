@@ -1393,12 +1393,12 @@
     <File>
       <GroupNumber>7</GroupNumber>
       <FileNumber>65</FileNumber>
-      <FileType>1</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\GDUT_ROBOCON\MATH_LIB\simple_math_tool.c</PathWithFileName>
-      <FilenameWithoutPath>simple_math_tool.c</FilenameWithoutPath>
+      <PathWithFileName>..\GDUT_ROBOCON\MATH_LIB\Vector2D.cpp</PathWithFileName>
+      <FilenameWithoutPath>Vector2D.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1409,8 +1409,28 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\GDUT_ROBOCON\MATH_LIB\simple_math_tool.h</PathWithFileName>
-      <FilenameWithoutPath>simple_math_tool.h</FilenameWithoutPath>
+      <PathWithFileName>..\GDUT_ROBOCON\MATH_LIB\Vector2D.h</PathWithFileName>
+      <FilenameWithoutPath>Vector2D.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+  </Group>
+
+  <Group>
+    <GroupName>Middlewares/Library/DSP Library/DSP Library</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
+    <File>
+      <GroupNumber>8</GroupNumber>
+      <FileNumber>67</FileNumber>
+      <FileType>4</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>../Middlewares/ST/ARM/DSP/Lib/arm_cortexM4lf_math.lib</PathWithFileName>
+      <FilenameWithoutPath>arm_cortexM4lf_math.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

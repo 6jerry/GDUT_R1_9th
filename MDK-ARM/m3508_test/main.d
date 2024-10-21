@@ -55,5 +55,9 @@ m3508_test/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\GDUT_ROBOCON\HARDWARE\can_device.h ..\GDUT_ROBOCON\CONTROL\pid.h \
   ..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h \
   ..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h \
-  ..\GDUT_ROBOCON\MATH_LIB\simple_math_tool.h \
-  ..\GDUT_ROBOCON\CONTROL\xbox.h ..\GDUT_ROBOCON\HARDWARE\MOTOR\m6020.h
+  ..\GDUT_ROBOCON\CONTROL\xbox.h ..\GDUT_ROBOCON\HARDWARE\MOTOR\m6020.h \
+  ..\GDUT_ROBOCON\MATH_LIB\Vector2D.h \
+  ..\Middlewares\ST\ARM\DSP\Inc\arm_math.h \
+  ..\Drivers\CMSIS\Include\cmsis_compiler.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\float.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\limits.h

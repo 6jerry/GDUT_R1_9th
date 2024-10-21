@@ -9,7 +9,7 @@ extern "C"
 #include "motor.h"
 #include "Action.h"
 #include "pid.h"
-#include "simple_math_tool.h"
+
 #ifdef __cplusplus
 }
 #endif

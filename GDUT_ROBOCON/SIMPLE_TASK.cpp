@@ -14,8 +14,12 @@ omni3_unusual r1_chassis(&m3508_front, &m3508_right, &m3508_left, 0.0719f, &Acti
 xbox_r1n r1_remote(&Action, &r1_chassis);
 demo test1;
 */
+Vector2D v1(3.0f, 4.0f);
+Vector2D v2(1.0f, 2.0f);
+Vector2D sum;
 
-RC9Protocol esp32_serial(&huart1, false), data_chain(&huart5, true);
+RC9Protocol esp32_serial(&huart1, false),
+    data_chain(&huart5, true);
 m3508p m3508_front(1, &hcan1), m3508_left(3, &hcan1), m3508_right(2, &hcan1); // 九期r2，硬件连接：三只m3508作为底盘动力电机位于can1
 TaskManager task_core;
 CanManager can_core;
@@ -125,6 +129,7 @@ void demo::process_data()
         r2n_chassis.point_track_info.target_x = data_chain.rx_frame_mat.data.msg_get[0];
         r2n_chassis.point_track_info.target_y = data_chain.rx_frame_mat.data.msg_get[1] - 2000.0f;
     }
+    sum = v1 + v2;
 
     // r2n_chassis.distan_pid.PID_SetParameters(ros_serial.rx_frame_mat.data.msg_get[1], ros_serial.rx_frame_mat.data.msg_get[2], ros_serial.rx_frame_mat.data.msg_get[3]);
 }

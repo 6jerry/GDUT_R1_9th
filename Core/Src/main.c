@@ -137,9 +137,8 @@ int main(void)
   osKernelInitialize();
 
   /* Call init function for freertos objects (in freertos.c) */
-  create_tasks();
 
-  /* Start scheduler */
+  create_tasks();
 
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */

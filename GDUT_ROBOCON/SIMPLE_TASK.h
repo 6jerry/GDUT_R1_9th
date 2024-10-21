@@ -18,7 +18,10 @@ extern "C"
 #include "chassis.h"
 #include "xbox.h"
 #include "m6020.h"
-    void create_tasks(void);
+
+#include "Vector2D.h"
+
+void create_tasks(void);
 #ifdef __cplusplus
 }
 #endif
