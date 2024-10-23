@@ -9,6 +9,7 @@ extern "C"
 #include "motor.h"
 #include "Action.h"
 #include "pid.h"
+#include "Vector2D.h"
 
 #ifdef __cplusplus
 }
@@ -33,7 +34,8 @@ enum Chassis_mode
     remote_robotv,
     remote_worldv,
     point_tracking,
-    line_tracking
+    line_tracking,
+    pure_pursuit
 };
 typedef struct point_track_info_
 {
@@ -47,29 +49,33 @@ typedef struct point_track_info_
     float direct_vector_x = 0.0f;
     float direct_vector_y = 0.0f;
 };
-typedef struct vector
-{
-    float X = 0.0f;
-    float Y = 0.0f;
-};
 typedef struct line_track_info_
 {
-    vector cur_to_target;
-    vector target_line;
-    vector target_point; // target line的起点
 
-    vector tangent_dir;
-    vector tangent_proj; // 投影向量
-    vector proj_point;
-    vector normal_dir; // 法相方向向量
+    Vector2D now_dis;
+
+    Vector2D projected;
+    Vector2D target_line;
+    Vector2D target_line_initpoint;
+    Vector2D project_point;
+    Vector2D normal_dir;
+    Vector2D tangent_dir;
     float normal_dis = 0.0f;
-    float tangent_dis = 0.0f; // 投影长度
-
-    vector tangent_target_speed;
-    vector normal_target_speed;
-
-    vector target_speed;
+    float tangent_dis = 0.0f;
+    float target_dis = 0.0f;
+    Vector2D target_wspeed;
 };
+
+typedef struct pure_pursuit_info_
+{
+    Vector2D path[36];          // 待追踪的轨迹
+    uint8_t point_sum = 0;      // 有多少个点
+    uint8_t tracking_index = 0; // 当前是追踪哪一个点
+    bool if_loop = false;       // 是否是环形轨迹?,如果是环形轨迹的话起始点要写两次
+    float tracked_lenth = 0.0f; // 沿着轨迹追踪多远了？
+    float change_point = 36.0f; // 啥时候切换点
+};
+// 要开始纯追踪，必须要先点追踪到轨迹起点
 
 class chassis // 基类，也是底盘的通用控制接口
 {
@@ -89,10 +95,14 @@ public:
 
     point_track_info_ point_track_info;
     line_track_info_ line_track_info;
+    pure_pursuit_info_ pure_pursuit_info;
     pid distan_pid;
-   
+    pid normal_control;
+    pid tangential_control;
+
     void point_track_compute();
     void line_track_compute();
+    void pure_pursuit_compute();
 
 public:
     void

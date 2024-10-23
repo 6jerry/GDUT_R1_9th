@@ -215,7 +215,6 @@ m3508_test/simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.cpp \
   ..\GDUT_ROBOCON\HARDWARE\can_device.h ..\Core\Inc\can.h \
   ..\GDUT_ROBOCON\CONTROL\pid.h ..\GDUT_ROBOCON\HARDWARE\MOTOR\motor.h \
   ..\GDUT_ROBOCON\CONTROL\STRUCTURE\chassis.h \
-  ..\GDUT_ROBOCON\CONTROL\xbox.h ..\GDUT_ROBOCON\HARDWARE\MOTOR\m6020.h \
   ..\GDUT_ROBOCON\MATH_LIB\Vector2D.h \
   ..\Middlewares\ST\ARM\DSP\Inc\arm_math.h \
   ..\Drivers\CMSIS\Include\cmsis_compiler.h \
@@ -224,4 +223,5 @@ m3508_test/simple_task.o: ..\GDUT_ROBOCON\SIMPLE_TASK.cpp \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\float.h \
   G:\Keil_v5\ARM\ARMCLANG\include\float.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\limits.h \
-  G:\Keil_v5\ARM\ARMCLANG\include\limits.h
+  G:\Keil_v5\ARM\ARMCLANG\include\limits.h \
+  ..\GDUT_ROBOCON\CONTROL\xbox.h ..\GDUT_ROBOCON\HARDWARE\MOTOR\m6020.h

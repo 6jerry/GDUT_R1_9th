@@ -14,10 +14,25 @@ omni3_unusual r1_chassis(&m3508_front, &m3508_right, &m3508_left, 0.0719f, &Acti
 xbox_r1n r1_remote(&Action, &r1_chassis);
 demo test1;
 */
-Vector2D v1(4.0f, 4.0f);
-Vector2D v2(1.0f, 0.0f);
+
+/*
+Vector2D p0(0.0f, 0.0f), p1(-20.44f, 155.29f), p2(-80.38f, 300.0f), p3(-175.74f, 424.26f),
+    p4(-300.0f, 519.62f), p5(-444.71f, 579.56f), p6(-600.0f, 600.0f), p7(-755.29f, 579.56f),
+    p8(-900.0f, 519.62f), p9(-1024.26f, 424.26f), p10(-1119.62f, 300.0f), p11(-1179.56f, 155.29f),
+    p12(-1200.0f, 0.0f), p13(-1179.56f, -155.29f), p14(-1119.62f, -300.0f), p15(-1024.26f, -424.26f),
+    p16(-900.0f, -519.62f), p17(-755.29f, -579.56f), p18(-600.0f, -600.0f), p19(-444.71f, -579.56f),
+    p20(-300.0f, -519.62f), p21(-175.74f, -424.26f), p22(-80.38f, -300.0f), p23(-20.44f, -155.29f), p24(0.0f, 0.0f);
+    */
+Vector2D p0(0.0f, 0.0f), p1(-20.44f, 155.29f), p2(-80.38f, 300.0f), p3(-175.74f, 424.26f),
+    p4(-300.0f, 519.62f), p5(-444.71f, 579.56f), p6(-600.0f, 600.0f), p7(-755.29f, 579.56f),
+    p8(-900.0f, 519.62f), p9(-1024.26f, 424.26f), p10(-1119.62f, 300.0f), p11(-1179.56f, 155.29f),
+    p12(-1200.0f, 0.0f), p13(-1179.56f, -155.29f), p14(-1119.62f, -300.0f), p15(-1024.26f, -424.26f),
+    p16(-900.0f, -519.62f), p17(-755.29f, -579.56f), p18(-600.0f, -600.0f), p19(-444.71f, -579.56f),
+    p20(-300.0f, -519.62f), p21(-175.74f, -424.26f), p22(-80.38f, -300.0f), p23(-20.44f, -155.29f), p24(0.0f, 0.0f);
+bool change_flag = true;
 Vector2D sum;
 float dot_sum = 0.0f;
+uint8_t tracking_point = 1;
 
 RC9Protocol esp32_serial(&huart1, false),
     data_chain(&huart5, true);
@@ -87,6 +102,61 @@ extern "C" void create_tasks(void)
 
     task_core.registerTask(3, &test1);
 
+    /*
+        r2n_chassis.pure_pursuit_info.path[0] = p0;
+        r2n_chassis.pure_pursuit_info.path[1] = p1;
+        r2n_chassis.pure_pursuit_info.path[2] = p2;
+        r2n_chassis.pure_pursuit_info.path[3] = p3;
+        r2n_chassis.pure_pursuit_info.path[4] = p4;
+        r2n_chassis.pure_pursuit_info.path[5] = p5;
+        r2n_chassis.pure_pursuit_info.path[6] = p6;
+        r2n_chassis.pure_pursuit_info.path[7] = p7;
+        r2n_chassis.pure_pursuit_info.path[8] = p8;
+        r2n_chassis.pure_pursuit_info.path[9] = p9;
+        r2n_chassis.pure_pursuit_info.path[10] = p10;
+        r2n_chassis.pure_pursuit_info.path[11] = p11;
+        r2n_chassis.pure_pursuit_info.path[12] = p12;
+        r2n_chassis.pure_pursuit_info.path[13] = p13;
+        r2n_chassis.pure_pursuit_info.path[14] = p14;
+        r2n_chassis.pure_pursuit_info.path[15] = p15;
+        r2n_chassis.pure_pursuit_info.path[16] = p16;
+        r2n_chassis.pure_pursuit_info.path[17] = p17;
+        r2n_chassis.pure_pursuit_info.path[18] = p18;
+        r2n_chassis.pure_pursuit_info.path[19] = p19;
+        r2n_chassis.pure_pursuit_info.path[20] = p20;
+        r2n_chassis.pure_pursuit_info.path[21] = p21;
+        r2n_chassis.pure_pursuit_info.path[22] = p22;
+        r2n_chassis.pure_pursuit_info.path[23] = p23;
+        r2n_chassis.pure_pursuit_info.path[24] = p24;
+        */
+    r2n_chassis.pure_pursuit_info.path[0] = p0;
+    r2n_chassis.pure_pursuit_info.path[1] = p1;
+    r2n_chassis.pure_pursuit_info.path[2] = p2;
+    r2n_chassis.pure_pursuit_info.path[3] = p3;
+    r2n_chassis.pure_pursuit_info.path[4] = p4;
+    r2n_chassis.pure_pursuit_info.path[5] = p5;
+    r2n_chassis.pure_pursuit_info.path[6] = p6;
+    r2n_chassis.pure_pursuit_info.path[7] = p7;
+    r2n_chassis.pure_pursuit_info.path[8] = p8;
+    r2n_chassis.pure_pursuit_info.path[9] = p9;
+    r2n_chassis.pure_pursuit_info.path[10] = p10;
+    r2n_chassis.pure_pursuit_info.path[11] = p11;
+    r2n_chassis.pure_pursuit_info.path[12] = p12;
+    r2n_chassis.pure_pursuit_info.path[13] = p13;
+    r2n_chassis.pure_pursuit_info.path[14] = p14;
+    r2n_chassis.pure_pursuit_info.path[15] = p15;
+    r2n_chassis.pure_pursuit_info.path[16] = p16;
+    r2n_chassis.pure_pursuit_info.path[17] = p17;
+    r2n_chassis.pure_pursuit_info.path[18] = p18;
+    r2n_chassis.pure_pursuit_info.path[19] = p19;
+    r2n_chassis.pure_pursuit_info.path[20] = p20;
+    r2n_chassis.pure_pursuit_info.path[21] = p21;
+    r2n_chassis.pure_pursuit_info.path[22] = p22;
+    r2n_chassis.pure_pursuit_info.path[23] = p23;
+    r2n_chassis.pure_pursuit_info.path[24] = p24;
+    r2n_chassis.pure_pursuit_info.point_sum = 25;
+    r2n_chassis.pure_pursuit_info.if_loop = true;
+
     /*八期r1
      can_core.init();
      Action.startUartReceiveIT();
@@ -130,7 +200,22 @@ void demo::process_data()
         r2n_chassis.point_track_info.target_x = data_chain.rx_frame_mat.data.msg_get[0];
         r2n_chassis.point_track_info.target_y = data_chain.rx_frame_mat.data.msg_get[1] - 2000.0f;
     }
-    sum = v1.project_onto(v2);
 
+    /*
+        if (change_flag)
+        {
+            r2n_chassis.line_track_info.target_line_initpoint = p1;
+            r2n_chassis.line_track_info.target_line = v1;
+            if (r2n_chassis.line_track_info.tangent_dis < 36.0f && r2n_chassis.line_track_info.tangent_dis != 0.0f)
+            {
+                change_flag = false;
+            }
+        }
+        else
+        {
+            r2n_chassis.line_track_info.target_line_initpoint = p2;
+            r2n_chassis.line_track_info.target_line = v2;
+        }
+        */
     // r2n_chassis.distan_pid.PID_SetParameters(ros_serial.rx_frame_mat.data.msg_get[1], ros_serial.rx_frame_mat.data.msg_get[2], ros_serial.rx_frame_mat.data.msg_get[3]);
 }

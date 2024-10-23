@@ -212,4 +212,13 @@ m3508_test/xbox.o: ..\GDUT_ROBOCON\CONTROL\xbox.cpp \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\traits.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\__math\trigonometric_functions.h \
   G:\Keil_v5\ARM\ARMCLANG\include\libcxx\stdlib.h \
-  G:\Keil_v5\ARM\ARMCLANG\include\stdlib.h ..\GDUT_ROBOCON\CONTROL\pid.h
+  G:\Keil_v5\ARM\ARMCLANG\include\stdlib.h ..\GDUT_ROBOCON\CONTROL\pid.h \
+  ..\GDUT_ROBOCON\MATH_LIB\Vector2D.h \
+  ..\Middlewares\ST\ARM\DSP\Inc\arm_math.h \
+  ..\Drivers\CMSIS\Include\cmsis_compiler.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\string.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\string.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\float.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\float.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\libcxx\limits.h \
+  G:\Keil_v5\ARM\ARMCLANG\include\limits.h

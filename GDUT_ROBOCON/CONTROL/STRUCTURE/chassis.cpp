@@ -99,28 +99,60 @@ void chassis::point_track_compute()
 }
 void chassis::line_track_compute()
 {
-    // line_track_info.cur_to_target.X = ;
-    float target_line_dis = sqrt(line_track_info.target_line.X * line_track_info.target_line.X + line_track_info.target_line.Y * line_track_info.target_line.Y);
-    line_track_info.tangent_dis = (line_track_info.target_line.X * line_track_info.cur_to_target.X + line_track_info.target_line.Y * line_track_info.cur_to_target.Y) / target_line_dis;
-    float temp = line_track_info.tangent_dis / target_line_dis;
 
-    line_track_info.tangent_proj.X = temp * line_track_info.target_line.X;
-    line_track_info.tangent_proj.Y = temp * line_track_info.target_line.Y;
+    // 计算法向误差
+    Vector2D now_point(ACTION->pose_data.world_pos_x, ACTION->pose_data.world_pos_y);
+    line_track_info.now_dis = now_point - line_track_info.target_line_initpoint;
 
-    line_track_info.proj_point.X = line_track_info.tangent_proj.X + line_track_info.target_point.X;
-    line_track_info.proj_point.Y = line_track_info.tangent_proj.Y + line_track_info.target_point.Y;
-    float normal_vector_x = ACTION->pose_data.world_pos_x - line_track_info.proj_point.X;
-    float normal_vector_y = ACTION->pose_data.world_pos_y - line_track_info.proj_point.Y;
-    line_track_info.normal_dis = sqrt(normal_vector_x * normal_vector_x + normal_vector_y * normal_vector_y);
+    line_track_info.projected = line_track_info.now_dis.project_onto(line_track_info.target_line);
+    line_track_info.tangent_dis = line_track_info.projected.magnitude();
 
-    line_track_info.tangent_dir.X = line_track_info.target_line.X / target_line_dis;
-    line_track_info.tangent_dir.Y = line_track_info.target_line.Y / target_line_dis;
+    line_track_info.project_point = line_track_info.projected + line_track_info.target_line_initpoint;
+    Vector2D normal_vector = line_track_info.project_point - now_point;
+    line_track_info.normal_dis = normal_vector.magnitude();
 
-    line_track_info.normal_dir.X = normal_vector_x / line_track_info.normal_dis;
-    line_track_info.normal_dir.Y = normal_vector_y / line_track_info.normal_dis;
+    line_track_info.tangent_dir = line_track_info.target_line.normalize();
+    line_track_info.normal_dir = normal_vector.normalize();
+
+    float nor_speed = normal_control.PID_ComputeError(line_track_info.normal_dis);
+    Vector2D normal_speed = nor_speed * line_track_info.normal_dir;
+
+    // tangential_control.setpoint = line_track_info.target_dis;
+    //  float tan_speed = tangential_control.PID_Compute(line_track_info.tangent_dis);
+    float tan_speed = -1.48f;
+    Vector2D tangent_speed = tan_speed * line_track_info.tangent_dir;
+
+    line_track_info.target_wspeed = normal_speed + tangent_speed;
 }
+void chassis::pure_pursuit_compute()
+{
 
-chassis::chassis(ChassisType chassistype_, float Rwheel_, action *ACTION_, float headingkp, float headingki, float headingkd, float kp_, float ki_, float kd_) : chassistype(chassistype_), heading_pid(headingkp, headingki, headingkd, 100000.0f, 5.0f, 0.01f, 0.5f), ACTION(ACTION_), Rwheel(Rwheel_), distan_pid(kp_, ki_, kd_, 1000000.0f, 1.4f, 50.0f, 600.0f)
+    // 由点计算得到向量
+    Vector2D now_track = pure_pursuit_info.path[pure_pursuit_info.tracking_index] - pure_pursuit_info.path[pure_pursuit_info.tracking_index + 1];
+    line_track_info.target_line_initpoint = pure_pursuit_info.path[pure_pursuit_info.tracking_index + 1];
+    line_track_info.target_line = now_track;
+
+    line_track_compute();
+    // 判断是否需要切换点
+    if (line_track_info.tangent_dis < pure_pursuit_info.change_point)
+    {
+        if (pure_pursuit_info.tracking_index < pure_pursuit_info.point_sum - 2)
+        {
+            pure_pursuit_info.tracking_index++;
+        }
+        else
+        {
+            if (pure_pursuit_info.if_loop)
+            {
+                // 环形轨迹
+                pure_pursuit_info.tracking_index = 0;
+            }
+        }
+    }
+
+    // 记录一下当前走过的路程并设置一下切向追踪速度，采用梯形速度规划，规划全程的追踪速度
+}
+chassis::chassis(ChassisType chassistype_, float Rwheel_, action *ACTION_, float headingkp, float headingki, float headingkd, float kp_, float ki_, float kd_) : chassistype(chassistype_), heading_pid(headingkp, headingki, headingkd, 100000.0f, 5.0f, 0.01f, 0.5f), ACTION(ACTION_), Rwheel(Rwheel_), distan_pid(kp_, ki_, kd_, 1000000.0f, 1.4f, 50.0f, 600.0f), normal_control(0.0062f, 0, 0.056f, 10000000.0f, 1.2f, 30.0f, 600.0f), tangential_control(0, 0, 0, 10000000.0f, 1.4f, 30.0f, 600.0f)
 {
 }
 
@@ -212,7 +244,10 @@ void omni3::process_data()
         worldv_to_robotv();
         break;
     case line_tracking:
-
+        line_track_compute();
+        input_wvx = line_track_info.target_wspeed.x;
+        input_wvy = line_track_info.target_wspeed.y;
+        worldv_to_robotv();
         break;
     case point_tracking:
         point_track_compute();
@@ -220,7 +255,16 @@ void omni3::process_data()
         input_wvy = point_track_info.target_speed_y;
         worldv_to_robotv();
 
+    case pure_pursuit:
+        pure_pursuit_compute();
+
+        input_wvx = line_track_info.target_wspeed.x;
+        input_wvy = line_track_info.target_wspeed.y;
+        worldv_to_robotv();
         break;
+
+        break;
+
     default:
 
         break;

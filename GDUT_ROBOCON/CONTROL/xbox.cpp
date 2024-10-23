@@ -174,7 +174,7 @@ void xbox::chassis_control()
     }
     if (if_point_track_flag == 1 && robot_stop_flag == 0)
     {
-        control_chassis->switch_chassis_mode(point_tracking);
+        control_chassis->switch_chassis_mode(pure_pursuit);
     }
 }
 
